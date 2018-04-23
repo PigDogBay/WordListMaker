@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace WordListMaker
 {
+    //These words lists were generated from
+    //https://github.com/en-wl/wordlist
     class WordListNames {
 
         public static List<String> filenames = new List<String>() {
