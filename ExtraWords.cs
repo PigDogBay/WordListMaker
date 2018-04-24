@@ -8,9 +8,6 @@ namespace WordListMaker
 
     public class ExtraWords {
 
-        //TODO Scrabble two letter words only
-        //TODO Foreign accented words that have been removed
-        //TODO Supercali....
         public static List<String> misc = new List<String>(){
                 "a", "i", "o",
                 //From the old list, but missing in the new
