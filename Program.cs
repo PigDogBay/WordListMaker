@@ -12,7 +12,8 @@ namespace WordListMaker
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.createWordList();
+//            p.createWordList();
+            p.compareToOldLists();
             Console.WriteLine("Done");
         }
 
@@ -51,13 +52,23 @@ namespace WordListMaker
             Console.WriteLine("\nNumber of chars is{0}",chars.Count());
             
         }
+        void compareToOldLists(){
+            var stdList = load("../standard.txt");
+            var proList = load("../pro.txt");
+            var newList = load("../words.txt");
+            var missingFromNew = 
+            stdList
+                .Union(proList)
+                .Except(newList);
+            save("../missingFromNew.txt", missingFromNew);
+            System.Console.WriteLine("Word Count {0}",missingFromNew.Count());
+        }
 
         void findWordsContaining(String word){
             var matches = loadWords().Where(s => s.Contains(word));
             print(matches);
             System.Console.WriteLine("Word Count {0}",matches.Count());
         }
-
 
         IEnumerable<String> process(IEnumerable<String> words){
             return words

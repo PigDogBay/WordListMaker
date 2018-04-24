@@ -12,7 +12,9 @@ namespace WordListMaker
         //TODO Foreign accented words that have been removed
         //TODO Supercali....
         public static List<String> misc = new List<String>(){
-                "a", "i", "o"
+                "a", "i", "o",
+                //From the old list, but missing in the new
+                "deliminators","overclocking","bogotifying","deliminator","overclocked","bloatwares","bogometers","bogosities","bogotified","bogotifies","overclocks","superusers","bloatware","bogometer","glitching","overclock","superuser","bogosity","bogotify","copyleft","glitched","grepping","segfault","tarballs","modding","nagware","tarball","eccles","foobar","modded","app","apps","bro","bros","palaeethnologist","palaeethnologic","paleethnologist","paleethnologic"
         };
         //TWL + CSW words from
         //https://en.wikibooks.org/wiki/Scrabble/Two_Letter_Words
@@ -27,7 +29,7 @@ namespace WordListMaker
         };
         public static List<String> feedback = new List<String>(){
                  "rulings", "ecarte", "sashimi", "leangle", "neddy", "actioned", "nidor", "manspreading", "covfefe", "trenchcoat", "actioned", "hutia", "roedean", "onesie",
-                 "twerk","twerking","twerks"
+                 "twerk","twerking","twerks", "umbrellabird"
         };
         public static List<String> neoligism = new List<String>(){
                 "onesie", "covfefe", "fatberg"
