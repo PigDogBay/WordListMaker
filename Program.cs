@@ -12,7 +12,7 @@ namespace WordListMaker
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.findWordsContaining("fuck");
+            p.compareNewToOldLists();
             Console.WriteLine("Done");
         }
 
@@ -61,6 +61,17 @@ namespace WordListMaker
                 .Except(newList);
             save("../missingFromNew.txt", missingFromNew);
             System.Console.WriteLine("Word Count {0}",missingFromNew.Count());
+        }
+        void compareNewToOldLists(){
+            var stdList = load("../standard.txt");
+            var proList = load("../pro.txt");
+            var newList = load("../words.txt");
+            var missingFromOld = 
+            newList
+                .Except(proList)
+                .Except(stdList);
+            save("../missingFromOld.txt", missingFromOld);
+            System.Console.WriteLine("Word Count {0}",missingFromOld.Count());
         }
 
         void findWordsContaining(String word){
