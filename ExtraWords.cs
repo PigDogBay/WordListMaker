@@ -36,6 +36,9 @@ namespace WordListMaker
         };
         public static List<String> bannedWords = new List<String>(){
                 "cunt","cunts",
+                "motherfuckers","motherfucking","motherfucker","fistfucking","mindfucking","fistfucked","mindfucked","fistfucks","fuckfaces","fuckheads","mindfucks","fistfuck","fuckface","fuckhead","fuckings","fuckoffs",
+                "mindfuck","fuckers","fucking","fuckoff","fuckups","fucked","fucker","fuckup","fucks","fuck",
+                "nigger","niggers","niggerhead","niggerdom","niggered","niggering","niggerish","niggerism","niggerisms","niggerling","niggerlings","niggery",                
                 "abo","abos","coon","coons","kraut","krauts","wop","wops","coonass","coonasses","wog","wogs","woggish",
                 "bullshit","bullshits","bullshitted","bullshitting","shit","shits","shittier","shittiest","shitting","shitty","bullshitter","bullshitter","chickenshit","chickenshits","horseshit","shitfaced","shithead","shitheads","shitload","shitted","horseshits","shitwork","apeshit","dipshit","dipshits","gobshite","gobshites","ratshit","shiting","shitkicker","shitkickers","shitless","shitlist","shitlists","shitloads","shittiness","shite","shites",
                 "wank","wanked","wanker","wankers","wanking","wanks",

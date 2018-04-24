@@ -12,8 +12,7 @@ namespace WordListMaker
         static void Main(string[] args)
         {
             Program p = new Program();
-//            p.createWordList();
-            p.compareToOldLists();
+            p.findWordsContaining("fuck");
             Console.WriteLine("Done");
         }
 
@@ -65,7 +64,8 @@ namespace WordListMaker
         }
 
         void findWordsContaining(String word){
-            var matches = loadWords().Where(s => s.Contains(word));
+            var matches = process(loadWords())
+            .Where(s => s.Contains(word));
             print(matches);
             System.Console.WriteLine("Word Count {0}",matches.Count());
         }
@@ -81,8 +81,6 @@ namespace WordListMaker
                 .Union(ExtraWords.misc)
                 .Union(ExtraWords.twoLetterWords)
                 .Select(s => s.ToLower())
-                .Where(s => !(s.Contains("nigger") && s.StartsWith("s")) ) //allow snigger words
-                .Where(s => !s.Contains("fuck") )
                 .Except(ExtraWords.bannedWords)
                 .Select(s => convertAccentedWord(s)) //Convert accented words to standard latin alphabet
                 .Distinct()
