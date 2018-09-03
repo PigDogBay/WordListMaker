@@ -26,7 +26,7 @@ namespace WordListMaker
         };
         public static List<String> feedback = new List<String>(){
                  "rulings", "ecarte", "sashimi", "leangle", "neddy", "actioned", "nidor", "manspreading", "covfefe", "trenchcoat", "actioned", "hutia", "roedean", "onesie",
-                 "twerk","twerking","twerks", "umbrellabird", "weei", "smokie"
+                 "twerk","twerking","twerks", "umbrellabird", "weei", "smokie", "zol", "piert", "goodfella", "goodfellas"
         };
         public static List<String> neoligism = new List<String>(){
                 "onesie", "covfefe", "fatberg"

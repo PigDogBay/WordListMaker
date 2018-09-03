@@ -8,16 +8,24 @@ namespace WordListMaker
 {
     class Program
     {
-        const string ROOT_DIR = "../wordlist/scowl/final/";
+        /*
+            3 Sept 2018
+            Pro Word Count -- 284923
+            Std Word Count -- 132615
+
+            Uses pre-built SCOWL from source forge, couldn't build github src code on Ubuntu 18.04 LTS or on the Mac
+         */
+        const string ROOT_DIR = "../scowl-2018.04.16/final/";
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.createWordList();
+            p.createWordList("../pro.txt", p.getProWordListNames());
+            p.createWordList("../std.txt", p.getStdWordListNames());
             Console.WriteLine("Done");
         }
 
-        void createWordList(){
-            var words = process(loadWords());
+        void createWordList(String name, IEnumerable<String> wordlists){
+            var words = process(loadWords(wordlists));
             //check words
             foreach (var w in words){
                 if (isNotLetter(w)){
@@ -25,11 +33,11 @@ namespace WordListMaker
                 }
             }
 
-            save("../words.txt",words);
+            save(name,words);
             System.Console.WriteLine("Word Count -- {0}",words.Count());
         }
         void listForeignWords(){
-            var words = loadWords()
+            var words = loadWords(getProWordListNames())
                 .Where(s => containsAccent(s));
             print(words);
             save("../foreign.txt",words);
@@ -38,7 +46,7 @@ namespace WordListMaker
 
         //'ABCDEFGHIKLMNOPQRSTVWZabcdefghijklmnopqrstuvwxyzÅÖÜàáâäåçèéêëíîïñóôöøùúûü
         void showAllChars(){
-            var words = loadWords()
+            var words = loadWords(getProWordListNames())
                 .Where(s => containsAccent(s));
             StringBuilder sb = new StringBuilder();
             foreach (String w in words){
@@ -75,7 +83,7 @@ namespace WordListMaker
         }
 
         void findWordsContaining(String word){
-            var matches = process(loadWords())
+            var matches = process(loadWords(getProWordListNames()))
             .Where(s => s.Contains(word));
             print(matches);
             System.Console.WriteLine("Word Count {0}",matches.Count());
@@ -116,15 +124,22 @@ namespace WordListMaker
             }
         }
 
-        List<String> loadWords() {
+        List<String> loadWords(IEnumerable<String> wordLists) {
             List<String> words = new List<String>();
-            foreach (var filename in filterNames()){
+            foreach (var filename in wordLists){
                 words.AddRange(load(ROOT_DIR+filename));
             }
             return words;
         }
-
-        IEnumerable<String> filterNames(){
+        IEnumerable<String> getStdWordListNames(){
+            return WordListNames.filenames
+                .Where(s=> !s.EndsWith(".95"))
+                .Where(s=> !s.EndsWith(".80"))
+                .Where(s=> !s.Contains("abbreviations"))
+                .Where(s=> !s.Contains("special"))
+                .Where(s=> !s.Contains("contractions"));
+        }
+        IEnumerable<String> getProWordListNames(){
             return WordListNames.filenames
                 .Where(s=> !s.EndsWith(".95"))
                 .Where(s=> !s.Contains("abbreviations"))
