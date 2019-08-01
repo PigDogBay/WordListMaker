@@ -11,7 +11,10 @@ namespace WordListMaker
         public static List<String> misc = new List<String>(){
                 "a", "i", "o",
                 //From the old list, but missing in the new
-                "deliminators","overclocking","bogotifying","deliminator","overclocked","bloatwares","bogometers","bogosities","bogotified","bogotifies","overclocks","superusers","bloatware","bogometer","glitching","overclock","superuser","bogosity","bogotify","copyleft","glitched","grepping","segfault","tarballs","modding","nagware","tarball","eccles","foobar","modded","app","apps","bro","bros","palaeethnologist","palaeethnologic","paleethnologist","paleethnologic"
+                "deliminators","overclocking","bogotifying","deliminator","overclocked","bloatwares","bogometers","bogosities","bogotified","bogotifies",
+                "overclocks","superusers","bloatware","bogometer","glitching","overclock","superuser","bogosity","bogotify","copyleft",
+                "glitched","grepping","segfault","tarballs","modding","nagware","tarball","eccles","foobar","modded","app","apps","bro","bros",
+                "palaeethnologist","palaeethnologic","paleethnologist","paleethnologic","ubergeek"
         };
         //TWL + CSW words from
         //https://en.wikibooks.org/wiki/Scrabble/Two_Letter_Words
@@ -26,7 +29,9 @@ namespace WordListMaker
         };
         public static List<String> feedback = new List<String>(){
                  "rulings", "ecarte", "sashimi", "leangle", "neddy", "actioned", "nidor", "manspreading", "covfefe", "trenchcoat", "actioned", "hutia", "roedean", "onesie",
-                 "twerk","twerking","twerks", "umbrellabird", "weei", "smokie", "zol", "piert", "goodfella", "goodfellas", "snowpea", "doner", "lusophone", "therm", "monetarise", "asgardia","asgardian", "cryptocurrency", "cryptocurrencies", "levidrome", "affordance", "affordances", "modularization", "interoperate", "interoperates", "compositionality"
+                 "twerk","twerking","twerks", "umbrellabird", "weei", "smokie", "zol", "piert", "goodfella", "goodfellas", "snowpea", "doner", "lusophone", "therm", "monetarise", 
+                 "asgardia","asgardian", "cryptocurrency", "cryptocurrencies", "levidrome", "affordance", "affordances", "modularization", "interoperate", "interoperates", 
+                 "compositionality"
         };
         public static List<String> neoligism = new List<String>(){
                 "onesie", "covfefe", "fatberg"
