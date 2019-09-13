@@ -15,7 +15,7 @@ namespace WordListMaker
 
             Uses pre-built SCOWL from source forge, couldn't build github src code on Ubuntu 18.04 LTS or on the Mac
          */
-        const string ROOT_DIR = "../scowl-2018.04.16/final/";
+        const string ROOT_DIR = "../scowl-src/scowl/final/";
         static void Main(string[] args)
         {
             Program p = new Program();
