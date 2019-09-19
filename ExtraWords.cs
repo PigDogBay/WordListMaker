@@ -20,9 +20,32 @@ namespace WordListMaker
         //https://en.wikibooks.org/wiki/Scrabble/Two_Letter_Words
         public static List<String> twoLetterWords = new List<String>(){
                 //TWL
-                "aa","ab","ad","ae","ag","ah","ai","al","am","an","ar","as","at","aw","ax","ay","ba","be","bi","bo","by","da","de","do","ed","ef","eh","el","em","en","er","es","et","ex","fa","fe","ga","gi","go","gu","ha","he","hi","hm","ho","id","if","in","is","it","jo","ji","ka","ki","la","li","lo","ma","me","mi","mm","mo","mu","my","na","ne","no","nu","od","oe","of","oh","oi","om","on","op","or","os","ow","ox","oy","pa","pe","pi","po","qi","re","ra","sh","si","so","ta","te","ti","to","uh","um","un","up","us","ut","we","wo","xi","xu","ya","ye","yo","za",
+                "aa","ab","ad","ae","ag","ah","ai","al","am","an","ar","as","at","aw","ax","ay",
+                "ba","be","bi","bo","by",
+                "da","de","do",
+                "ed","ef","eh","el","em","en","er","es","et","ew","ex",
+                "fa","fe",
+                "gi","go",
+                "ha","he","hi","hm","ho",
+                "id","if","in","is","it",
+                "jo",
+                "ka","ki",
+                "la","li","lo",
+                "ma","me","mi","mm","mo","mu","my",
+                "na","ne","no","nu",
+                "od","oe","of","oh","oi","ok","om","on","op","or","os","ow","ox","oy",
+                "pa","pe","pi","po",
+                "qi",
+                "re",
+                "sh","si","so",
+                "ta","te","ti","to",
+                "uh","um","un","up","us","ut",
+                "we","wo",
+                "xi","xu",
+                "ya","ye","yo",
+                "za",
                 //CSW
-                "ch","di","ea","ee","fy","gu","io","ja","ko","ky","ny","ob","oo","ou","ov","st","ug","ur","yu","zo"
+                "ch","di","ea","ee","fy","gu","io","ja","ko","ky","ny","ob","oo","ou","st","ug","ur","yu","zo"
         };
         public static List<String> abbreviations = new List<String>(){
                 "ecmascript","gnu","ikea","nascar","norad","nvidia","sap","sars","sqlite","suse","ebay","emusic","ios","ipad","iphone","ipod","itunes","mudder","mudders","mudding","muddings","slapped","slapping","ufological","ufologist","ufologists","var","vars","waspier","waspiest","waspiness","waspinesses","waspish","waspishness","waspishnesses","ok","ebook","ebooks"
