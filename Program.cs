@@ -19,23 +19,37 @@ namespace WordListMaker
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.createWordList("../pro.txt", p.getProWordListNames());
-            p.createWordList("../std.txt", p.getStdWordListNames());
-            Console.WriteLine("Done");
+            p.createAppWordList();
+            // p.createWordList("../pro.txt", p.getProWordListNames());
+            // p.createWordList("../std.txt", p.getStdWordListNames());
+        }
+
+        void createAppWordList(){
+            var sowpods = load("../wordlists/sowpods.txt");
+            var scowl = loadWords(getProWordListNames());
+            var combined = scowl.Union(sowpods);
+            var processed = process(combined);
+            checkWords(processed);
+            save("../words.txt", processed);
+            System.Console.WriteLine("Word Count -- {0}",processed.Count());
         }
 
         void createWordList(String name, IEnumerable<String> wordlists){
             var words = process(loadWords(wordlists));
-            //check words
+            checkWords(words);
+            save(name,words);
+            System.Console.WriteLine("Word Count -- {0}",words.Count());
+        }
+
+        void checkWords(IEnumerable<string> words){
             foreach (var w in words){
                 if (isNotLetter(w)){
                     Console.WriteLine("Error found {0}",w);
                 }
             }
-
-            save(name,words);
-            System.Console.WriteLine("Word Count -- {0}",words.Count());
         }
+
+
         void listForeignWords(){
             var words = loadWords(getProWordListNames())
                 .Where(s => containsAccent(s));
