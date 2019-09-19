@@ -123,7 +123,8 @@ namespace WordListMaker
         public void save(String filename, IEnumerable<String> words)
         {
             //Android default charset is UTF-8
-            using (StreamWriter writer = new StreamWriter(filename, false, Encoding.UTF8))
+            var utf8WithoutBom = new UTF8Encoding(false);
+            using (StreamWriter writer = new StreamWriter(filename, false, utf8WithoutBom))
             {
                 writer.NewLine = "\n";
                 foreach(var word in words)
