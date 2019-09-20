@@ -20,6 +20,8 @@ namespace WordListMaker
         {
             Program p = new Program();
             p.createAppWordList();
+            p.createSowpods();
+            p.createTwl();
             // p.createWordList("../pro.txt", p.getProWordListNames());
             // p.createWordList("../std.txt", p.getStdWordListNames());
         }
@@ -32,6 +34,28 @@ namespace WordListMaker
             checkWords(processed);
             save("../words.txt", processed);
             System.Console.WriteLine("Word Count -- {0}",processed.Count());
+        }
+        void createSowpods(){
+            var sowpods = load("../wordlists/sowpods.txt");
+            var processed = sowpods
+                .Select(s => s.ToLower())
+                .Except(ExtraWords.bannedWords)
+                .Distinct()
+                .OrderByDescending(s => s.Length)
+                .ThenBy(s => s);
+            save ("../sowpods.txt", processed);
+            System.Console.WriteLine("SOWPODS Word Count -- {0}",processed.Count());
+        }
+        void createTwl(){
+            var sowpods = load("../wordlists/twl06.txt");
+            var processed = sowpods
+                .Select(s => s.ToLower())
+                .Except(ExtraWords.bannedWords)
+                .Distinct()
+                .OrderByDescending(s => s.Length)
+                .ThenBy(s => s);
+            save ("../twl.txt", processed);
+            System.Console.WriteLine("TWL06 Word Count -- {0}",processed.Count());
         }
 
         void createWordList(String name, IEnumerable<String> wordlists){
