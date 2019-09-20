@@ -43,6 +43,7 @@ namespace WordListMaker
                 .Distinct()
                 .OrderByDescending(s => s.Length)
                 .ThenBy(s => s);
+            checkWords(processed);
             save ("../sowpods.txt", processed);
             System.Console.WriteLine("SOWPODS Word Count -- {0}",processed.Count());
         }
@@ -54,6 +55,7 @@ namespace WordListMaker
                 .Distinct()
                 .OrderByDescending(s => s.Length)
                 .ThenBy(s => s);
+            checkWords(processed);
             save ("../twl.txt", processed);
             System.Console.WriteLine("TWL06 Word Count -- {0}",processed.Count());
         }
