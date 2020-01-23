@@ -19,11 +19,38 @@ namespace WordListMaker
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.createAppWordList();
-            p.createSowpods();
-            p.createTwl();
+            Console.WriteLine("Cleaning up aspell words");
+            p.createGerman();
+            // p.createAppWordList();
+            // p.createSowpods();
+            // p.createTwl();
             // p.createWordList("../pro.txt", p.getProWordListNames());
             // p.createWordList("../std.txt", p.getStdWordListNames());
+        }
+
+        /*
+        First create German word list, using
+        aspell -d de dump master | aspell -l de expand | tr ' ' '\n' > aspell-de.txt
+        The two letters word have been checked on Google German-English translator
+        */
+        void createGerman() {
+            String[] twoWords = {"ab","an","am","da","du","eh","er","es","ex","im","in","ja","je","ob","oh","pi","qm","so","um","wo","zu"};
+            var expandedAspell = loadUtf8("../wordlists/aspell-de.txt");
+            var processed = expandedAspell
+                .Where(s => s.Length>1 && Char.IsLower(s.ElementAt(1))) //Strip abbreviations
+                .Where(s => Char.IsLower(s.Last())) //Strip abbreviations, eg CoE
+                .Select(s => s.ToLower())
+                .Select(s => convertGermanAccents(s)) //äöüß to ae, oe, ue, ss
+                .Select(s => convertAccentedWord(s)) //Convert accented words to standard latin alphabet
+                .Where(s => s.Length>2)             //Remove all 1 and 2 letter words     
+                .Union(twoWords)
+                .Distinct()
+                .OrderByDescending(s => s.Length)
+                .ThenBy(s => s);
+            
+            checkWords(processed);
+            save("../wordlist-net-de.txt", processed);
+            System.Console.WriteLine("Word Count -- {0}",processed.Count());
         }
 
         void createAppWordList(){
@@ -203,6 +230,18 @@ namespace WordListMaker
             }
             return words;
         }
+        List<String> loadUtf8(String filename)
+        {
+            List<String> words = new List<string>();
+            using (StreamReader sr = new StreamReader(filename, Encoding.UTF8))
+            {
+                while (sr.Peek() > 0)
+                {
+                    words.Add(sr.ReadLine());
+                }
+            }
+            return words;
+        }
 
         String convertAccentedWord(String word){
             return containsAccent(word) ? removeAccents(word) : word;
@@ -250,6 +289,14 @@ namespace WordListMaker
             .Replace('ú','u')
             .Replace('û','u')
             .Replace('ü','u');
+        }
+        //äöüß to ae, oe, ue, ss
+        String convertGermanAccents(String word){
+            return word
+            .Replace("ß","ss")
+            .Replace("ä","ae")
+            .Replace("ö","oe")
+            .Replace("ü","ue");
         }
 
     }
