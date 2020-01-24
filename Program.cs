@@ -8,24 +8,15 @@ namespace WordListMaker
 {
     class Program
     {
-        /*
-            3 Sept 2018
-            Pro Word Count -- 284923
-            Std Word Count -- 132615
-
-            Uses pre-built SCOWL from source forge, couldn't build github src code on Ubuntu 18.04 LTS or on the Mac
-         */
-        const string ROOT_DIR = "../scowl-src/scowl/final/";
+        const string ROOT_DIR = "../scowl/wordlist/scowl/final/";
         static void Main(string[] args)
         {
             Program p = new Program();
-            Console.WriteLine("Cleaning up aspell words");
-            p.createGerman();
-            // p.createAppWordList();
+            //Console.WriteLine("Cleaning up aspell words");
+            //p.createGerman();
+            p.createAppWordList();
             // p.createSowpods();
             // p.createTwl();
-            // p.createWordList("../pro.txt", p.getProWordListNames());
-            // p.createWordList("../std.txt", p.getStdWordListNames());
         }
 
         /*
@@ -86,14 +77,6 @@ namespace WordListMaker
             save ("../twl.txt", processed);
             System.Console.WriteLine("TWL06 Word Count -- {0}",processed.Count());
         }
-
-        void createWordList(String name, IEnumerable<String> wordlists){
-            var words = process(loadWords(wordlists));
-            checkWords(words);
-            save(name,words);
-            System.Console.WriteLine("Word Count -- {0}",words.Count());
-        }
-
         void checkWords(IEnumerable<string> words){
             foreach (var w in words){
                 if (isNotLetter(w)){
@@ -159,8 +142,9 @@ namespace WordListMaker
         IEnumerable<String> process(IEnumerable<String> words){
             return words
                 .Where(s => !s.Contains('\''))
-                .Where(s => s.Length>2)             //Remove all 1 and 2 letter words     
+                .Where(s => s.Length>2)             //Remove all 1 and 2 letter words 
                 .Where(s => Char.IsLower(s.ElementAt(1))) //Strip abbreviations
+                .Where(s => Char.IsLower(s.Last())) //Strip abbreviations, eg CoE
                 .Union(ExtraWords.abbreviations) //add some abbreviations back
                 .Union(ExtraWords.feedback) 
                 .Union(ExtraWords.neoligism)
