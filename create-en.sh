@@ -1,5 +1,7 @@
 #!/bin/bash
-#Install the german word list using
+#TODO - need to remove taboo words
+#
+#Install the English word list using
 #sudo apt-get install aspell-de
 #
 #The dictionary can be dumped out and all the declensions/conjugations expanded to create the base word list
