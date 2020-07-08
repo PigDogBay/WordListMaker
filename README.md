@@ -1,2 +1,1 @@
-# WordListMaker
-Creating wordlists from the SCOWL lists
+Copyright MPD Bailey Technology
