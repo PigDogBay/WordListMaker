@@ -17,7 +17,8 @@ namespace WordListMaker
             //p.createAppWordList();
             // p.createSowpods();
             // p.createTwl();
-            p.createFrench();
+            //p.createFrench();
+            p.createSpanish();
         }
 
         /*
@@ -70,6 +71,25 @@ namespace WordListMaker
             save("../wordlist-net-fr.txt", processed);
             System.Console.WriteLine("Word Count -- {0}",processed.Count());
         }
+        void createSpanish() {
+            String[] twoWords = {"ah","al","as","ay","ca","da","de","di","ea","eh","el","en","es","fe","fu","ha","he","ir","ja","je","ji","jo","la","le","lo","me","mi","na","ni","no","nu","oh","os","se","si","su","te","ti","tu","uf","un","va","ve","vi","ya","yo"};
+            var expandedAspell = loadUtf8("../wordlists/aspell-es.txt");
+            var processed = expandedAspell
+               .Where(s => s.Length>1 && Char.IsLower(s.ElementAt(1))) //Strip abbreviations
+               .Where(s => Char.IsLower(s.Last())) //Strip abbreviations, eg CoE
+               .Select(s => s.ToLower())
+               .Select(s => convertAccentedWord(s)) //Convert accented words to standard latin alphabet
+               .Where(s => s.Length>2)             //Remove all 1 and 2 letter words     
+               .Union(twoWords)
+               .Distinct()
+               .OrderByDescending(s => s.Length)
+               .ThenBy(s => s);
+            
+            checkWords(processed);
+            save("../wordlist-net-es.txt", processed);
+            System.Console.WriteLine("Word Count -- {0}",processed.Count());
+        }
+
 
         void createAppWordList(){
             var sowpods = load("../wordlists/sowpods.txt");

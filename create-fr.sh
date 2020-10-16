@@ -39,7 +39,7 @@
 #- uniq removes repeated adjacent lines
 #
 # The two letter word lists is a based on the Aspell-fr list but each word has been checked by Google translate and Collins
-# https://www.collinsdictionary.com/dictionary/french-english/nu
+# https://www.collinsdictionary.com/dictionary/french-english/bonjour
 #
 echo "Creating wordlist-fr.txt"
 aspell -d fr dump master \
