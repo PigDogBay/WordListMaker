@@ -30,7 +30,7 @@
 #French words are often repeated with prefixes d' l' qu' - these can all be removed
 # sed "s/^.*'.*$//g" \    ^ start of line, .* any char 0 or more times, $ end of line
 #
-# sed delete function to remove words of 2 letters or less
+# sed delete function to remove words of 2 letters or less and words with 13 letters or more
 #
 # Sort the words by length and then alphabetically
 #- gawk is used to print the length and word
@@ -51,7 +51,7 @@ aspell -d fr dump master \
 | gawk '{print tolower($0)}' \
 | iconv -f utf8 -t ascii//TRANSLIT \
 | sed "s/^.*'.*$//g" \
-| sed "/^.\{,2\}\$/d" \
+| sed "/^.\{,2\}\$/d;/^.\{13,\}/d" \
 | gawk '{print length, $0}' \
 | sort -k1,1nr -k2,2 \
 | cut -d " " -f2- \

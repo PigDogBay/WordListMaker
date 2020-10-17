@@ -13,11 +13,11 @@ namespace WordListMaker
         {
             Program p = new Program();
             //Console.WriteLine("Cleaning up aspell words");
-            //p.createGerman();
+            p.createGerman();
             //p.createAppWordList();
             // p.createSowpods();
             // p.createTwl();
-            //p.createFrench();
+            p.createFrench();
             p.createSpanish();
         }
 
@@ -35,7 +35,7 @@ namespace WordListMaker
                 .Select(s => s.ToLower())
                 .Select(s => convertGermanAccents(s)) //äöüß to ae, oe, ue, ss
                 .Select(s => convertAccentedWord(s)) //Convert accented words to standard latin alphabet
-                .Where(s => s.Length>2)             //Remove all 1 and 2 letter words     
+                .Where(s => s.Length>2 && s.Length<13)             //Remove all 1 and 2 letter words and any words over 12 letters 
                 .Union(twoWords)
                 .Distinct()
                 .OrderByDescending(s => s.Length)
@@ -61,7 +61,7 @@ namespace WordListMaker
                .Where(s=> !s.Contains('\''))  //Strip out words with apostrophes
                .Select(s => s.ToLower())
                .Select(s => convertAccentedWord(s)) //Convert accented words to standard latin alphabet
-               .Where(s => s.Length>2)             //Remove all 1 and 2 letter words     
+                .Where(s => s.Length>2 && s.Length<13)             //Remove all 1 and 2 letter words and any words over 12 letters 
                .Union(twoWords)
                .Distinct()
                .OrderByDescending(s => s.Length)
@@ -79,7 +79,7 @@ namespace WordListMaker
                .Where(s => Char.IsLower(s.Last())) //Strip abbreviations, eg CoE
                .Select(s => s.ToLower())
                .Select(s => convertAccentedWord(s)) //Convert accented words to standard latin alphabet
-               .Where(s => s.Length>2)             //Remove all 1 and 2 letter words     
+                .Where(s => s.Length>2 && s.Length<11)             //Remove all 1 and 2 letter words and any words over 12 letters 
                .Union(twoWords)
                .Distinct()
                .OrderByDescending(s => s.Length)

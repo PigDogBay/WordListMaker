@@ -24,7 +24,7 @@
 #
 # iconv converts accented chars to normal a-z chars
 #
-# sed delete function to remove words of 2 letters or less
+# sed delete function to remove words of 2 letters or less and words with 13 letters or more
 #
 # Sort the words by length and then alphabetically
 #- gawk is used to print the length and word
@@ -41,7 +41,7 @@ aspell -d de dump master \
 | gawk '{print tolower($0)}' \
 | sed "s/ä/ae/g; s/ö/oe/g; s/ü/ue/g; s/ß/ss/g" \
 | iconv -f utf8 -t ascii//TRANSLIT \
-| sed "/^.\{,2\}\$/d" \
+| sed "/^.\{,2\}\$/d;/^.\{13,\}/d" \
 | gawk '{print length, $0}' \
 | sort -k1,1nr -k2,2 \
 | cut -d " " -f2- \
@@ -49,3 +49,5 @@ aspell -d de dump master \
 > wordlist-de.txt
 #append two letter words
 echo $'ab\nam\nan\nda\ndu\neh\ner\nes\nex\nim\nin\nja\nje\nob\noh\npi\nqm\nso\num\nwo\nzu' >> wordlist-de.txt
+echo "Number of words "
+wc -w wordlist-de.txt
