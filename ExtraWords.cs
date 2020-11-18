@@ -54,7 +54,7 @@ namespace WordListMaker
                  "rulings", "ecarte", "sashimi", "leangle", "neddy", "actioned", "nidor", "manspreading", "covfefe", "trenchcoat", "actioned", "hutia", "roedean", "onesie",
                  "twerk","twerking","twerks", "umbrellabird", "weei", "smokie", "zol", "piert", "goodfella", "goodfellas", "snowpea", "doner", "lusophone", "therm", "monetarise", 
                  "asgardia","asgardian", "cryptocurrency", "cryptocurrencies", "levidrome", "affordance", "affordances", "modularization", "interoperate", "interoperates", 
-                 "compositionality","bicorporal", "ammanford", "quatford", "sleaford", "yarford", "valleyford", "ilford","bananaquit","jalfrezi"
+                 "compositionality","bicorporal", "ammanford", "quatford", "sleaford", "yarford", "valleyford", "ilford","bananaquit","jalfrezi","unpave"
         };
         public static List<String> neoligism = new List<String>(){
                 "onesie", "covfefe", "fatberg"
