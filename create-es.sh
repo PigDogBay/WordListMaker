@@ -1,6 +1,6 @@
 #!/bin/bash
-#Install the german word list using
-#sudo apt-get install aspell-de
+#Install the Spanish word list using
+#sudo apt install aspell-es
 #
 #The dictionary can be dumped out and all the declensions/conjugations expanded to create the base word list
 #The conjugations/declensions are spearated by spaces so these need to be converted to newlines
@@ -20,11 +20,9 @@
 # Now that the acronyms have been removed I can convert to lower case
 # gawk tolower() converts accented letters to lower case as well as A-Z
 #
-# Convert äöüß to ae, oe, ue, ss using sed's substition function
-#
 # iconv converts accented chars to normal a-z chars
 #
-# sed delete function to remove words of 2 letters or less and words with 13 letters or more
+# sed delete function to remove words of 2 letters or less and words with 11 letters or more
 #
 # Sort the words by length and then alphabetically
 #- gawk is used to print the length and word
@@ -32,22 +30,23 @@
 #- cut uses space as a delimiter and selects only the second field to the end of the line
 #- uniq removes repeated adjacent lines
 #
-# The two letter word lists is a based on the Aspell-de list but each word has been checked by Google translate
-echo "Creating wordlist-de.txt"
-aspell -d de dump master \
-| aspell -l de expand \
+# The two letter word lists is a based on the Aspell-es list but each word has been checked by Google translate and Collins
+# https://www.collinsdictionary.com/dictionary/spanish-english/hola
+#
+echo "Creating wordlist-es.txt"
+aspell -d es dump master \
+| aspell -l es expand \
 | tr ' ' '\n' \
 | sed "s/\<\w[A-Z]\w*\>//g;s/\<\w\+[A-Z]\>//g;/^$/d" \
 | gawk '{print tolower($0)}' \
-| sed "s/ä/ae/g; s/ö/oe/g; s/ü/ue/g; s/ß/ss/g" \
 | iconv -f utf8 -t ascii//TRANSLIT \
-| sed "/^.\{,2\}\$/d;/^.\{13,\}/d" \
+| sed "/^.\{,2\}\$/d;/^.\{11,\}/d" \
 | gawk '{print length, $0}' \
 | sort -k1,1nr -k2,2 \
 | cut -d " " -f2- \
 | uniq \
-> wordlist-de.txt
+> wordlist-es.txt
 #append two letter words
-echo $'ab\nam\nan\nda\ndu\neh\ner\nes\nex\nim\nin\nja\nje\nob\noh\npi\nqm\nso\num\nwo\nzu' >> wordlist-de.txt
+echo $'ah\nal\nas\nay\nca\nda\nde\ndi\nea\neh\nel\nen\nes\nfe\nfu\nha\nhe\nir\nja\nje\nji\njo\nla\nle\nlo\nme\nmi\nna\nni\nno\nnu\noh\nos\nse\nsi\nsu\nte\nti\ntu\nuf\nun\nva\nve\nvi\nya\nyo' >> wordlist-es.txt
 echo "Number of words "
-wc -w wordlist-de.txt
+wc -w wordlist-es.txt

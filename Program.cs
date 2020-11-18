@@ -13,10 +13,12 @@ namespace WordListMaker
         {
             Program p = new Program();
             //Console.WriteLine("Cleaning up aspell words");
-            //p.createGerman();
-            p.createAppWordList();
+            p.createGerman();
+            //p.createAppWordList();
             // p.createSowpods();
             // p.createTwl();
+            p.createFrench();
+            p.createSpanish();
         }
 
         /*
@@ -33,7 +35,7 @@ namespace WordListMaker
                 .Select(s => s.ToLower())
                 .Select(s => convertGermanAccents(s)) //äöüß to ae, oe, ue, ss
                 .Select(s => convertAccentedWord(s)) //Convert accented words to standard latin alphabet
-                .Where(s => s.Length>2)             //Remove all 1 and 2 letter words     
+                .Where(s => s.Length>2 && s.Length<13)             //Remove all 1 and 2 letter words and any words over 12 letters 
                 .Union(twoWords)
                 .Distinct()
                 .OrderByDescending(s => s.Length)
@@ -43,6 +45,51 @@ namespace WordListMaker
             save("../wordlist-net-de.txt", processed);
             System.Console.WriteLine("Word Count -- {0}",processed.Count());
         }
+        void createFrench() {
+            String[] twoWords = {"ah","ai","an","as","au","bu","ca","ce","ci","de","do","du","eh","en","es","et","eu","fi","ha","he","if","il","in","je","la","le","li","lu","ma","me","mi","mu","ne","ni","nu","oh","on","or","os","ou","pu","re","ri","sa","se","si","su","ta","te","tu","un","us","va","vu"};
+            var expandedAspell = loadUtf8("../wordlists/aspell-fr.txt");
+            var processed = expandedAspell
+               .Where(s => s.Length>1 && Char.IsLower(s.ElementAt(1))) //Strip abbreviations
+               .Where(s => Char.IsLower(s.Last())) //Strip abbreviations, eg CoE
+               .Select(s => {                 //split up hyphenated words
+                   if (s.Contains("-"))
+                       return s.Split('-');
+                   else
+                       return new String[]{s};
+               })
+               .SelectMany(s => s)
+               .Where(s=> !s.Contains('\''))  //Strip out words with apostrophes
+               .Select(s => s.ToLower())
+               .Select(s => convertAccentedWord(s)) //Convert accented words to standard latin alphabet
+                .Where(s => s.Length>2 && s.Length<13)             //Remove all 1 and 2 letter words and any words over 12 letters 
+               .Union(twoWords)
+               .Distinct()
+               .OrderByDescending(s => s.Length)
+               .ThenBy(s => s);
+            
+            checkWords(processed);
+            save("../wordlist-net-fr.txt", processed);
+            System.Console.WriteLine("Word Count -- {0}",processed.Count());
+        }
+        void createSpanish() {
+            String[] twoWords = {"ah","al","as","ay","ca","da","de","di","ea","eh","el","en","es","fe","fu","ha","he","ir","ja","je","ji","jo","la","le","lo","me","mi","na","ni","no","nu","oh","os","se","si","su","te","ti","tu","uf","un","va","ve","vi","ya","yo"};
+            var expandedAspell = loadUtf8("../wordlists/aspell-es.txt");
+            var processed = expandedAspell
+               .Where(s => s.Length>1 && Char.IsLower(s.ElementAt(1))) //Strip abbreviations
+               .Where(s => Char.IsLower(s.Last())) //Strip abbreviations, eg CoE
+               .Select(s => s.ToLower())
+               .Select(s => convertAccentedWord(s)) //Convert accented words to standard latin alphabet
+                .Where(s => s.Length>2 && s.Length<11)             //Remove all 1 and 2 letter words and any words over 12 letters 
+               .Union(twoWords)
+               .Distinct()
+               .OrderByDescending(s => s.Length)
+               .ThenBy(s => s);
+            
+            checkWords(processed);
+            save("../wordlist-net-es.txt", processed);
+            System.Console.WriteLine("Word Count -- {0}",processed.Count());
+        }
+
 
         void createAppWordList(){
             var sowpods = load("../wordlists/sowpods.txt");
