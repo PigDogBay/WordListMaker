@@ -57,7 +57,9 @@ namespace WordListMaker
                  "compositionality","bicorporal", "ammanford", "quatford", "sleaford", "yarford", "valleyford", "ilford","bananaquit","jalfrezi","unpave"
         };
         public static List<String> neoligism = new List<String>(){
-                "onesie", "covfefe", "fatberg"
+                "onesie", "covfefe", "fatberg", 
+                //2020 words
+                "allyship", "anthropause", "blursday", "covidiot", "doomscrolling", "infodemic", "plandemic", "superspreader", "twindemic", "unmute", "wokeness", "workation", "zoombombing", "photobombing", "photobomb","photobombs","photobombed"
         };
         public static List<String> bannedWords = new List<String>(){
                 "cunt","cunts",

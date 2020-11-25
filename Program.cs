@@ -13,12 +13,12 @@ namespace WordListMaker
         {
             Program p = new Program();
             //Console.WriteLine("Cleaning up aspell words");
-            p.createGerman();
-            //p.createAppWordList();
-            // p.createSowpods();
-            // p.createTwl();
-            p.createFrench();
-            p.createSpanish();
+            //p.createGerman();
+            p.createAppWordList();
+            //p.createSowpods();
+            //p.createTwl();
+            //p.createFrench();
+            //p.createSpanish();
         }
 
         /*
