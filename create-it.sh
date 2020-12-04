@@ -60,6 +60,8 @@ aspell -d it dump master \
 | cut -d " " -f2- \
 | uniq \
 > wordlist-it.txt
+#append two letter words
+echo $'ad\nah\nal\nbe\nce\nci\nda\ndi\neh\nex\nfa\nfu\nha\nho\nil\nin\nio\nla\nle\nli\nlo\nma\nme\nne\nno\noh\nok\npo\nre\nsa\nse\nsi\nso\nsu\nte\nti\ntu\nun\nva\nve' >> wordlist-it.txt
 echo "Number of words "
 wc -w wordlist-it.txt
 
