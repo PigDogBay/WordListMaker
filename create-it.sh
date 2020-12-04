@@ -53,9 +53,9 @@ aspell -d it dump master \
 | sed "/^.*'.*$/d" \
 | sed "/^usa$/d;/^www$/d" \
 | sed "/\<\w[A-Z]\w*\>/d;/\<\w\+[A-Z]\>/d" \
+| gawk '{print tolower($0)}' \
 | iconv -f utf8 -t ascii//TRANSLIT \
 | sed "/^.\{,2\}\$/d;/^.\{11,\}/d" \
-| gawk '{print tolower($0)}' \
 | gawk '{print length, $0}' \
 | sort -k1,1nr -k2,2 \
 | cut -d " " -f2- \
@@ -65,22 +65,3 @@ aspell -d it dump master \
 echo $'ad\nah\nal\nbe\nce\nci\nda\ndi\neh\nex\nfa\nfu\nha\nho\nil\nin\nio\nla\nle\nli\nlo\nma\nme\nne\nno\noh\nok\npo\nre\nsa\nse\nsi\nso\nsu\nte\nti\ntu\nun\nva\nve' >> wordlist-it.txt
 echo "Number of words "
 wc -w wordlist-it.txt
-
-
-# echo "Creating wordlist-it.txt"
-# aspell -d it dump master \
-# | aspell -l it expand \
-# | tr ' ' '\n' \
-# | sed "s/\<\w[A-Z]\w*\>//g;s/\<\w\+[A-Z]\>//g;/^$/d" \
-# | gawk '{print tolower($0)}' \
-# | iconv -f utf8 -t ascii//TRANSLIT \
-# | sed "/^.\{,2\}\$/d;/^.\{11,\}/d" \
-# | gawk '{print length, $0}' \
-# | sort -k1,1nr -k2,2 \
-# | cut -d " " -f2- \
-# | uniq \
-# > wordlist-it.txt
-# #append two letter words
-# echo $'ah\nal\nas\nay\nca\nda\nde\ndi\nea\neh\nel\nen\nes\nfe\nfu\nha\nhe\nir\nja\nje\nji\njo\nla\nle\nlo\nme\nmi\nna\nni\nno\nnu\noh\nos\nse\nsi\nsu\nte\nti\ntu\nuf\nun\nva\nve\nvi\nya\nyo' >> wordlist-es.txt
-# echo "Number of words "
-# wc -w wordlist-it.txt
