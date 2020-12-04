@@ -51,6 +51,7 @@ aspell -d it dump master \
 | sed "/[a-z\s]*xx[a-z\s]*/d" \
 | tr ' ' '\n' \
 | sed "/^.*'.*$/d" \
+| sed "/^usa$/d;/^www$/d" \
 | sed "/\<\w[A-Z]\w*\>/d;/\<\w\+[A-Z]\>/d" \
 | iconv -f utf8 -t ascii//TRANSLIT \
 | sed "/^.\{,2\}\$/d;/^.\{11,\}/d" \
