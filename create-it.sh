@@ -1,4 +1,8 @@
 #!/bin/bash
+#Due to conjugations / declensions there are many variations for each Italian word
+#To reduce the size of the list to a reasonable level, the max word length is 9 letters (Wc of  252727)
+#10 letters gives a word count of 455809
+#
 #Install the Italian word list using
 #sudo apt install aspell-it
 #
@@ -55,7 +59,7 @@ aspell -d it dump master \
 | sed "/\<\w[A-Z]\w*\>/d;/\<\w\+[A-Z]\>/d" \
 | gawk '{print tolower($0)}' \
 | iconv -f utf8 -t ascii//TRANSLIT \
-| sed "/^.\{,2\}\$/d;/^.\{11,\}/d" \
+| sed "/^.\{,2\}\$/d;/^.\{10,\}/d" \
 | gawk '{print length, $0}' \
 | sort -k1,1nr -k2,2 \
 | cut -d " " -f2- \
