@@ -1,4 +1,4 @@
-const val OUT_FILENAME = "../../idea.txt"
+const val OUT_FILENAME = "../../out/idea.txt"
 
 fun main(args: Array<String>) {
     val words = createScowlWordList()
