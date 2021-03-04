@@ -1,9 +1,12 @@
+package com.mpdbailey.scowl
+
+import com.mpdbailey.utils.ResourceLoader
 import java.io.File
 
 const val SCOWL_DIR = "../../scowl/wordlist/scowl/final/"
 const val SOWPODS = "../../wordlists/sowpods.txt"
-const val BANNED_WORDS = "bannedwords.txt"
-const val EXTRA_WORDS = "extrawords.txt"
+const val BANNED_WORDS = "/bannedwords.txt"
+const val EXTRA_WORDS = "/extrawords.txt"
 
 val comparator = compareByDescending<String> {it.length }
 val bannedWords = ResourceLoader().load(BANNED_WORDS)

@@ -1,3 +1,6 @@
+package com.mpdbailey.scowl
+
+import com.mpdbailey.utils.RomanNumerals
 import java.io.File
 
 const val SCOWL_FILENAME = "../../out/words.txt"

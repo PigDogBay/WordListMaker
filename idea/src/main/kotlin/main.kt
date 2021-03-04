@@ -1,3 +1,7 @@
+import com.mpdbailey.scowl.createScowlWordList
+import com.mpdbailey.scowl.saveWordList
+import com.mpdbailey.scowl.validate
+
 const val OUT_FILENAME = "../../out/idea.txt"
 const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
 
@@ -25,5 +29,5 @@ fun createScowl(){
 
 fun main(args: Array<String>) {
     createScowl()
-    createNabuDb()
+//    createNabuDb()
 }

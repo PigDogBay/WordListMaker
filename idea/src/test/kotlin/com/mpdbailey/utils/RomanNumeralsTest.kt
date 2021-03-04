@@ -1,3 +1,6 @@
+package com.mpdbailey.utils
+
+import com.mpdbailey.utils.RomanNumerals
 import org.junit.Test
 
 import org.junit.Assert.*
