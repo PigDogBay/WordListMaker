@@ -1,9 +1,11 @@
+import com.mpdbailey.scowl.Ukacd
 import com.mpdbailey.scowl.createScowlWordList
 import com.mpdbailey.scowl.saveWordList
 import com.mpdbailey.scowl.validate
 
 const val OUT_FILENAME = "../../out/idea.txt"
 const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
+const val UKACD17_FILENAME = "../../wordlists/UKACD/UKACD17.TXT"
 
 fun createNabuDb(){
     println("Creating Nabu database")
@@ -28,6 +30,8 @@ fun createScowl(){
 
 
 fun main(args: Array<String>) {
-    createScowl()
+//    createScowl()
 //    createNabuDb()
+    val Ukacd = Ukacd(UKACD17_FILENAME)
+    Ukacd.createWordList()
 }

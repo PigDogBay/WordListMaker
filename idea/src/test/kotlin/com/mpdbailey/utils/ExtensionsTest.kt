@@ -1,11 +1,11 @@
-package com.mpdbailey.scowl
+package com.mpdbailey.utils
 
 import org.junit.Test
 
 import org.junit.Assert.*
 
 
-internal class WordListTest {
+internal class ExtensionsTest {
 
     @Test
     fun removeAccents1() {
