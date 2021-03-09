@@ -33,4 +33,8 @@ class RomanNumerals {
         return numeralsMap[l]!! + toRoman(number - l)
     }
 
+    fun toRoman(range : IntRange) : List<String>{
+        return range.map { toRoman(it) }
+    }
+
 }
