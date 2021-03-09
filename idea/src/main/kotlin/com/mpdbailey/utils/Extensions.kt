@@ -1,5 +1,7 @@
 package com.mpdbailey.utils
 
+import java.io.File
+
 
 /**
  * Using normalizer didn't work
@@ -71,3 +73,9 @@ fun String.removeAccents() : String = this
     .replace('ú','u')
     .replace('û','u')
     .replace('ü','u')
+
+fun List<String>.saveWordList(filename: String) {
+    File(filename).printWriter().use { out ->
+        forEach { out.println(it) }
+    }
+}

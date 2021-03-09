@@ -38,8 +38,3 @@ fun createScowlWordList() : List<String> {
 
 fun loadWordList(filename : String) : List<String> = File(filename).readLines(Charsets.ISO_8859_1)
 
-fun List<String>.saveWordList(filename: String) {
-    File(filename).printWriter().use { out ->
-        forEach { out.println(it) }
-    }
-}
