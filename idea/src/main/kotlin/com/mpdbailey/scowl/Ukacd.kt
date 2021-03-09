@@ -22,19 +22,6 @@ class Ukacd(private val filename : String) {
             .toList()
     }
 
-    private fun compressString(str : String) : String{
-        return str.replace(",","")
-            .replace(",","")
-            .replace("?","")
-            .replace("!","")
-            .replace("'","")
-            .replace(".","")
-            .replace(";","")
-            .replace(":","")
-            .replace(" ","")
-            .replace("-","")
-    }
-
     fun phrases() : List<String>{
         return loadWordList(filename)
             .asSequence()

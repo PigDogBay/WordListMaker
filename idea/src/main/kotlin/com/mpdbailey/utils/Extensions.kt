@@ -74,6 +74,18 @@ fun String.removeAccents() : String = this
     .replace('û','u')
     .replace('ü','u')
 
+fun String.removePunctuation() : String = this
+    .replace(",","")
+    .replace(",","")
+    .replace("?","")
+    .replace("!","")
+    .replace("'","")
+    .replace(".","")
+    .replace(";","")
+    .replace(":","")
+    .replace(" ","")
+    .replace("-","")
+
 fun List<String>.saveWordList(filename: String) {
     File(filename).printWriter().use { out ->
         forEach { out.println(it) }
