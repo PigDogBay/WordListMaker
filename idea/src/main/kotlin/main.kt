@@ -1,6 +1,6 @@
 import com.mpdbailey.scowl.*
 import com.mpdbailey.utils.saveWordList
-import com.mpdbailey.utils.removePunctuation
+import com.mpdbailey.utils.removeWordSeparators
 
 const val OUT_FILENAME = "../../out/idea.txt"
 const val PHRASES_FILENAME = "../../out/phrases.txt"
@@ -34,15 +34,33 @@ fun createPhrases(){
     val wordNet = WordNet().phrases()
     val ukacd = Ukacd(UKACD17_FILENAME).phrases()
     val combined = (wordNet + ukacd)
-        .distinctBy {it.removePunctuation()  }
+        .distinctBy {it.removeWordSeparators()  }
         .sortedWith(comparator.thenBy { it })
     println("Phrases count ${combined.count()}")
     combined.saveWordList(PHRASES_FILENAME)
 }
 
+fun createAll(){
+    val wordNet = WordNet().phrases()
+    val ukacd = Ukacd(UKACD17_FILENAME).phrases()
+    val scowl = createScowlWordList()
+    val phrases = (wordNet + ukacd)
+        .map { it.toLowerCase() }
+        .sortedWith(comparator.thenBy { it })
+        .distinctBy {it.removeWordSeparators()}
+    val all = (phrases + scowl)
+        .sortedWith(comparator.thenBy { it })
+    all.saveWordList(OUT_FILENAME)
+
+    println("WordNet Count: ${wordNet.count()}")
+    println("UKACD Count: ${ukacd.count()}")
+    println("Phrases Count: ${phrases.count()}")
+    println("Scowl Count: ${scowl.count()}")
+    println("All Count: ${all.count()}")
+}
+
 
 fun main(args: Array<String>) {
-//    createScowl()
 //    createNabuDb()
-    createPhrases()
+    createAll()
 }
