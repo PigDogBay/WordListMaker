@@ -2,6 +2,7 @@ package com.mpdbailey.scowl
 
 import com.mpdbailey.nabu.Combine
 import com.mpdbailey.utils.RomanNumerals
+import com.mpdbailey.utils.removePunctuation
 
 class WordNet {
     private val regexIllegal = Regex("[_'\\-.!/0-9]")
@@ -41,6 +42,7 @@ class WordNet {
             .map { it.replace('_', ' ') }
             .map{it.replace("st.", "st")}
             .filter { !it.contains('.') }
+            .map { it.removePunctuation() }
             .sortedWith(comparator.thenBy { it })
             .distinct()
             .toList()

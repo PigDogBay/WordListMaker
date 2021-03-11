@@ -83,6 +83,8 @@ fun String.removePunctuation() : String = this
     .replace(".","")
     .replace(";","")
     .replace(":","")
+
+fun String.removeWordSeparators() : String = this
     .replace(" ","")
     .replace("-","")
 

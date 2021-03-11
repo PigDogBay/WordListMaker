@@ -1,6 +1,7 @@
 package com.mpdbailey.scowl
 
 import com.mpdbailey.utils.removeAccents
+import com.mpdbailey.utils.removePunctuation
 
 class Ukacd(private val filename : String) {
     private val regexIllegal = Regex("[\\s'\\-.!]")
@@ -28,7 +29,7 @@ class Ukacd(private val filename : String) {
             .filter {it.contains(regexPhrases)}
             .filter { it.length in minPhraseLength..maxPhraseLength }
             .filter{it.contains(regexBannedWords)}
-            .map { it.removeAccents() }
+            .map { it.removePunctuation().removeAccents() }
             .sortedWith(comparator.thenBy { it })
             .distinct()
             .toList()
