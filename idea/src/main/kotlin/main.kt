@@ -51,7 +51,9 @@ fun createAll(){
     val all = (phrases + scowl)
         .sortedWith(comparator.thenBy { it })
     all.saveWordList(OUT_FILENAME)
-
+    println("Invalid words found:")
+    validate(OUT_FILENAME)
+    println("\nSummary\n-------")
     println("WordNet Count: ${wordNet.count()}")
     println("UKACD Count: ${ukacd.count()}")
     println("Phrases Count: ${phrases.count()}")

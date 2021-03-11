@@ -30,7 +30,7 @@ fun createScowlWordList() : List<String> {
         .map{it.removeAccents()}
         .minus(bannedWords)
         .toList()
-        .union(extraWords)
+        .union(extraWords.map { it.toLowerCase() })
         .sortedWith(comparator.thenBy { it })
         .distinct()
         .toList()

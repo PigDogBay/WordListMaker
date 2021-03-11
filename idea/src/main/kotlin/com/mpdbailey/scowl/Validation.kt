@@ -33,12 +33,14 @@ private fun validatePrinter(displayName : String, filename: String){
  */
 fun containsIllegalChar(word : String) : Boolean = word.any{it < 'a' || it > 'z'}
 
+private val legalRomanNumeralWords = listOf("div","dix","mix","di","li","mi","mm","xi","i")
 
 fun validate(filename : String) : Int {
-    //Check only contain a-z
+    val regexIllegalChars = Regex("[^a-z\\s\\-]")
+    //Check only contain a-z,- and space
     val invalidWords = File(filename)
         .readLines()
-        .filter { containsIllegalChar(it) }
+        .filter { it.contains(regexIllegalChars) }
     invalidWords.forEach { println(it) }
 
     //Do not contain Roman numerals
@@ -48,6 +50,7 @@ fun validate(filename : String) : Int {
     val invalidRomans = File(filename)
         .readLines()
         .intersect(numerals)
+        .minus(legalRomanNumeralWords)
     invalidRomans.forEach{println(it)}
 
     return invalidWords.count() + invalidRomans.count()
