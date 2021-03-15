@@ -6,6 +6,7 @@ class DatabaseLookup(filename : String) {
         val direct = ids.mapNotNull {database.querySynonymSet(it)}
         val associated = direct
             .flatMap { it.associatedIndices }
+            .filter { it.isNotEmpty() }
             .mapNotNull {database.querySynonymSet(it)}
         return direct+associated
     }
