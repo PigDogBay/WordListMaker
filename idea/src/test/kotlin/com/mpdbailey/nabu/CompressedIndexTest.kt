@@ -23,7 +23,7 @@ class CompressedIndexTest {
         val target = CompressedIndex()
         target.createMap(indices)
         val actual = target.compress(listOf("12345678", "12345678", "42424242"))
-        assertEquals("001001003",actual)
+        assertEquals(listOf("001","001","003"),actual)
     }
 
     @Test

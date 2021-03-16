@@ -22,7 +22,6 @@ class CompressedIndex {
 
     fun compress(indices : List<String>) = indices
         .map{hashMap[it]!!}
-        .reduce{acc, str -> acc + str}
 
 
     private fun next() : String {
