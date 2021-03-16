@@ -3,6 +3,10 @@ package com.mpdbailey.nabu
 import java.lang.IndexOutOfBoundsException
 
 class CompressedIndex {
+    companion object {
+        fun flatten(indices : List<String>) = indices.fold(""){acc, s -> acc + s }
+        fun unflatten(indexString : String) = indexString.chunked(3)
+    }
     private val max = 'z'
     private val counter = charArrayOf('0','0','0')
 

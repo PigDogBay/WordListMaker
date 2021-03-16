@@ -41,7 +41,7 @@ class Database(private val filename : String) {
         indices.forEach {
             prepStat.setString(1, it.word)
             //OK to use , as separator but can be optimised out as indices are same length
-            prepStat.setString(2, it.indices.joinToString(","))
+            prepStat.setString(2, CompressedIndex.flatten(it.indices))
             prepStat.executeUpdate()
         }
         connection.commit()
@@ -56,7 +56,7 @@ class Database(private val filename : String) {
         synonyms.forEach {
             prepStat.setString(1, it.index)
             prepStat.setString(2, it.words.joinToString(","))
-            prepStat.setString(3, it.associatedIndices.joinToString(","))
+            prepStat.setString(3, CompressedIndex.flatten(it.associatedIndices))
             prepStat.executeUpdate()
         }
         connection.commit()
@@ -70,7 +70,7 @@ class Database(private val filename : String) {
         prepStat.setString(1, word)
         val resultSet = prepStat.executeQuery()
         val results = if (resultSet.next()){
-            resultSet.getString("ids").split(',')
+            CompressedIndex.unflatten(resultSet.getString("ids"))
         } else { emptyList<String>()}
         prepStat.close()
         connection.close()
@@ -85,7 +85,7 @@ class Database(private val filename : String) {
         val results = if (resultSet.next()){
             SynonymSet(id,
                 resultSet.getString("synonyms").split(','),
-                resultSet.getString("associatedIds").split(','))
+                CompressedIndex.unflatten(resultSet.getString("associatedIds")))
         } else {null}
         prepStat.close()
         connection.close()
