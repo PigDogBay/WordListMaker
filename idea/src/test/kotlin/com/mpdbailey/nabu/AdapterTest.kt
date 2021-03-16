@@ -37,6 +37,6 @@ class AdapterTest {
             "close",
             "16777216 00 a 01 close 1 020 = 05091408 n 0000 + 05092779 n 0102 ! 00447582 a 0101 & 00449506 a 0000 & 00449787 a 0000 & 00449943 a 0000 & 00450164 a 0000 & 00450348 a 0000 & 00450678 a 0000 & 00450811 a 0000 & 00450958 a 0000 & 00451113 a 0000 & 00451366 a 0000 & 00451559 a 0000 & 00451696 a 0000 & 00451803 a 0000 & 00451923 a 0000 & 00452181 a 0000 & 00452303 a 0000 & 00452436 a 0000 | at or within a short distance in space or time or having elements near each other; \"close to noon\"; \"how close are we to town?\"; \"a close formation of ships\"  "
         )
-        val synonymSet = target.convert(definition)
+        target.convert(definition)
     }
 }
