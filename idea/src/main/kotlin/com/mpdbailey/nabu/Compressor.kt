@@ -6,6 +6,7 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
 
     private val compressedIndex = CompressedIndex()
     private val regexIllegal = Regex("[./0-9]")
+    private val replaceBrackets = Regex("\\([a-z]+\\)")
 
     init {
         compressedIndex.createMap(synonymSets.map{it.index})
@@ -22,6 +23,13 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
             .distinct()
         return SynonymIndex(indices[0].word, all)
     }
+
+    private fun processSynSetWords(words : List<String>) = words
+        .map { it.replace(replaceBrackets,"") }
+        .filter{ !bannedWords.contains(it)}
+        .filter { it.isNotEmpty() }
+        .distinct()
+
 
     val compressedIndices =
         indices
@@ -40,7 +48,7 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
 
     val compressedSynonymSets = synonymSets.map{ SynonymSet(
             compressedIndex.compress(it.index),
-            it.words,
+            processSynSetWords(it.words),
             compressedIndex.compress(it.associatedIndices)) }
 
 }
