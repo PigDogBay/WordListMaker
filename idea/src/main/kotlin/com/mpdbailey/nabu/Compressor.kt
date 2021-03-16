@@ -1,5 +1,7 @@
 package com.mpdbailey.nabu
 
+import com.mpdbailey.scowl.bannedWords
+
 class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
 
     private val compressedIndex = CompressedIndex()
@@ -30,6 +32,7 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
             .map { SynonymIndex(
                 cleanIndexWord(it.word)
                 ,compressedIndex.compress(it.indices)) }
+            .filter{ !bannedWords.contains(it.word)}
             //multiple entries for can exist for the same phrase, eg step-in or 'step in'
             .groupBy { it.word }
             .map { compressMultipleIndices(it.value) }
