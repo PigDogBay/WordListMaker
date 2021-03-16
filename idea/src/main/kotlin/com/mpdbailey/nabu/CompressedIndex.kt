@@ -1,16 +1,31 @@
 package com.mpdbailey.nabu
 
+import java.lang.IndexOutOfBoundsException
+
 class CompressedIndex {
     private val max = 'z'
     private val counter = charArrayOf('0','0','0')
 
-    fun reset(){
-        counter[0] = '0'
-        counter[1] = '0'
-        counter[2] = '0'
+    private val hashMap = HashMap<String, String>()
+
+    private fun add(index : String){
+        if (!hashMap.keys.contains(index)){
+            hashMap[index] = next()
+        }
     }
 
-    fun next() : String {
+    fun createMap(indices : List<String>){
+        indices.forEach { add(it) }
+    }
+
+    fun compress(index : String) = hashMap[index]!!
+
+    fun compress(indices : List<String>) = indices
+        .map{hashMap[it]!!}
+        .reduce{acc, str -> acc + str}
+
+
+    private fun next() : String {
         counter[2]++
         if (counter[2] > max) {
             counter[2] = '0'
@@ -21,7 +36,7 @@ class CompressedIndex {
             counter[0]++
         }
         if (counter[0] > max) {
-            reset()
+            throw IndexOutOfBoundsException("Too many indices")
         }
         return String(counter)
     }
