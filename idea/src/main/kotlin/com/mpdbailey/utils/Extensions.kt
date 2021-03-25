@@ -93,3 +93,12 @@ fun List<String>.saveWordList(filename: String) {
         forEach { out.println(it) }
     }
 }
+
+fun String.unexpectedChar() : Boolean {
+    this.forEach {
+        if (!(it in 'a'..'z' ||  it == ' ' || it == '-')){
+            return true
+        }
+    }
+    return false
+}
