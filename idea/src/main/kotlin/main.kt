@@ -7,6 +7,7 @@ import com.mpdbailey.utils.saveWordList
 import com.mpdbailey.utils.removeWordSeparators
 
 const val OUT_FILENAME = "../../out/words.txt"
+const val SMALL_FILENAME = "../../out/small.txt"
 const val PHRASES_FILENAME = "../../out/phrases.txt"
 const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
 const val UKACD17_FILENAME = "../../wordlists/UKACD/UKACD17.TXT"
@@ -35,6 +36,15 @@ fun createScowl(){
     words.saveWordList(OUT_FILENAME)
     println("Validating - find any illegal words:")
     val badWordCount = validate(OUT_FILENAME)
+    println("Found $badWordCount illegal words")
+}
+
+fun createSmall(){
+    val words = createSmallWordList()
+    println("Count: ${words.count()}")
+    words.saveWordList(SMALL_FILENAME)
+    println("Validating - find any illegal words:")
+    val badWordCount = validate(SMALL_FILENAME)
     println("Found $badWordCount illegal words")
 }
 
@@ -67,5 +77,6 @@ fun dbLookup(query : String){
 fun main(args: Array<String>) {
     //createNabuDb()
 //    dbLookup("second hand")
-    createPhrases()
+    createScowl()
+    createSmall()
 }
