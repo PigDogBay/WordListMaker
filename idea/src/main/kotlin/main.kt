@@ -2,6 +2,7 @@ import com.mpdbailey.nabu.Combine
 import com.mpdbailey.nabu.Compressor
 import com.mpdbailey.nabu.DatabaseLookup
 import com.mpdbailey.scowl.*
+import com.mpdbailey.utils.ResourceLoader
 import com.mpdbailey.utils.saveWordList
 import com.mpdbailey.utils.removeWordSeparators
 
@@ -9,6 +10,7 @@ const val OUT_FILENAME = "../../out/words.txt"
 const val PHRASES_FILENAME = "../../out/phrases.txt"
 const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
 const val UKACD17_FILENAME = "../../wordlists/UKACD/UKACD17.TXT"
+const val EXTRA_PHRASES = "/extraphrases.txt"
 
 fun createNabuDb(){
     println("Creating Nabu database")
@@ -39,11 +41,14 @@ fun createScowl(){
 fun createPhrases(){
     val wordNet = WordNet().phrases()
     val ukacd = Ukacd(UKACD17_FILENAME).phrases()
-    val phrases = (wordNet + ukacd)
+    val extraPhrases = ResourceLoader().load(EXTRA_PHRASES)
+
+    val phrases = (wordNet + ukacd + extraPhrases)
         .map { it.toLowerCase() }
         .sortedWith(comparator.thenBy { it })
         .distinctBy {it.removeWordSeparators()}
     phrases.saveWordList(PHRASES_FILENAME)
+
     println("Invalid words found:")
     validate(PHRASES_FILENAME)
     println("\nSummary\n-------")
@@ -61,5 +66,6 @@ fun dbLookup(query : String){
 
 fun main(args: Array<String>) {
     //createNabuDb()
-    dbLookup("second hand")
+//    dbLookup("second hand")
+    createPhrases()
 }
