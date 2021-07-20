@@ -80,6 +80,7 @@ emusic
 en
 er
 es
+eswatini
 et
 ew
 ex
