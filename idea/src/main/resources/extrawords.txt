@@ -1,6 +1,7 @@
 a
 aa
 ab
+acol
 actioned
 actioned
 ad
@@ -138,6 +139,7 @@ ma
 manspreading
 me
 mi
+mirrorball
 mm
 mo
 mochi
@@ -227,12 +229,14 @@ superuser
 superusers
 suse
 ta
+taormina
 tarball
 tarballs
 te
 therm
 ti
 to
+totnes
 trenchcoat
 trocadero
 twerk
