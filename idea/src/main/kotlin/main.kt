@@ -77,6 +77,7 @@ fun dbLookup(query : String){
 fun main(args: Array<String>) {
     //createNabuDb()
 //    dbLookup("second hand")
-    createScowl()
-    createSmall()
+//    createScowl()
+//    createSmall()
+    createPhrases()
 }
