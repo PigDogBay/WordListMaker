@@ -55,7 +55,8 @@ fun createPhrases(){
 
     val phrases = (wordNet + ukacd + extraPhrases)
         .map { it.toLowerCase() }
-        .sortedWith(comparator.thenBy { it })
+        //Sort hyphens and spaces as being the same otherwise 'close-range' comes after 'close shave'
+        .sortedWith(comparator.thenBy { it.replace("-"," ") })
         .distinctBy {it.removeWordSeparators()}
     phrases.saveWordList(PHRASES_FILENAME)
 
