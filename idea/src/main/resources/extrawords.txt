@@ -140,6 +140,7 @@ li
 lo
 lusophone
 ma
+manningtree
 manspreading
 me
 mi
@@ -220,6 +221,7 @@ rulings
 sap
 sars
 sashimi
+satnav
 segfault
 sh
 si
@@ -243,6 +245,7 @@ tarballs
 te
 therm
 ti
+titipu
 to
 totnes
 trenchcoat
