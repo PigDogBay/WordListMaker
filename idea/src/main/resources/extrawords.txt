@@ -18,6 +18,7 @@ am
 ammanford
 an
 anthropause
+anyhoo
 app
 apps
 ar
@@ -166,6 +167,8 @@ neddy
 nidor
 no
 norad
+norwester
+norwesters
 nu
 nvidia
 ny
@@ -218,6 +221,7 @@ rhinion
 roedean
 ruislip
 rulings
+sanditon
 sap
 sars
 sashimi
@@ -231,6 +235,8 @@ sleaford
 smokie
 snowpea
 so
+souwester
+souwesters
 spey
 sqlite
 st
