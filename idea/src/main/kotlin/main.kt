@@ -12,6 +12,7 @@ const val PHRASES_FILENAME = "../../out/phrases.txt"
 const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
 const val UKACD17_FILENAME = "../../wordlists/UKACD/UKACD17.TXT"
 const val EXTRA_PHRASES = "/extraphrases.txt"
+const val ACTORS = "/actors.txt"
 
 fun createNabuDb(){
     println("Creating Nabu database")
@@ -51,9 +52,10 @@ fun createSmall(){
 fun createPhrases(){
     val wordNet = WordNet().phrases()
     val ukacd = Ukacd(UKACD17_FILENAME).phrases()
+    val actors = Ukacd("").phrases(ResourceLoader().load(ACTORS))
     val extraPhrases = ResourceLoader().load(EXTRA_PHRASES)
 
-    val phrases = (wordNet + ukacd + extraPhrases)
+    val phrases = (wordNet + ukacd + extraPhrases + actors)
         .map { it.toLowerCase() }
         //Sort hyphens and spaces as being the same otherwise 'close-range' comes after 'close shave'
         .sortedWith(comparator.thenBy { it.replace("-"," ") })
@@ -64,6 +66,7 @@ fun createPhrases(){
     validate(PHRASES_FILENAME)
     println("\nSummary\n-------")
     println("WordNet Count: ${wordNet.count()}")
+    println("Actors Count: ${actors.count()}")
     println("UKACD Count: ${ukacd.count()}")
     println("Phrases Count: ${phrases.count()}")
 }

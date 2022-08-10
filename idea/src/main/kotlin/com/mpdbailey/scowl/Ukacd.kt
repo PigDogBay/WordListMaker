@@ -24,7 +24,11 @@ class Ukacd(private val filename : String) {
     }
 
     fun phrases() : List<String>{
-        return loadWordList(filename)
+        return phrases(loadWordList(filename))
+    }
+
+    fun phrases(rawList : List<String>) : List<String>{
+        return rawList
             .asSequence()
             .filter {it.contains(regexPhrases)}
             .filter { it.length in minPhraseLength..maxPhraseLength }
