@@ -92,6 +92,7 @@ fa
 fatberg
 fe
 foobar
+fratty
 fy
 gi
 glitched
