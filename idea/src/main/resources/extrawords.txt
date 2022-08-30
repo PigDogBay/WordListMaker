@@ -168,6 +168,7 @@ nascar
 ne
 neddy
 nidor
+niente
 no
 noob
 norad
@@ -203,11 +204,14 @@ ow
 ox
 oy
 pa
+paan
 palaeethnologic
 palaeethnologist
 paleethnologic
 paleethnologist
 pe
+pepita
+phablet
 photobomb
 photobombed
 photobombing
@@ -294,6 +298,7 @@ waspishnesses
 we
 weei
 wo
+woohoo
 wokeness
 workation
 xi
@@ -302,6 +307,7 @@ ya
 yarford
 ye
 yo
+yoohoo
 yu
 za
 zo

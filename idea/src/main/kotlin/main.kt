@@ -13,6 +13,7 @@ const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
 const val UKACD17_FILENAME = "../../wordlists/UKACD/UKACD17.TXT"
 const val EXTRA_PHRASES = "/extraphrases.txt"
 const val ACTORS = "/actors.txt"
+const val POLITICIANS = "/politicians.txt"
 
 fun createNabuDb(){
     println("Creating Nabu database")
@@ -53,9 +54,10 @@ fun createPhrases(){
     val wordNet = WordNet().phrases()
     val ukacd = Ukacd(UKACD17_FILENAME).phrases()
     val actors = Ukacd("").phrases(ResourceLoader().load(ACTORS))
+    val politicians = Ukacd("").phrases(ResourceLoader().load(POLITICIANS))
     val extraPhrases = ResourceLoader().load(EXTRA_PHRASES)
 
-    val phrases = (wordNet + ukacd + extraPhrases + actors)
+    val phrases = (wordNet + ukacd + extraPhrases + actors + politicians)
         .map { it.toLowerCase() }
         //Sort hyphens and spaces as being the same otherwise 'close-range' comes after 'close shave'
         .sortedWith(comparator.thenBy { it.replace("-"," ") })
