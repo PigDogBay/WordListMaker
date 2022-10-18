@@ -1,6 +1,7 @@
 a
 aa
 ab
+abarth
 acol
 actioned
 actioned
@@ -22,6 +23,7 @@ anyhoo
 app
 apps
 ar
+ardente
 as
 asgardia
 asgardian
@@ -61,6 +63,7 @@ cryptocurrencies
 cryptocurrency
 da
 de
+deked
 deliminator
 deliminators
 di
@@ -89,6 +92,7 @@ et
 ew
 ex
 fa
+farro
 fatberg
 fe
 foobar
@@ -175,6 +179,8 @@ norad
 norwester
 norwesters
 nu
+nunchuk
+nunchuck
 nvidia
 ny
 o
@@ -224,9 +230,11 @@ prepended
 prepending
 qi
 quatford
+rainswept
 re
 rhinion
 roedean
+rotini
 ruislip
 rulings
 sanditon
