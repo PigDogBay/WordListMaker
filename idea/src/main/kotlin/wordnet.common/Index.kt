@@ -1,24 +1,26 @@
 package wordnet.common
 
-
-/*  Offset: 148117 file: Index.adj
-        "close a 15 4 ! & = + 15 7 00448955 00453543 00446553 00310743 00022256 00893915 00560964 02519542 02240484 02007394 01865308 01450828 01439442 01116967 00502916  "
-        148117
-        close
-        a
-        15
-        15
-        7
-        00448955 00453543 00446553 00310743 00022256 00893915 00560964 02519542 02240484 02007394 01865308 01450828 01439442 01116967 00502916
-        4
-        1 5 18 20
-     */
-/// <summary>
-/// Parses an index structure from the specified file at the specified offset
-/// </summary>
-/// <param name="offset">The ofset in the file at which the index exists</param>
-/// <param name="dbFileName">The full path to the database file to open</param>
-/// <returns>A populated index structure in successful; otherwise an empty index structure</returns>
+/**
+ * Parses an index structure from the specified file at the specified offset
+ *
+ * @param idxOffset The offset in the file at which the index exists</param>
+ * @param record The full path to the database file to open</param>
+ * @return A populated index structure in successful; otherwise an empty index structure</returns>
+ *
+ * Example
+ *
+ *  idxOffset: 148117 (file: Index.adj)
+ *  record: "close a 15 4 ! & = + 15 7 00448955 00453543 00446553 00310743 00022256 00893915 00560964 02519542 02240484 02007394 01865308 01450828 01439442 01116967 00502916  "
+ *
+ *    close : Word
+ *    a : Part of Speech, a = adjective
+ *    15 : Sense Count
+ *    4 : Pointers Used Count
+ *    ! & = + : Pointer types (ANTPTR, SIMPTR, ATTRIBUTE, NORMALIZATIONS)
+ *    15 : Offset count
+ *    7 : Tagged Senses Count
+ *    00448955 00453543 00446553 00310743 00022256 00893915 00560964 02519542 02240484 02007394 01865308 01450828 01439442 01116967 00502916 : Syn Set Offsets
+ */
 class Index(record: String, val idxOffset: Int) {
     val word : String
     val partOfSpeech : String
