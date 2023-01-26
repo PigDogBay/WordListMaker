@@ -40,8 +40,9 @@ class Definition {
     01 close 1: Number of words
     close 1: List of words, word(close) LexId(1)
     020: Associated word count
-    = 05091408 n 0000 +: List of: Type (= ATTRIBUTE), File Offset(05091408), File Code (n data.noun), Lex To/From pointers (0000)
-    Definition data
+    = 05091408 n 0000: List of: Type (= ATTRIBUTE), File Offset(05091408), File Code (n data.noun), Lex To/From pointers (0000)
+    |: Skipped
+    Definition text
      */
     constructor(word : String, record : String) {
         val tokens = record
