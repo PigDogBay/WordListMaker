@@ -11,6 +11,32 @@ fun readRecord(offset : Int, dbFileName : String) : String {
 }
 
 /**
+ * Find definitions for the specified word
+ */
+fun getDefinition(word : String) : Map<String, List<Definition>> {
+    val retVal = HashMap<String, ArrayList<Definition>>()
+    val fileListIndex = getAllIndexFiles()
+    val fileListData = getAllDataFiles()
+    for (i in 0 until fileListIndex.count()){
+        val offset = fastSearch(word.toLowerCase(), fileListIndex[i])
+        if (offset>0){
+            val record = readRecord(offset, fileListIndex[i])
+            val idx = Index(record,offset)
+            for (synSetOffset in idx.synSetsOffsets){
+                val dataRecord = readRecord(synSetOffset, fileListData[i])
+                val definition = Definition(word, dataRecord)
+                val wordKey = definition.words.joinToString(separator = ", ")
+                if (!retVal.contains(wordKey)){
+                    retVal[wordKey] = ArrayList()
+                }
+                retVal[wordKey]?.add(definition)
+            }
+        }
+    }
+    return retVal
+}
+
+/**
  * Uses a binary search to find the file position of the line containing the keyword
  */
 fun fastSearch(keyword : String, dbFileName : String) : Int {
