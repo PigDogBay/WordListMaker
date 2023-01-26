@@ -15,8 +15,17 @@ const val EXTRA_PHRASES = "/extraphrases.txt"
 const val ACTORS = "/actors.txt"
 const val POLITICIANS = "/politicians.txt"
 
+/**
+ * 1) Load the 4 types of files (adjectives, adverbs, nouns and verbs) for the index and definition data
+ * 2) Parse each line of data into Index/Definition objects
+ * 3) Combine the 4 types into one output list for both Index and Definition
+ * 4) Convert the raw data types, Index & Definition, into SynonymIndex and SynonymSet
+ * 5) Fix up the index offsets based on the file type
+ *
+ */
 fun createNabuDb(){
     println("Creating Nabu database")
+    //COnver
     val combine = Combine()
     val compressor = Compressor(combine.indices(),combine.synonyms())
     println("Compressing indices")

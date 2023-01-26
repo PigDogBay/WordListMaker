@@ -23,12 +23,23 @@ class Validation {
         println("$dbPartOfSpeech ${indices.count()}, $posPass, $defPosPass, $indexPass")
     }
 
+    /**
+     * Loads the index file for the specified part of speech
+     * Each line in the index file is parsed into an Index object
+     *
+     * Note that the file index.sense is a different format to the other index files
+     * and seems to be a combined list of the index files.
+     */
     fun loadIndices(dbPartOfSpeech: DbPartOfSpeech) : List<Index> =
         File(getDbFilePath(DbType.Index,dbPartOfSpeech))
             .readLines(Charsets.UTF_8)
             .drop(copyrightLineCount)
             .map { Index(it,0) }
 
+    /**
+     * Loads the data file for the specified part of speech
+     * Each line in the index file is parsed into an Index object
+     */
     fun loadDefinitions(dbPartOfSpeech: DbPartOfSpeech) : List<Definition> =
         File(getDbFilePath(DbType.Data,dbPartOfSpeech))
             .readLines(Charsets.UTF_8)

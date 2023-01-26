@@ -4,6 +4,10 @@ import wordnet.common.Definition
 import wordnet.common.Index
 import java.lang.IllegalArgumentException
 
+/**
+ * Converts the WordNet Index and Definition objects into SynonymIndex and SynonymSet objects.
+ * Since the data is split across 4 files, the file offset and type is combined in convertPosition()
+ */
 class Adapter {
 
     fun convert(index: Index) : SynonymIndex {
