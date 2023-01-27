@@ -26,6 +26,9 @@ class Definition {
     var ptrList : Definition? = null
     val associatedIndices = ArrayList<AssociatedIndex>()
 
+    //Sense represents the order of the definition and is based on the ordering of offsets in the index file
+    val sense : Int
+
     /*
     Each line in the file represents 1 definition entry:
         "00448955 00 a
@@ -43,7 +46,8 @@ class Definition {
     |: Skipped
     Definition text
      */
-    constructor(word : String, record : String) {
+    constructor(word : String, record : String, sense : Int = 0) {
+        this.sense = sense
         val tokens = record
             .trim()
             .split(' ')

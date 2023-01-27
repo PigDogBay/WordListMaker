@@ -23,9 +23,11 @@ fun getDefinition(word : String) : Map<String, List<Definition>> {
             val record = readRecord(offset, fileListIndex[i])
             println(record)
             val idx = Index(record,offset)
+            //Sense specifies the definition display order and is same as offset ordering
+            var sense = 1
             for (synSetOffset in idx.synSetsOffsets){
                 val dataRecord = readRecord(synSetOffset, fileListData[i])
-                val definition = Definition(word, dataRecord)
+                val definition = Definition(word, dataRecord, sense++)
                 val wordKey = definition.words.joinToString(separator = ", ")
                 if (!retVal.contains(wordKey)){
                     retVal[wordKey] = ArrayList()

@@ -99,7 +99,7 @@ fun wordNetLookup(word : String){
     grouped.keys.forEach { pos ->
         println("$word ($pos)")
         println("-------------------------")
-        grouped[pos]?.forEach {def ->
+        grouped[pos]?.sortedBy { it.sense }?.forEach {def ->
             println(displayDefinition(def))
         }
     }
