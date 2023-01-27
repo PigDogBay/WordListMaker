@@ -92,9 +92,12 @@ fun dbLookup(query : String){
 }
 
 fun wordNetLookup(word : String){
-    val definitions = getDefinition("close")
-    definitions.keys.forEach { key ->
-        definitions[key]?.forEach { def ->
+    val grouped = getDefinition("close")
+        .flatMap { it.value }
+        .groupBy { it.partOfSpeech }
+    grouped.keys.forEach { pos ->
+        println("$word($pos)")
+        grouped[pos]?.forEach {def ->
             println(displayDefinition(def))
         }
     }
