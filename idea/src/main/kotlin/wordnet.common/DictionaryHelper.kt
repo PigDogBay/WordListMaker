@@ -37,6 +37,15 @@ fun getDefinition(word : String) : Map<String, List<Definition>> {
     return retVal
 }
 
+fun displayDefinition(definition: Definition) : String {
+    val builder = StringBuilder()
+    builder.append(definition.words.joinToString(separator = ", "))
+    builder.append("\n")
+    builder.append(definition.definitionText)
+    builder.append("\n")
+    return builder.toString()
+}
+
 /**
  * Uses a binary search to find the file position of the line containing the keyword
  */

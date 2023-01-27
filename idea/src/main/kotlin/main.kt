@@ -5,6 +5,7 @@ import com.mpdbailey.scowl.*
 import com.mpdbailey.utils.ResourceLoader
 import com.mpdbailey.utils.saveWordList
 import com.mpdbailey.utils.removeWordSeparators
+import wordnet.common.displayDefinition
 import wordnet.common.getDefinition
 
 const val OUT_FILENAME = "../../out/words.txt"
@@ -90,17 +91,20 @@ fun dbLookup(query : String){
     println("Count ${r.count()}")
 }
 
+fun wordNetLookup(word : String){
+    val definitions = getDefinition("close")
+    definitions.keys.forEach { key ->
+        definitions[key]?.forEach { def ->
+            println(displayDefinition(def))
+        }
+    }
+}
+
 fun main(args: Array<String>) {
     //createNabuDb()
 //    dbLookup("second hand")
 //    createScowl()
 //    createSmall()
 //    createPhrases()
-    val definitions = getDefinition("close")
-    definitions.keys.forEach { word ->
-        println(word)
-        definitions[word]?.forEach { def ->
-            println(def.definitionText)
-        }
-    }
+    wordNetLookup("close")
 }
