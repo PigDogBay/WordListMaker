@@ -7,6 +7,7 @@ import com.mpdbailey.utils.saveWordList
 import com.mpdbailey.utils.removeWordSeparators
 import wordnet.common.displayDefinition
 import wordnet.common.getDefinition
+import wordnet.common.mbDisplayPartOfSpeech
 
 const val OUT_FILENAME = "../../out/words.txt"
 const val SMALL_FILENAME = "../../out/small.txt"
@@ -94,9 +95,10 @@ fun dbLookup(query : String){
 fun wordNetLookup(word : String){
     val grouped = getDefinition("close")
         .flatMap { it.value }
-        .groupBy { it.partOfSpeech }
+        .groupBy {  mbDisplayPartOfSpeech(it.partOfSpeech) }
     grouped.keys.forEach { pos ->
-        println("$word($pos)")
+        println("$word ($pos)")
+        println("-------------------------")
         grouped[pos]?.forEach {def ->
             println(displayDefinition(def))
         }

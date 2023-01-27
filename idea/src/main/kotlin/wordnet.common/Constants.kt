@@ -43,6 +43,14 @@ fun getPartOfSpeech(code : String) : Int = when (code) {
     else -> -1
 }
 
+fun mbDisplayPartOfSpeech(code : String) : String = when (code) {
+    "n" -> "noun"
+    "a", "s" -> "adjective"
+    "v" -> "verb"
+    "r" -> "adverb"
+    else -> "noun"
+}
+
 //TODO check AdjSat value in the C code
 enum class DbPartOfSpeech(val value : Int) {
     All(0),Noun(1),Verb(2),Adj(3),Adv(4),Satellite(5),AdjSat(5);

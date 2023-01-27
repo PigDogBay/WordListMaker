@@ -39,7 +39,7 @@ fun getDefinition(word : String) : Map<String, List<Definition>> {
 
 fun displayDefinition(definition: Definition) : String {
     val builder = StringBuilder()
-    builder.append("("+definition.partOfSpeech+") ")
+    builder.append("("+definition.partOfSpeech+")")
     builder.append(definition.words.joinToString(separator = ", "))
     builder.append("\n")
     builder.append(definition.definitionText.replace("; ","\n"))
