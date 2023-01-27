@@ -28,6 +28,11 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
         .replace('_',' ')
         .replace('-',' ')
 
+    /**
+     * The word 'close' is listed in all synonym index sets (adj, adverb, noun, verb)
+     * Since we are creating a combined index list,
+     * need to join all the offsets together and remove any duplicates
+     */
     private fun compressMultipleIndices(indices : List<SynonymIndex>) : SynonymIndex {
         val all = indices
             .flatMap { it.indices }

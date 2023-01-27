@@ -21,6 +21,7 @@ fun getDefinition(word : String) : Map<String, List<Definition>> {
         val offset = fastSearch(word.toLowerCase(), fileListIndex[i])
         if (offset>0){
             val record = readRecord(offset, fileListIndex[i])
+            println(record)
             val idx = Index(record,offset)
             for (synSetOffset in idx.synSetsOffsets){
                 val dataRecord = readRecord(synSetOffset, fileListData[i])
