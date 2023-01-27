@@ -12,7 +12,6 @@ class Definition {
     val partOfSpeech : String
     val wordCount : Int
     val words = ArrayList<String>()
-//    val senseNumbers = ArrayList<Int>()
     val ptrCount : Int
     val ptrTypes = ArrayList<Int>()
     val ptrOffsets = ArrayList<Int>()
@@ -100,8 +99,5 @@ class Definition {
         var builder = ""
         tokens.forEachRemaining{builder+= "$it " }
         definitionText = builder.trim()
-        for (i in 1..wordCount){
-            //TODO SenseNumbers - not used tho
-        }
     }
 }

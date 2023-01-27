@@ -20,6 +20,10 @@ package wordnet.common
  *    15 : Offset count
  *    7 : Tagged Senses Count
  *    00448955 00453543 00446553 00310743 00022256 00893915 00560964 02519542 02240484 02007394 01865308 01450828 01439442 01116967 00502916 : Syn Set Offsets
+ *
+ *
+ *    Note that the ordering of the Offsets represents the 'Sense', so 00448955 = 1, 00502916 = 15
+ *    When displaying definitions, they are ordered by sense.
  */
 class Index(record: String, val idxOffset: Int) {
     val word : String
