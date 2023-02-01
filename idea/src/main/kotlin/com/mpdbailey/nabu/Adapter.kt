@@ -19,7 +19,8 @@ class Adapter {
     fun convert(definition: Definition) : SynonymSet {
         val associatedIndices = definition.associatedIndices
             .map{ convertPosition(it.offset,it.partOfSpeech.letter) }
-        return SynonymSet(convertPosition(definition.position,definition.partOfSpeech),definition.words, associatedIndices)
+        val pos = PartOfSpeech.from(definition.partOfSpeech)
+        return SynonymSet(convertPosition(definition.position,definition.partOfSpeech),definition.words, associatedIndices, pos, definition.definitionText)
     }
 
     /*

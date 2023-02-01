@@ -28,6 +28,8 @@ class AdapterTest {
         assertEquals(synonymSet.index,"106d9bb")
         assertEquals(synonymSet.associatedIndices.count(),20)
         assertEquals(synonymSet.associatedIndices[0],"84db050")
+        assertEquals(PartOfSpeech.ADJECTIVE, synonymSet.partOfSpeech)
+        assertEquals("at or within a short distance in space or time or having elements near each other; \"close to noon\"; \"how close are we to town?\"; \"a close formation of ships\"",synonymSet.definitions)
     }
 
     @Test(expected = IllegalArgumentException::class)
