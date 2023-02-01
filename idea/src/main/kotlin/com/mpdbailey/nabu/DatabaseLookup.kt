@@ -18,9 +18,26 @@ class DatabaseLookup(filename : String) {
             .distinct()
     }
 
+    fun display(definition: SynonymSet) : String {
+        val builder = StringBuilder()
+        builder.append("("+definition.partOfSpeech+")")
+        builder.append(definition.words.joinToString(separator = ", "))
+        builder.append("\n")
+        builder.append(definition.definitions.replace("; ","\n"))
+        builder.append("\n")
+        return builder.toString()
+    }
+
     fun getDefinitions(word : String) {
         val index = database.query(word)
-        val sets = index.mapNotNull {database.querySynonymSet(it)}
-        sets.forEach {println(it.definitions) }
+        val groupedSets = index.mapNotNull {database.querySynonymSet(it)}
+            .groupBy { it.partOfSpeech }
+        groupedSets.keys.forEach { pos ->
+            println("$word ($pos)")
+            println("-------------------------")
+            groupedSets[pos]?.sortedBy { index.indexOf(it.index)}?.forEach { def ->
+                println(display(def))
+            }
+        }
     }
 }
