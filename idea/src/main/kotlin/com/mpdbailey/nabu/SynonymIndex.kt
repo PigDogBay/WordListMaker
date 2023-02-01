@@ -18,6 +18,14 @@ data class SynonymSet(val index : String,
 enum class PartOfSpeech(val letter : Char){
     NOUN(letter = 'n'), VERB(letter = 'v'), ADJECTIVE(letter = 'a'), ADVERB(letter = 'r');
 
+    val sortOrder: Int
+        get() = when (this) {
+            NOUN -> 0
+            VERB -> 1
+            ADJECTIVE -> 2
+            ADVERB -> 3
+        }
+
     companion object {
         fun from(letter: String) : PartOfSpeech = when (letter) {
             "n" -> NOUN

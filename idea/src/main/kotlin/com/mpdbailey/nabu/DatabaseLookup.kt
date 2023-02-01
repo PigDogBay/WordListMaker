@@ -29,13 +29,18 @@ class DatabaseLookup(filename : String) {
     }
 
     fun getDefinitions(word : String) {
-        val index = database.query(word)
-        val groupedSets = index.mapNotNull {database.querySynonymSet(it)}
+        //List of string indices that point to definition IDs
+        val indices = database.query(word)
+        //Get definitions for each index and group by part of speech
+        val groupedSets = indices.mapNotNull {database.querySynonymSet(it)}
             .groupBy { it.partOfSpeech }
-        groupedSets.keys.forEach { pos ->
+        //Sort keys (noun, verb, adj, adv) then sort definitions by the order that the id appears in indices
+        groupedSets.keys
+            .sortedBy { it.sortOrder }
+            .forEach { pos ->
             println("$word ($pos)")
             println("-------------------------")
-            groupedSets[pos]?.sortedBy { index.indexOf(it.index)}?.forEach { def ->
+            groupedSets[pos]?.sortedBy { indices.indexOf(it.index)}?.forEach { def ->
                 println(display(def))
             }
         }
