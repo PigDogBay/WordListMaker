@@ -87,9 +87,10 @@ fun createPhrases(){
 
 fun dbLookup(query : String){
     val dbl = DatabaseLookup(NABU_FILENAME)
-    val r = dbl.search(query).sortedBy { it.length }
-    r.forEach { println("$it (${it.count()})") }
-    println("Count ${r.count()}")
+    dbl.getDefinitions(query)
+//    val r = dbl.search(query).sortedBy { it.length }
+//    r.forEach { println("$it (${it.count()})") }
+//    println("Count ${r.count()}")
 }
 
 fun wordNetLookup(word : String){
@@ -106,10 +107,11 @@ fun wordNetLookup(word : String){
 }
 
 fun main(args: Array<String>) {
-    //createNabuDb()
+    dbLookup("close")
+//    createNabuDb()
 //    dbLookup("second hand")
 //    createScowl()
 //    createSmall()
 //    createPhrases()
-    wordNetLookup("close")
+//    wordNetLookup("close")
 }

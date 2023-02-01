@@ -68,6 +68,9 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
     val compressedSynonymSets = synonymSets.map{ SynonymSet(
             compressedIndex.compress(it.index),
             processSynSetWords(it.words),
-            compressedIndex.compress(it.associatedIndices)) }
+            compressedIndex.compress(it.associatedIndices),
+            it.partOfSpeech,
+            it.definitions)
+    }
 
 }

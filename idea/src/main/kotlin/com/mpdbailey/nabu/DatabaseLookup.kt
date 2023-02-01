@@ -17,4 +17,10 @@ class DatabaseLookup(filename : String) {
             .flatMap { it.words }
             .distinct()
     }
+
+    fun getDefinitions(word : String) {
+        val index = database.query(word)
+        val sets = index.mapNotNull {database.querySynonymSet(it)}
+        sets.forEach {println(it.definitions) }
+    }
 }

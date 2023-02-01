@@ -12,14 +12,16 @@ class Database(private val filename : String) {
     private val createDataTableSql = """CREATE TABLE IF NOT EXISTS synonymSet (
 	id text NOT NULL PRIMARY KEY,
     synonyms text NOT NULL,
-    associatedIds text NOT NULL
+    partOfSpeech text NOT NULL,
+    associatedIds text NOT NULL,
+    definitions text NOT NULL
 );"""
 
     private val insertLookupSql = "INSERT INTO lookup(word,ids) VALUES(?,?)"
-    private val insertSynonymsSql = "INSERT INTO synonymSet(id,synonyms,associatedIds) VALUES(?,?,?)"
+    private val insertSynonymsSql = "INSERT INTO synonymSet(id,synonyms,partOfSpeech,associatedIds,definitions) VALUES(?,?,?,?,?)"
 
     private val queryLookupSql = "SELECT ids FROM lookup WHERE word = ?"
-    private val querySynonymSetSql = "SELECT synonyms,associatedIds FROM synonymSet WHERE id = ?"
+    private val querySynonymSetSql = "SELECT synonyms,associatedIds,partOfSpeech,definitions FROM synonymSet WHERE id = ?"
 
     fun create() {
         File(filename).delete()
@@ -56,7 +58,9 @@ class Database(private val filename : String) {
         synonyms.forEach {
             prepStat.setString(1, it.index)
             prepStat.setString(2, it.words.joinToString(","))
-            prepStat.setString(3, CompressedIndex.flatten(it.associatedIndices))
+            prepStat.setString(3, it.partOfSpeech.letter.toString())
+            prepStat.setString(4, CompressedIndex.flatten(it.associatedIndices))
+            prepStat.setString(5, it.definitions)
             prepStat.executeUpdate()
         }
         connection.commit()
@@ -85,7 +89,10 @@ class Database(private val filename : String) {
         val results = if (resultSet.next()){
             SynonymSet(id,
                 resultSet.getString("synonyms").split(','),
-                CompressedIndex.unflatten(resultSet.getString("associatedIds")))
+                CompressedIndex.unflatten(resultSet.getString("associatedIds")),
+                PartOfSpeech.from(resultSet.getString("partOfSpeech")),
+                resultSet.getString("definitions")
+            )
         } else {null}
         prepStat.close()
         connection.close()
