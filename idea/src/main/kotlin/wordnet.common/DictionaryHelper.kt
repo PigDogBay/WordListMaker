@@ -15,8 +15,8 @@ fun readRecord(offset : Int, dbFileName : String) : String {
  */
 fun getDefinition(word : String) : Map<String, List<Definition>> {
     val retVal = HashMap<String, ArrayList<Definition>>()
-    val fileListIndex = getAllIndexFiles()
-    val fileListData = getAllDataFiles()
+    val fileListIndex = DbFileHelper().getAllIndexFiles()
+    val fileListData = DbFileHelper().getAllDataFiles()
     for (i in 0 until fileListIndex.count()){
         val offset = fastSearch(word.toLowerCase(), fileListIndex[i])
         if (offset>0){
