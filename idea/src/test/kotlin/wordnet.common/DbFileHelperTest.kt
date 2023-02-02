@@ -8,6 +8,20 @@ import java.io.File
 class DbFileHelperTest {
 
     @Test
+    fun loadIndices1() {
+        val target = DbFileHelper()
+        val indices = target.loadIndices(DbPartOfSpeech.Noun)
+        assertEquals(117953, indices.count())
+    }
+
+    @Test
+    fun loadDefinitions1() {
+        val target = DbFileHelper()
+        val definitions = target.loadDefinitions(DbPartOfSpeech.Adj)
+        assertEquals(18185, definitions.count())
+    }
+
+    @Test
     fun getAllIndexFiles1() {
         getAllIndexFiles().forEach {
             println(it)
