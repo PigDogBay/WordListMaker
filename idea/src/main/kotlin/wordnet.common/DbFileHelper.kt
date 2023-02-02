@@ -87,8 +87,3 @@ class DbFileHelper {
         )
     }
 }
-
-fun getDbFilePath(db : DbType, pos : DbPartOfSpeech) : String {
-    val filename = "/Users/markbailey/work/MPDBTech/wordlist/wordlists/WordNet/dict3.1/${db.filename}.${pos.fileExtension}"
-    return Paths.get(filename).toAbsolutePath().toString()
-}

@@ -104,8 +104,9 @@ fun searchAll(word : String) : List<String>{
 
 
 fun searchSynonyms(word : String, dbPartOfSpeech: DbPartOfSpeech) : List<String> {
-    val indexFile = getDbFilePath(DbType.Index,dbPartOfSpeech)
-    val dataFile = getDbFilePath(DbType.Data,dbPartOfSpeech)
+    val dbFileHelper = DbFileHelper()
+    val indexFile = dbFileHelper.getDbFilePath(DbType.Index,dbPartOfSpeech)
+    val dataFile = dbFileHelper.getDbFilePath(DbType.Data,dbPartOfSpeech)
     val words = ArrayList<String>()
     val offset = fastSearch(word,indexFile)
     if (offset == 0) return words
@@ -123,7 +124,7 @@ fun searchSynonyms(word : String, dbPartOfSpeech: DbPartOfSpeech) : List<String>
 fun getAssociatedWords(definition: Definition) : List<String> {
     val words = ArrayList<String>()
     for (i in 0 until definition.ptrCount) {
-        val filename = getDbFilePath(DbType.Data, definition.ptrPartOfSpeech[i])
+        val filename = DbFileHelper().getDbFilePath(DbType.Data, definition.ptrPartOfSpeech[i])
         val record = readRecord(definition.ptrOffsets[i], filename)
         val assDef = Definition("", record)
         words.addAll(assDef.words)
