@@ -1,5 +1,3 @@
-import com.mpdbailey.nabu.Combine
-import com.mpdbailey.nabu.Compressor
 import com.mpdbailey.nabu.DatabaseLookup
 import com.mpdbailey.scowl.*
 import com.mpdbailey.utils.ResourceLoader
@@ -17,32 +15,6 @@ const val UKACD17_FILENAME = "../../wordlists/UKACD/UKACD17.TXT"
 const val EXTRA_PHRASES = "/extraphrases.txt"
 const val ACTORS = "/actors.txt"
 const val POLITICIANS = "/politicians.txt"
-
-/**
- * 1) Load the 4 types of files (adjectives, adverbs, nouns and verbs) for the index and definition data
- * 2) Parse each line of data into Index/Definition objects
- * 3) Combine the 4 types into one output list for both Index and Definition
- * 4) Convert the raw data types, Index & Definition, into SynonymIndex and SynonymSet
- * 5) Fix up the index offsets based on the file type
- *
- */
-fun createNabuDb(){
-    println("Creating Nabu database")
-    //COnver
-    val combine = Combine()
-    val compressor = Compressor(combine.indices(),combine.synonyms())
-    println("Compressing indices")
-    val compIndices = compressor.compressedIndices
-    println("Compressing sets")
-    val compSets = compressor.compressedSynonymSets
-    val database = com.mpdbailey.nabu.Database(NABU_FILENAME)
-    println("Creating Db")
-    database.create()
-    println("Inserting Indices")
-    database.insert(compIndices)
-    println("Inserting Definitions")
-    database.insertSynonyms(compSets)
-}
 
 fun createScowl(){
     val words = createScowlWordList()
@@ -108,6 +80,7 @@ fun wordNetLookup(word : String){
 
 fun main(args: Array<String>) {
     dbLookup("close")
+    //BuildNabu().build(NABU_FILENAME)
 //    createNabuDb()
 //    dbLookup("second hand")
 //    createScowl()
