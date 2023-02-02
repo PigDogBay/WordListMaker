@@ -1,9 +1,10 @@
 package com.mpdbailey.nabu
 
+import wordnet.common.DbFileHelper
 import wordnet.common.DbPartOfSpeech
 
 /**
- * Loads the index and data files
+ * Loads the index and data files (see resources/wordnet/)
  * The files are split into 4 parts, adjectives, adverbs, verbs and nouns
  * These files are combined into 1 list
  */
@@ -11,14 +12,14 @@ class Combine {
 
     private fun load(dbPartOfSpeech: DbPartOfSpeech) : Sequence<SynonymIndex> {
         val adapter = Adapter()
-        return Validation().loadIndices(dbPartOfSpeech)
+        return DbFileHelper().loadIndices(dbPartOfSpeech)
             .map{adapter.convert(it)}
             .asSequence()
     }
 
     private fun loadDefinitions(dbPartOfSpeech: DbPartOfSpeech) : Sequence<SynonymSet> {
         val adapter = Adapter()
-        return Validation().loadDefinitions(dbPartOfSpeech)
+        return DbFileHelper().loadDefinitions(dbPartOfSpeech)
             .map{adapter.convert(it)}
             .asSequence()
     }

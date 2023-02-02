@@ -1,5 +1,6 @@
 package wordnet.common
 
+import java.io.RandomAccessFile
 import java.nio.file.Paths
 
 class DbFileHelper {
@@ -36,6 +37,28 @@ class DbFileHelper {
             .drop(copyrightLineCount)
             .map { Definition("",it) }
 
+
+    /**
+     * Checks the data file to ensure definition offsets match the file offsets
+     * TODO Move this into a unit test
+     */
+    fun checkOffsets(dbPartOfSpeech: DbPartOfSpeech) : Int {
+        val filename = getDbFilePath(DbType.Data, dbPartOfSpeech)
+        var count = 0
+        RandomAccessFile(filename,"r").use { fs ->
+            for (i in 1..copyrightLineCount){
+                fs.readLine()
+            }
+            do {
+                val offset = fs.filePointer.toInt()
+                val line = fs.readLine() ?: break
+                val tokens = line.split(' ')
+                count++
+                if (tokens[0].toInt()!= offset) break
+            } while (true)
+        }
+        return count
+    }
 }
 
 
