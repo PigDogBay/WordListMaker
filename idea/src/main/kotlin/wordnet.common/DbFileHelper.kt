@@ -1,15 +1,16 @@
 package wordnet.common
 
-import java.io.RandomAccessFile
 import java.nio.file.Path
-import java.nio.file.Paths
 
+/**
+ * Code to load the WordNet index/data files
+ */
 class DbFileHelper {
     /**
      * The index and data files all have the same copyright notice at the top of the file
      * This needs to be ignored when parsing the file
      */
-    private val copyrightLineCount = 29
+    val copyrightLineCount = 29
 
     private fun getWordNetResourceName(db : DbType, pos : DbPartOfSpeech) : String = "/wordnet/${db.filename}.${pos.fileExtension}"
 
@@ -38,29 +39,6 @@ class DbFileHelper {
             .drop(copyrightLineCount)
             .map { Definition("",it) }
 
-
-    /**
-     * Checks the data file to ensure definition offsets match the file offsets
-     * TODO Move this into a unit test
-     */
-    fun checkOffsets(dbPartOfSpeech: DbPartOfSpeech) : Int {
-        val filename = getDbFilePath(DbType.Data, dbPartOfSpeech)
-        var count = 0
-        RandomAccessFile(filename,"r").use { fs ->
-            for (i in 1..copyrightLineCount){
-                fs.readLine()
-            }
-            do {
-                val offset = fs.filePointer.toInt()
-                val line = fs.readLine() ?: break
-                val tokens = line.split(' ')
-                count++
-                if (tokens[0].toInt()!= offset) break
-            } while (true)
-        }
-        return count
-    }
-
     /**
      * Returns the absolute file path to the index/data file in the app's resource folder
      */
@@ -69,6 +47,9 @@ class DbFileHelper {
         return Path.of(url).toAbsolutePath().toString()
     }
 
+    /**
+     * Returns a list of the noun, verb, adjective and adverb index files
+     */
     fun getAllIndexFiles() : List<String> {
         return listOf(
             getDbFilePath(DbType.Index,DbPartOfSpeech.Adj),
@@ -78,6 +59,9 @@ class DbFileHelper {
         )
     }
 
+    /**
+     * Returns a list of the noun, verb, adjective and adverb data files
+     */
     fun getAllDataFiles() : List<String> {
         return listOf(
             getDbFilePath(DbType.Data,DbPartOfSpeech.Adj),
