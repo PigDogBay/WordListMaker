@@ -23,7 +23,8 @@ class DbFileHelperTest {
 
     @Test
     fun getAllIndexFiles1() {
-        getAllIndexFiles().forEach {
+        val target = DbFileHelper()
+        target.getAllIndexFiles().forEach {
             println(it)
             assertTrue(File(it).exists())
         }
@@ -31,7 +32,8 @@ class DbFileHelperTest {
 
     @Test
     fun getAllDataFiles1() {
-        getAllDataFiles().forEach {
+        val target = DbFileHelper()
+        target.getAllDataFiles().forEach {
             println(it)
             assertTrue(File(it).exists())
         }
@@ -39,8 +41,8 @@ class DbFileHelperTest {
 
     @Test
     fun getDbFilePath1() {
-        val file = getDbFilePath(DbType.Data,DbPartOfSpeech.Adj)
-        println(file)
-        assertTrue(File(file).exists())
+        val target = DbFileHelper()
+        val path =  target.getDbFilePath(DbType.Data,DbPartOfSpeech.Adj)
+        assertTrue(File(path).exists())
     }
 }

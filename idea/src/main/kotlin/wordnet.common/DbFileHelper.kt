@@ -1,6 +1,7 @@
 package wordnet.common
 
 import java.io.RandomAccessFile
+import java.nio.file.Path
 import java.nio.file.Paths
 
 class DbFileHelper {
@@ -58,6 +59,32 @@ class DbFileHelper {
             } while (true)
         }
         return count
+    }
+
+    /**
+     * Returns the absolute file path to the index/data file in the app's resource folder
+     */
+    fun getDbFilePath(db : DbType, pos : DbPartOfSpeech) : String {
+        val url = this.javaClass.getResource("/wordnet/${db.filename}.${pos.fileExtension}").toURI()
+        return Path.of(url).toAbsolutePath().toString()
+    }
+
+    fun getAllIndexFiles() : List<String> {
+        return listOf(
+            getDbFilePath(DbType.Index,DbPartOfSpeech.Adj),
+            getDbFilePath(DbType.Index,DbPartOfSpeech.Adv),
+            getDbFilePath(DbType.Index,DbPartOfSpeech.Noun),
+            getDbFilePath(DbType.Index,DbPartOfSpeech.Verb),
+        )
+    }
+
+    fun getAllDataFiles() : List<String> {
+        return listOf(
+            getDbFilePath(DbType.Data,DbPartOfSpeech.Adj),
+            getDbFilePath(DbType.Data,DbPartOfSpeech.Adv),
+            getDbFilePath(DbType.Data,DbPartOfSpeech.Noun),
+            getDbFilePath(DbType.Data,DbPartOfSpeech.Verb),
+        )
     }
 }
 
