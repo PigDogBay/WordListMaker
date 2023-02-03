@@ -6,7 +6,7 @@ import org.junit.rules.TemporaryFolder
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 
-class DatabaseText {
+class DatabaseTest {
 
     //On MacOS creates a folder such as:
     //    /var/folders/5x/2_cr44vs0zl5b2v353n2nfz80000gn/T/junit17362152814298797681
