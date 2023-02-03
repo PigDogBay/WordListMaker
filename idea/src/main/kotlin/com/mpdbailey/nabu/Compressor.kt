@@ -2,6 +2,11 @@ package com.mpdbailey.nabu
 
 import com.mpdbailey.scowl.bannedWords
 
+/**
+ * Note banned words:
+ * If an index word is in the banned list, the index is removed
+ * If the banned word is in the SynonymSet.words, its is removed from the words list
+ */
 class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
 
     private val compressedIndex = CompressedIndex()
