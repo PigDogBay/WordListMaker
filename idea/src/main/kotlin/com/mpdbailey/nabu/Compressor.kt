@@ -12,7 +12,7 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
     private val compressedIndex = CompressedIndex()
     private val regexIllegal = Regex("[./0-9]")
     private val replaceBrackets = Regex("\\([a-z]+\\)")
-    /*
+    /**
         Synonyms contain A-Z 0-9 () ' . - /
         A-Z is lowercased
         Remove strings containing 0-9 /
@@ -20,8 +20,10 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
         Remove chars ' and .
         Remove any strings containing wordnet
 
+        Synonyms that contain /
+        Lo/Ovral, A/C, read/write_head, 20/20, 24/7, 9/11, counts/minute
      */
-    private val regexSynonymIllegal = Regex("[//0-9]")
+    private val regexSynonymIllegal = Regex("[/0-9]")
     private val regexSynonymRemoveChars = Regex("['.]")
 
     init {

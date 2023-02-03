@@ -49,5 +49,19 @@ class DatabaseText {
         assertEquals(synSet.words[2],"tomato ketchup" )
     }
 
+    /**
+        Check that illegal synonyms are removed such as
+        Lo/Ovral, A/C, read/write_head, 20/20, 24/7, 9/11, counts/minute
+     */
+    @Test
+    fun illegalSynonyms1(){
+        val nabu = createDb()
+        val indices = nabu.query("twenty twenty")
+        assertEquals(1,indices.count())
+        val synSet = nabu.querySynonymSet(indices[0])!!
+        assertEquals(1,synSet.words.count())
+        assertEquals("twenty-twenty",synSet.words[0])
+    }
+
 
 }
