@@ -1,3 +1,4 @@
+import com.mpdbailey.nabu.BuildNabu
 import com.mpdbailey.nabu.DatabaseLookup
 import com.mpdbailey.scowl.*
 import com.mpdbailey.utils.ResourceLoader
@@ -79,12 +80,8 @@ fun wordNetLookup(word : String){
 }
 
 fun main(args: Array<String>) {
-    dbLookup("close")
-    //BuildNabu().build(NABU_FILENAME)
-//    createNabuDb()
-//    dbLookup("second hand")
-//    createScowl()
-//    createSmall()
-//    createPhrases()
-//    wordNetLookup("close")
+    BuildNabu().build(NABU_FILENAME)
+    createScowl()
+    createSmall()
+    createPhrases()
 }
