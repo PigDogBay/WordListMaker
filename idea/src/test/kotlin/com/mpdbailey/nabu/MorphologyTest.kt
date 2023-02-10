@@ -52,22 +52,9 @@ class MorphologyTest {
     fun noDuplicates1() {
         val duplicates = Morphology()
             .loadAllExceptions()
-//            .groupingBy { it.inflected }
-//            .eachCount()
-//            .filter { it.value>1 }
-//        assertTrue(duplicates.isEmpty())
-            .groupBy { it.inflected }
-            .filter { it.value.count()>1 }
-        duplicates.keys.forEach { key ->
-            duplicates[key]?.forEach{value ->
-                print("${value.partOfSpeech} ${value.inflected} --")
-                value.baseForms.forEach { base ->
-                    print("$base, ")
-                }
-                println()
-            }
-        }
+            .groupingBy { it.inflected }
+            .eachCount()
+            .filter { it.value>1 }
         assertTrue(duplicates.isEmpty())
-
     }
 }
