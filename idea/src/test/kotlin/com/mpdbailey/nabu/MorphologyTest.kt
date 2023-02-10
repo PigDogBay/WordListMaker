@@ -10,7 +10,7 @@ class MorphologyTest {
     fun loadAllExceptions1(){
         val morphology = Morphology()
         val exceptions = morphology.loadAllExceptions()
-        assertEquals(5952,exceptions.count())
+        assertEquals(5931,exceptions.count())
         val ex1 = exceptions.first { it.inflected == "masses" }
         assertEquals("mass",ex1.baseForms[0])
         assertEquals("masse",ex1.baseForms[1])
@@ -57,4 +57,56 @@ class MorphologyTest {
             .filter { it.value>1 }
         assertTrue(duplicates.isEmpty())
     }
+
+    @Test
+    fun getWordBases1(){
+        val morph = Morphology()
+        val bases = morph.getWordBases("acest")
+        assertEquals(2,bases.count())
+        assertEquals("ac",bases[0])
+        assertEquals("ace",bases[1])
+    }
+    @Test
+    fun getWordBases2(){
+        val morph = Morphology()
+        val bases = morph.getWordBases("programming")
+        assertEquals(2,bases.count())
+        assertEquals("programme",bases[0])
+        assertEquals("programm",bases[1])
+    }
+
+    @Test
+    fun getWordBasesFul1(){
+        val morph = Morphology()
+        val bases = morph.getWordBases("boxesful")
+        assertEquals(2,bases.count())
+        assertEquals("boxeful",bases[0])
+        assertEquals("boxful",bases[1])
+    }
+
+    @Test
+    fun getWordBasesFail1(){
+        val morph = Morphology()
+        val bases = morph.getWordBases("nosuchendqwt")
+        assertTrue(bases.isEmpty())
+    }
+    @Test
+    fun getWordBasesFail2(){
+        val morph = Morphology()
+        val bases = morph.getWordBases("")
+        assertTrue(bases.isEmpty())
+    }
+    @Test
+    fun getWordBasesFail3(){
+        val morph = Morphology()
+        val bases = morph.getWordBases("ing")
+        assertTrue(bases.isEmpty())
+    }
+    @Test
+    fun getWordBasesFail4(){
+        val morph = Morphology()
+        val bases = morph.getWordBases("es")
+        assertTrue(bases.isEmpty())
+    }
+
 }
