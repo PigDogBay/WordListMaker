@@ -2,6 +2,9 @@ package com.mpdbailey.nabu
 
 class DatabaseLookup(filename : String) {
     private val database = Database(filename)
+    private val morph = Morphology()
+    private val exceptions  = morph.loadAllExceptions()
+
     private fun lookup(ids : List<String>) : List<SynonymSet>{
         val direct = ids.mapNotNull {database.querySynonymSet(it)}
         val associated = direct
@@ -30,7 +33,7 @@ class DatabaseLookup(filename : String) {
 
     fun getDefinitions(word : String) {
         //List of string indices that point to definition IDs
-        val indices = database.query(word)
+        val indices = morphIndexSearch(word)
         //Get definitions for each index and group by part of speech
         val groupedSets = indices.mapNotNull {database.querySynonymSet(it)}
             .groupBy { it.partOfSpeech }
@@ -44,5 +47,16 @@ class DatabaseLookup(filename : String) {
                 println(display(def))
             }
         }
+    }
+
+    private fun morphIndexSearch(word : String) : List<String>{
+        val excIndices = exceptions
+            .filter { it.inflected == word }
+            .flatMap { it.baseForms }
+            .flatMap {database.query(it)}
+        val rulesIndices = morph.getWordBases(word)
+            .flatMap {database.query(it)}
+        return (database.query(word) + excIndices + rulesIndices).distinct()
+
     }
 }
