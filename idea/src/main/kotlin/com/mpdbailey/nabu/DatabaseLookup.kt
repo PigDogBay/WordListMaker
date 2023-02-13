@@ -3,7 +3,6 @@ package com.mpdbailey.nabu
 class DatabaseLookup(filename : String) {
     private val database = Database(filename)
     private val morph = Morphology()
-    private val exceptions  = morph.loadAllExceptions()
 
     private fun lookup(ids : List<String>) : List<SynonymSet>{
         val direct = ids.mapNotNull {database.querySynonymSet(it)}
@@ -50,13 +49,10 @@ class DatabaseLookup(filename : String) {
     }
 
     private fun morphIndexSearch(word : String) : List<String>{
-        val excIndices = exceptions
-            .filter { it.inflected == word }
-            .flatMap { it.baseForms }
+        val excIndices = database.queryExceptions(word)
             .flatMap {database.query(it)}
         val rulesIndices = morph.getWordBases(word)
             .flatMap {database.query(it)}
         return (database.query(word) + excIndices + rulesIndices).distinct()
-
     }
 }
