@@ -32,5 +32,6 @@ class BuildNabu {
         database.create()
         database.insert(compIndices)
         database.insertSynonyms(compSets)
+        database.insertExceptions(Morphology().loadAllExceptions())
     }
 }

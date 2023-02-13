@@ -16,12 +16,18 @@ class Database(private val filename : String) {
     associatedIds text NOT NULL,
     definitions text NOT NULL
 );"""
+    private val createExceptionsTableSql = """CREATE TABLE IF NOT EXISTS exceptions (
+	inflected text NOT NULL PRIMARY KEY,
+	bases text NOT NULL
+);"""
 
     private val insertLookupSql = "INSERT INTO lookup(word,ids) VALUES(?,?)"
     private val insertSynonymsSql = "INSERT INTO synonymSet(id,synonyms,partOfSpeech,associatedIds,definitions) VALUES(?,?,?,?,?)"
+    private val insertExceptionsSql = "INSERT INTO exceptions(inflected,bases) VALUES(?,?)"
 
     private val queryLookupSql = "SELECT ids FROM lookup WHERE word = ?"
     private val querySynonymSetSql = "SELECT synonyms,associatedIds,partOfSpeech,definitions FROM synonymSet WHERE id = ?"
+    private val queryExceptionSql = "SELECT bases FROM exceptions WHERE inflected = ?"
 
     fun create() {
         File(filename).delete()
@@ -32,6 +38,7 @@ class Database(private val filename : String) {
         val statement = connection.createStatement()
         statement.execute(createIndexTableSql)
         statement.execute(createDataTableSql)
+        statement.execute(createExceptionsTableSql)
         statement.close()
         connection.close()
     }
@@ -68,6 +75,20 @@ class Database(private val filename : String) {
         connection.close()
     }
 
+    fun insertExceptions(exceptions : List<ExceptionItem>){
+        val connection = DriverManager.getConnection(url)
+        connection.autoCommit = false
+        val prepStat = connection.prepareStatement(insertExceptionsSql)
+        exceptions.forEach {
+            prepStat.setString(1, it.inflected)
+            prepStat.setString(2, it.baseForms.joinToString(","))
+            prepStat.executeUpdate()
+        }
+        connection.commit()
+        prepStat.close()
+        connection.close()
+    }
+
     fun query(word : String) : List<String> {
         val connection = DriverManager.getConnection(url)
         val prepStat = connection.prepareStatement(queryLookupSql)
@@ -75,7 +96,7 @@ class Database(private val filename : String) {
         val resultSet = prepStat.executeQuery()
         val results = if (resultSet.next()){
             CompressedIndex.unflatten(resultSet.getString("ids"))
-        } else { emptyList<String>()}
+        } else { emptyList()}
         prepStat.close()
         connection.close()
         return results
@@ -94,6 +115,19 @@ class Database(private val filename : String) {
                 resultSet.getString("definitions")
             )
         } else {null}
+        prepStat.close()
+        connection.close()
+        return results
+    }
+
+    fun queryExceptions(inflected : String) : List<String> {
+        val connection = DriverManager.getConnection(url)
+        val prepStat = connection.prepareStatement(queryExceptionSql)
+        prepStat.setString(1, inflected)
+        val resultSet = prepStat.executeQuery()
+        val results = if (resultSet.next()){
+            resultSet.getString("bases").split(',')
+        } else { emptyList()}
         prepStat.close()
         connection.close()
         return results

@@ -63,5 +63,20 @@ class DatabaseTest {
         assertEquals("twenty-twenty",synSet.words[0])
     }
 
+    @Test
+    fun exceptions1() {
+        val nabu = createDb()
+        val bases = nabu.queryExceptions("bacilli")
+        assertEquals(1,bases.count())
+        assertEquals("bacillus", bases[0])
+    }
 
+    @Test
+    fun exceptions2() {
+        val nabu = createDb()
+        val bases = nabu.queryExceptions("masses")
+        assertEquals(2,bases.count())
+        assertEquals("mass", bases[0])
+        assertEquals("masse", bases[1])
+    }
 }
