@@ -1,21 +1,20 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.8.20"
     application
 }
 
-group = "me.markbailey"
-version = "1.0-SNAPSHOT"
+group = "com.mpdbailey.wordlistmaker"
+version = "1.18"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.xerial:sqlite-jdbc:3.34.0")
+    implementation("org.xerial:sqlite-jdbc:3.40.1.0")
     testImplementation(kotlin("test-junit"))
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.test {
@@ -23,17 +22,8 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "17"
 }
-
 application {
-    mainClassName = "MainKt"
-}
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    jvmTarget = "1.8"
-}
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+    mainClass.set("MainKt")
 }
