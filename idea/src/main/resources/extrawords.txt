@@ -33,8 +33,10 @@ ax
 ay
 ba
 bananaquit
+barback
 be
 bi
+bibimbap
 bicorporal
 bloatware
 bloatwares
@@ -54,6 +56,7 @@ bros
 by
 ch
 clownfish
+collab
 compositionality
 copyleft
 cortado
@@ -96,6 +99,7 @@ fa
 farro
 fatberg
 fe
+femocrat
 foobar
 fratty
 fy
@@ -143,16 +147,20 @@ jo
 ka
 ki
 ko
+kubie
 ky
 la
 leangle
+lede
 levidrome
 li
 lo
 lusophone
 ma
+macaron
 manningtree
 manspreading
+matcha
 me
 memed
 mi
@@ -250,6 +258,7 @@ sap
 sars
 sashimi
 satnav
+seabass
 segfault
 sh
 sharjah
