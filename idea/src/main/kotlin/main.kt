@@ -13,6 +13,7 @@ const val SMALL_FILENAME = "../../out/small.txt"
 const val PHRASES_FILENAME = "../../out/phrases.txt"
 const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
 const val UKACD17_FILENAME = "../../wordlists/UKACD/UKACD17.TXT"
+const val SCHOLAR_FILENAME = "../../out/scholar.txt"
 const val EXTRA_PHRASES = "/extraphrases.txt"
 const val ACTORS = "/actors.txt"
 const val POLITICIANS = "/politicians.txt"
@@ -23,6 +24,16 @@ fun createScowl(){
     words.saveWordList(OUT_FILENAME)
     println("Validating - find any illegal words:")
     val badWordCount = validate(OUT_FILENAME)
+    println("Found $badWordCount illegal words")
+}
+
+fun createScholar(){
+    val words = createScowlWordList()
+        .filter { it.count()<11 }
+    println("Count: ${words.count()}")
+    words.saveWordList(SCHOLAR_FILENAME)
+    println("Validating - find any illegal words:")
+    val badWordCount = validate(SCHOLAR_FILENAME)
     println("Found $badWordCount illegal words")
 }
 
@@ -59,6 +70,7 @@ fun createPhrases(){
 }
 
 fun dbLookup(query : String){
+    println("Looking up $query")
     val dbl = DatabaseLookup(NABU_FILENAME)
     dbl.getDefinitions(query)
 //    val r = dbl.search(query).sortedBy { it.length }
@@ -80,8 +92,10 @@ fun wordNetLookup(word : String){
 }
 
 fun main(args: Array<String>) {
-    BuildNabu().build(NABU_FILENAME)
-    createScowl()
-    createSmall()
-    createPhrases()
+    createScholar()
+//dbLookup("lotus eaters")
+//    BuildNabu().build(NABU_FILENAME)
+//    createScowl()
+//    createSmall()
+//    createPhrases()
 }
