@@ -54,7 +54,7 @@ fun createPhrases(){
     val extraPhrases = ResourceLoader().load(EXTRA_PHRASES)
 
     val phrases = (wordNet + ukacd + extraPhrases + actors + politicians)
-        .map { it.toLowerCase() }
+        .map { it.lowercase() }
         //Sort hyphens and spaces as being the same otherwise 'close-range' comes after 'close shave'
         .sortedWith(comparator.thenBy { it.replace("-"," ") })
         .distinctBy {it.removeWordSeparators()}
@@ -92,10 +92,10 @@ fun wordNetLookup(word : String){
 }
 
 fun main(args: Array<String>) {
-    createScholar()
+//    createScholar()
 //dbLookup("lotus eaters")
 //    BuildNabu().build(NABU_FILENAME)
-//    createScowl()
-//    createSmall()
-//    createPhrases()
+    createScowl()
+    createSmall()
+    createPhrases()
 }
