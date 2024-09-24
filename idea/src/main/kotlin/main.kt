@@ -12,7 +12,7 @@ const val OUT_FILENAME = "../../out/words.txt"
 const val SMALL_FILENAME = "../../out/small.txt"
 const val PHRASES_FILENAME = "../../out/phrases.txt"
 const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
-const val UKACD17_FILENAME = "../../wordlists/UKACD/UKACD17.TXT"
+const val UKACD17 = "/source/ukacd17.txt"
 const val SCHOLAR_FILENAME = "../../out/scholar.txt"
 const val EXTRA_PHRASES = "/extraphrases.txt"
 const val ACTORS = "/actors.txt"
@@ -48,7 +48,7 @@ fun createSmall(){
 
 fun createPhrases(){
     val wordNet = WordNet().phrases()
-    val ukacd = Ukacd(UKACD17_FILENAME).phrases()
+    val ukacd = Ukacd("").phrases(ResourceLoader().load(UKACD17))
     val actors = Ukacd("").phrases(ResourceLoader().load(ACTORS))
     val politicians = Ukacd("").phrases(ResourceLoader().load(POLITICIANS))
     val extraPhrases = ResourceLoader().load(EXTRA_PHRASES)
