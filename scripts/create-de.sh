@@ -33,6 +33,7 @@
 #- uniq removes repeated adjacent lines
 #
 # The two letter word lists is a based on the Aspell-de list but each word has been checked by Google translate
+	
 echo "Creating wordlist-de.txt"
 aspell -d de dump master \
 | aspell -l de expand \
@@ -46,8 +47,9 @@ aspell -d de dump master \
 | sort -k1,1nr -k2,2 \
 | cut -d " " -f2- \
 | uniq \
+| sed "/\<gst\>/d" \
 > wordlist-de.txt
 #append two letter words
-echo $'ab\nam\nan\nda\ndu\neh\ner\nes\nex\nim\nin\nja\nje\nob\noh\npi\nqm\nso\num\nwo\nzu' >> wordlist-de.txt
+echo $'ab\nam\nan\nda\ndu\neh\nei\ner\nes\nex\nim\nin\nja\nje\nob\noh\npi\nqm\nso\num\nwo\nzu' >> wordlist-de.txt
 echo "Number of words "
 wc -w wordlist-de.txt
