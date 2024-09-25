@@ -38,7 +38,7 @@ aspell -d pt_PT dump master \
 | aspell -l pt_PT expand \
 | tr ' ' '\n' \
 | tr '-' '\n' \
-| sed "/\<\(\|xi\|xii\|xiii\|xiv\|xv\|xvi\|xvii\|xviii\|xix\|xx\|xxi\|xxii\|xxiii\|xxiv\|xxv\|xxvi\|xxvii\|xxviii\|xxix\|xxx\|xis\|vii\|viii\|iii\)\>/d" \
+| sed "/\<\(\|xi\|xii\|xiii\|xiv\|xv\|xvi\|xvii\|xviii\|xix\|xx\|xxi\|xxii\|xxiii\|xxiv\|xxv\|xxvi\|xxvii\|xxviii\|xxix\|xxx\|vii\|viii\|iii\)\>/d" \
 | sed "/\<\w[A-Z]\w*\>/d;/\<\w\+[A-Z]\>/d" \
 | gawk '{print tolower($0)}' \
 | iconv -f utf8 -t ascii//TRANSLIT \
