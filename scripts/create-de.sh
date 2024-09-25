@@ -32,6 +32,8 @@
 #- cut uses space as a delimiter and selects only the second field to the end of the line
 #- uniq removes repeated adjacent lines
 #
+# sed "/\<gst\>/d" Removes gst from the word list, this is an abbreviation (Gst)
+#
 # The two letter word lists is a based on the Aspell-de list but each word has been checked by Google translate
 	
 echo "Creating wordlist-de.txt"
