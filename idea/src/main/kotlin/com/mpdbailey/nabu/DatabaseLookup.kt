@@ -13,6 +13,10 @@ class DatabaseLookup(filename : String) {
         return direct+associated
     }
 
+    val indicesCount : Int = database.count(database.lookupCountSql)
+    val definitionsCount : Int = database.count(database.synonymSetCountSql)
+    val exceptionsCount : Int = database.count(database.exceptionsCountSql)
+
     fun search(word : String) : List<String> {
         val id = database.query(word)
         return lookup(id)

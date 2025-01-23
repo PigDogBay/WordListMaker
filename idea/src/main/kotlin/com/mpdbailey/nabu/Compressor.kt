@@ -10,7 +10,7 @@ import com.mpdbailey.scowl.bannedWords
 class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
 
     private val compressedIndex = CompressedIndex()
-    private val regexIllegal = Regex("[./0-9]")
+    private val regexIllegal = Regex("[/0-9]")
     private val replaceBrackets = Regex("\\([a-z]+\\)")
     /**
         Synonyms contain A-Z 0-9 () ' . - /
@@ -34,6 +34,8 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
         .replace("\'","")
         .replace('_',' ')
         .replace('-',' ')
+        .replace(".","")  //Remove . for acronyms
+        .trim()
 
     /**
      * The word 'close' is listed in all synonym index sets (adj, adverb, noun, verb)

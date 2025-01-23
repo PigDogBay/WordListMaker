@@ -29,6 +29,10 @@ class Database(private val filename : String) {
     private val querySynonymSetSql = "SELECT synonyms,associatedIds,partOfSpeech,definitions FROM synonymSet WHERE id = ?"
     private val queryExceptionSql = "SELECT bases FROM exceptions WHERE inflected = ?"
 
+    val lookupCountSql = "SELECT COUNT(*) FROM lookup"
+    val synonymSetCountSql = "SELECT COUNT(*) FROM synonymSet"
+    val exceptionsCountSql = "SELECT COUNT(*) FROM exceptions"
+
     fun create() {
         File(filename).delete()
         val connection = DriverManager.getConnection(url)
@@ -131,5 +135,17 @@ class Database(private val filename : String) {
         prepStat.close()
         connection.close()
         return results
+    }
+
+    fun count(countSql : String) : Int {
+        val connection = DriverManager.getConnection(url)
+        val prepStat = connection.prepareStatement(countSql)
+        val resultSet = prepStat.executeQuery()
+        val count = if (resultSet.next()){
+            resultSet.getInt(1)
+        } else { 0}
+        prepStat.close()
+        connection.close()
+        return count
     }
 }

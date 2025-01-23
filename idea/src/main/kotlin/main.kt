@@ -7,6 +7,7 @@ import com.mpdbailey.utils.removeWordSeparators
 import wordnet.common.displayDefinition
 import wordnet.common.getDefinition
 import wordnet.common.mbDisplayPartOfSpeech
+import java.io.File
 
 const val OUT_FILENAME = "../../out/words.txt"
 const val SMALL_FILENAME = "../../out/small.txt"
@@ -91,11 +92,22 @@ fun wordNetLookup(word : String){
     }
 }
 
+fun nabuStatus(){
+    val file = File(NABU_FILENAME)
+
+    val dbl = DatabaseLookup(NABU_FILENAME)
+    println("Nabu Status")
+    println("File size: ${file.length()} bytes, ${file.length()/(1024*1024)}Mb")
+    println("Table Counts: ${dbl.indicesCount} indices, ${dbl.definitionsCount} definitions, ${dbl.exceptionsCount} exceptions")
+}
+
+
 fun main(args: Array<String>) {
 //    createScholar()
-//dbLookup("lotus eaters")
-//    BuildNabu().build(NABU_FILENAME)
-    createScowl()
-    createSmall()
-    createPhrases()
+    BuildNabu().build(NABU_FILENAME)
+    nabuStatus()
+    dbLookup("g b shaw")
+//    createScowl()
+//    createSmall()
+//    createPhrases()
 }

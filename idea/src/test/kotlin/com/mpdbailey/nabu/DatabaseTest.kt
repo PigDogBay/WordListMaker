@@ -5,6 +5,7 @@ import org.junit.Test
 import org.junit.rules.TemporaryFolder
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class DatabaseTest {
 
@@ -47,6 +48,24 @@ class DatabaseTest {
         assertEquals(synSet.words[0],"catsup" )
         assertEquals(synSet.words[1],"ketchup" )
         assertEquals(synSet.words[2],"tomato ketchup" )
+    }
+
+    @Test
+    fun abbreviations1(){
+        val nabu = createDb()
+        val indices = nabu.query("g b shaw")
+        assertEquals(1,indices.count())
+        val synSet = nabu.querySynonymSet(indices[0])!!
+        assertTrue(synSet.words.contains("g b shaw"))
+    }
+
+    @Test
+    fun abbreviations2(){
+        val nabu = createDb()
+        val indices = nabu.query("nb")
+        assertEquals(2,indices.count())
+        val synSet = nabu.querySynonymSet(indices[0])!!
+        assertTrue(synSet.words.contains("nota bene"))
     }
 
     /**
