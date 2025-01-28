@@ -41,4 +41,12 @@ class AdditionsTest {
         assertEquals(DbPartOfSpeech.Verb,definition.associatedIndices[1].partOfSpeech)
     }
 
+    @Test
+    fun add1(){
+        val target = Additions()
+        target.add("cricket equipment", DbPartOfSpeech.Noun)
+        assertEquals(3136912,target.associates[0].offset)
+        assertEquals(DbPartOfSpeech.Noun,target.associates[0].partOfSpeech)
+    }
+
 }

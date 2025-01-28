@@ -1,5 +1,7 @@
 package wordnet.common
 
+import java.util.Dictionary
+
 /**
  * Tools to create new definition and index strings for adding to the index and data files
  */
@@ -24,6 +26,14 @@ class Additions {
                 "%03d ".format(associates.size) +
                 generateAssociated() + " | " +
                 definitions
+    }
+
+    fun add(associatedWord : String, partOfSpeech: DbPartOfSpeech){
+        val indexWord = associatedWord.lowercase().replace(' ','_')
+        val helper = DbFileHelper()
+        val indices = helper.loadIndices(partOfSpeech)
+        val index = indices.first { it.word == indexWord }
+        associates.add(AssociatedIndex(index.synSetsOffsets.first(),partOfSpeech))
     }
 
     private fun generateWordString() : String {
