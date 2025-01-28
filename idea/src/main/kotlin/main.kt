@@ -1,12 +1,11 @@
 import com.mpdbailey.nabu.BuildNabu
 import com.mpdbailey.nabu.DatabaseLookup
 import com.mpdbailey.scowl.*
+import com.mpdbailey.scowl.comparator
 import com.mpdbailey.utils.ResourceLoader
 import com.mpdbailey.utils.saveWordList
 import com.mpdbailey.utils.removeWordSeparators
-import wordnet.common.displayDefinition
-import wordnet.common.getDefinition
-import wordnet.common.mbDisplayPartOfSpeech
+import wordnet.common.*
 import java.io.File
 
 const val OUT_FILENAME = "../../out/words.txt"
@@ -80,13 +79,14 @@ fun dbLookup(query : String){
 }
 
 fun wordNetLookup(word : String){
-    val grouped = getDefinition("close")
+    val grouped = getDefinition(word)
         .flatMap { it.value }
         .groupBy {  mbDisplayPartOfSpeech(it.partOfSpeech) }
     grouped.keys.forEach { pos ->
         println("$word ($pos)")
         println("-------------------------")
         grouped[pos]?.sortedBy { it.sense }?.forEach {def ->
+            println("%08d".format(def.position))
             println(displayDefinition(def))
         }
     }
@@ -103,10 +103,16 @@ fun nabuStatus(){
 
 
 fun main(args: Array<String>) {
+    //additionBail()
+//    wordNetLookup("bail")
+
+
 //    createScholar()
     BuildNabu().build(NABU_FILENAME)
     nabuStatus()
-    dbLookup("g b shaw")
+    dbLookup("bail")
+
+//    dbLookup("cricket equipment")
 //    createScowl()
 //    createSmall()
 //    createPhrases()
