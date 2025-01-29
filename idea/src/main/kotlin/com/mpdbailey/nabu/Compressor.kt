@@ -9,7 +9,7 @@ import com.mpdbailey.scowl.bannedWords
  */
 class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
 
-    private val compressedIndex = CompressedIndex()
+    val compressedIndex = CompressedIndex()
     private val regexIllegal = Regex("[/0-9]")
     private val replaceBrackets = Regex("\\([a-z]+\\)")
     /**

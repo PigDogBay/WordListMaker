@@ -13,18 +13,20 @@ data class AssociatedWord (
 
 data class DefinitionData (
     val word : String,
-    val synIndex :String,
     val partOfSpeech: PartOfSpeech,
     val definition : String,
     val words : List<String>,
     val associatedWords : List<AssociatedWord>
-)
+) {
+    var synIndex = "000"
+}
 
 class DbAdditions(dbFileName : String) {
     val db = Database(dbFileName)
 
-    fun addAll(data : List<DefinitionData>) {
+    fun addAll(data : List<DefinitionData>, compressedIndex: CompressedIndex) {
         data.forEach {
+            it.synIndex = compressedIndex.next()
             add(it)
         }
     }
@@ -104,7 +106,6 @@ class DbAdditions(dbFileName : String) {
 
 val bailSynonymSetData = DefinitionData(
     "bail",
-    "F00",
     PartOfSpeech.NOUN,
     "One of the two wooden crosspieces that rest on top of the stumps to form a wicket",
     listOf("bail","wicket","stump","cricket equipment","cricket"),

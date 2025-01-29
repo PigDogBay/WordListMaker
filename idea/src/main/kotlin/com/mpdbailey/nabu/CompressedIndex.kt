@@ -28,7 +28,7 @@ class CompressedIndex {
         .map{hashMap[it]!!}
 
 
-    private fun next() : String {
+    fun next() : String {
         counter[2]++
         if (counter[2] > max) {
             counter[2] = '0'
