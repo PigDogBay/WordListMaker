@@ -1,5 +1,9 @@
 package com.mpdbailey.nabu
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.util.Objects
+
 /**
  * Builds the Nabu database and stores it as a file
  *
@@ -14,6 +18,7 @@ package com.mpdbailey.nabu
  * 7) Tidy up the index and synonymSet lists and remove any offensive entries
  * 8) Create the Nabu database table and store as a file
  * 9) Insert all the indices and synonym set data into the DB
+ * 10) Add extra definitions from resources/ExtraDefinitions.json
  */
 class BuildNabu {
     /**
@@ -36,6 +41,7 @@ class BuildNabu {
 
         //Add extra definitions
         val additional = DbAdditions(dbFileName)
-        additional.addAll(listOf(bailSynonymSetData), compressor.compressedIndex)
+        val data = loadDefinitionGson("/ExtraDefinitions.json")
+        additional.addAll(data, compressor.compressedIndex)
     }
 }

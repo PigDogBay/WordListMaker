@@ -1,5 +1,9 @@
 package com.mpdbailey.nabu
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.mpdbailey.utils.ResourceLoader
+
 
 /**
  * Synonym set can have associated words
@@ -19,6 +23,13 @@ data class DefinitionData (
     val associatedWords : List<AssociatedWord>
 ) {
     var synIndex = "000"
+}
+
+fun loadDefinitionGson(path : String) : List<DefinitionData>{
+    val gsonText = ResourceLoader().loadText(path)
+    val dataDefinitionDataType = object : TypeToken<List<DefinitionData>>(){}.type
+    val data :List<DefinitionData> = Gson().fromJson(gsonText, dataDefinitionDataType )
+    return data
 }
 
 class DbAdditions(dbFileName : String) {
@@ -100,6 +111,12 @@ class DbAdditions(dbFileName : String) {
             val assSyn = db.querySynonymSet(ass)
             println("$ass ${assSyn?.definitions}")
         }
+    }
+
+    private fun displayGson(data : List<DefinitionData>){
+        val gson = Gson()
+        val json = gson.toJson(data)
+        println("----JSON------\n$json\n-----JSON END------")
     }
 
 }

@@ -1,0 +1,15 @@
+[
+  {
+    "word": "bail",
+    "partOfSpeech": "NOUN",
+    "definition": "One of the two wooden crosspieces that rest on top of the stumps to form a wicket",
+    "words": ["bail","wicket","stump","cricket equipment","cricket"],
+    "associatedWords": [
+      {"word": "stump","index": 2},
+      {"word": "wicket","index": 0},
+      {"word": "cricket equipment","index": 0},
+      {"word": "cricket","index": 1}
+    ],
+    "synIndex": "000"
+  }
+]
