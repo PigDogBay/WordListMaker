@@ -33,5 +33,9 @@ class BuildNabu {
         database.insert(compIndices)
         database.insertSynonyms(compSets)
         database.insertExceptions(Morphology().loadAllExceptions())
+
+        //Add extra definitions
+        val additional = DbAdditions(dbFileName)
+        additional.addExtraDefinitions()
     }
 }
