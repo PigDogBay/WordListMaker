@@ -25,6 +25,8 @@ class Database(private val filename : String) {
     private val insertSynonymsSql = "INSERT INTO synonymSet(id,synonyms,partOfSpeech,associatedIds,definitions) VALUES(?,?,?,?,?)"
     private val insertExceptionsSql = "INSERT INTO exceptions(inflected,bases) VALUES(?,?)"
 
+    private val updateLookupSql = "UPDATE lookup SET ids = ? where word = ?"
+
     private val queryLookupSql = "SELECT ids FROM lookup WHERE word = ?"
     private val querySynonymSetSql = "SELECT synonyms,associatedIds,partOfSpeech,definitions FROM synonymSet WHERE id = ?"
     private val queryExceptionSql = "SELECT bases FROM exceptions WHERE inflected = ?"
@@ -44,6 +46,19 @@ class Database(private val filename : String) {
         statement.execute(createDataTableSql)
         statement.execute(createExceptionsTableSql)
         statement.close()
+        connection.close()
+    }
+
+    ///Replace the ids for the index
+    fun update(index : SynonymIndex){
+        val connection = DriverManager.getConnection(url)
+        connection.autoCommit = false
+        val prepStat = connection.prepareStatement(updateLookupSql)
+        prepStat.setString(1, CompressedIndex.flatten(index.indices))
+        prepStat.setString(2, index.word)
+        prepStat.executeUpdate()
+        connection.commit()
+        prepStat.close()
         connection.close()
     }
 
