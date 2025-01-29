@@ -98,4 +98,13 @@ class DatabaseTest {
         assertEquals("mass", bases[0])
         assertEquals("masse", bases[1])
     }
+
+    @Test
+    fun update1(){
+        val nabu = createDb()
+        val synIndex = SynonymIndex("bail",listOf("AAA","BBB"))
+        nabu.update(synIndex)
+        val actualIds = nabu.query("bail").reduce{a,s->"$a $s"}
+        assertEquals("AAA BBB",actualIds)
+    }
 }
