@@ -36,6 +36,6 @@ class BuildNabu {
 
         //Add extra definitions
         val additional = DbAdditions(dbFileName)
-        additional.addExtraDefinitions()
+        additional.add(bailSynonymSetData)
     }
 }

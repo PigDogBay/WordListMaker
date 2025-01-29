@@ -1,14 +1,50 @@
 package com.mpdbailey.nabu
 
+
+/**
+ * Synonym set can have associated words
+ * These words will be looked up in the lookUp table
+ * index is to select the relevant synonym index from the list of ids
+ */
+data class AssociatedWord (
+    val word : String,
+    val index : Int
+)
+
+data class DefinitionData (
+    val word : String,
+    val synIndex :String,
+    val partOfSpeech: PartOfSpeech,
+    val definition : String,
+    val words : List<String>,
+    val associatedWords : List<AssociatedWord>
+)
+
 class DbAdditions(dbFileName : String) {
     val db = Database(dbFileName)
 
-    fun addExtraDefinitions(){
-        //Add extra definition for 'bail'
-        val bailSyn = bailSynSet()
-        insert(bailSyn)
-        //Update the index for 'bail'
-        updateIndex("bail",bailSyn)
+    fun addAll(data : List<DefinitionData>) {
+        data.forEach {
+            add(it)
+        }
+    }
+
+    fun add(definitionData : DefinitionData){
+        val synonymSet = toSynonymSet(definitionData)
+        //Add the definition
+        insert(synonymSet)
+        //Update the lookup table to point to the new definition
+        updateIndex(definitionData.word,synonymSet)
+    }
+
+    private fun toSynonymSet(definitionData: DefinitionData) :SynonymSet{
+        return SynonymSet(definitionData.synIndex,
+            definitionData.words,
+            //Find the definition index for the associated word
+            definitionData.associatedWords.map { db.query(it.word)[it.index] },
+            definitionData.partOfSpeech,
+            definitionData.definition
+        )
     }
 
     private fun insert(synonymSet: SynonymSet){
@@ -64,27 +100,18 @@ class DbAdditions(dbFileName : String) {
         }
     }
 
-    /***
-     * Data
-     */
-
-    private fun bailSynSet() : SynonymSet {
-        return SynonymSet("F00",
-            listOf("bail","wicket","stump","cricket equipment","cricket"),
-            listOf(
-                findAssociatedIndex("stump",2),
-                findAssociatedIndex("wicket",0),
-                findAssociatedIndex("cricket equipment",0),
-                findAssociatedIndex("cricket",1),
-            ),
-            PartOfSpeech.NOUN,
-            "One of the two wooden crosspieces that rest on top of the stumps to form a wicket"
-            )
-    }
-
-    private fun findAssociatedIndex(word : String, synIndex : Int) : String {
-        return db.query(word)[synIndex]
-    }
-
-
 }
+
+val bailSynonymSetData = DefinitionData(
+    "bail",
+    "F00",
+    PartOfSpeech.NOUN,
+    "One of the two wooden crosspieces that rest on top of the stumps to form a wicket",
+    listOf("bail","wicket","stump","cricket equipment","cricket"),
+    listOf(
+        AssociatedWord("stump",2),
+        AssociatedWord("wicket",0),
+        AssociatedWord("cricket equipment",0),
+        AssociatedWord("cricket",1),
+    )
+)
