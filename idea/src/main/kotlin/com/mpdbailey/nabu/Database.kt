@@ -3,6 +3,29 @@ package com.mpdbailey.nabu
 import java.io.File
 import java.sql.DriverManager
 
+/**
+ *
+ * Database overview
+ *
+ * Look Up table
+ *     Word - The word to look up its synonyms and definition
+ *     Ids - List of Ids, each Id is 3 characters and is used to query the Synonym Set table
+ *
+ * Synonym Set table
+ *     Id - Unique (Primary Key) 3 char code
+ *     Synonym - list of related words (synonyms) separated by ','
+ *     Part of speech - Noun, Verb, Adjective or Adverb
+ *     Associated Ids - List of Ids, each Id is a key to another related synonym set
+ *     Definitions - List of definitions separated by '; '
+ *
+ * The lookup table is used to find a list of Ids for a word,
+ * these Ids are then used to find the definitions and synonyms in the synonymSet table
+ *
+ * A synonym set may also reference related synonym sets as associated ids, these associated ids
+ * can be queried in the synonym set table to find more related words which are useful for finding
+ * thesaurus results.
+ *
+ */
 class Database(private val filename : String) {
     private val url = "jdbc:sqlite:$filename"
     private val createIndexTableSql = """CREATE TABLE IF NOT EXISTS lookup (
