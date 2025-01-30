@@ -42,6 +42,10 @@ class BuildNabu {
         //Add extra definitions
         val additional = DbAdditions(dbFileName)
         val data = loadDefinitionGson("/ExtraDefinitions.json")
-        additional.addAll(data, compressor.compressedIndex)
+        data.forEach {
+            //Set unique id for the definition
+            it.synIndex = compressor.compressedIndex.next()
+            additional.add(it)
+        }
     }
 }

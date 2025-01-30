@@ -52,19 +52,14 @@ fun loadDefinitionGson(path : String) : List<DefinitionData>{
  * Also some helper functions (displayIds) to find which index to use for AssociatedWords
  */
 class DbAdditions(dbFileName : String) {
-    val db = Database(dbFileName)
+    private val db = Database(dbFileName)
 
     /**
-     * data: - list of definitions to add
-     * compressedIndex: - Used to generate unique ids for each new definition
+     * Adds the definition to the Nabu database,
+     *
+     * Note that for the lookUp table, new words will be added and
+     * existing words will be appended the new id to the list of synonym ids
      */
-    fun addAll(data : List<DefinitionData>, compressedIndex: CompressedIndex) {
-        data.forEach {
-            it.synIndex = compressedIndex.next()
-            add(it)
-        }
-    }
-
     fun add(definitionData : DefinitionData){
         val synonymSet = toSynonymSet(definitionData)
         //Add the definition
