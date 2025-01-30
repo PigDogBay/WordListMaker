@@ -1,15 +1,15 @@
 package com.mpdbailey.nabu
 
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.mpdbailey.utils.ResourceLoader
-
 
 /**
- * Synonym set can have associated words
+ * A synonym set can have associated words
  * These words will be looked up in the lookUp table
  * index is to select the relevant 'synonym index' from the list of ids
  * The synonym index points to another synonym in the synonymSet table
+ *
+ * @param word The word to query the lookUp table
+ * @param index Index of the synonym ID in the list of ids returned from the lookUp query
  */
 data class AssociatedWord (
     val word : String,
@@ -18,11 +18,12 @@ data class AssociatedWord (
 
 /**
  * Class to represent the data needed to add a new definition to the Nabu database
- * word: The word that is being defined and is used to query the lookUp table
- * partOfSpeech: What type is the word
- * definition: Separate multiple definition strings using '; '
- * words: List of closely related words that are also found in the lookUp table, these will appear in the synonym list for the word
- * associatedWords: The word may also be related to other definitions, instead of specifying the synonym id for the definition
+ *
+ * @param word The word that is being defined and is used to query the lookUp table
+ * @param partOfSpeech What type is the word
+ * @param definition Separate multiple definition strings using '; '
+ * @param words List of closely related words that are also found in the lookUp table, these will appear in the synonym list for the word
+ * @param associatedWords The word may also be related to other definitions, instead of specifying the synonym id for the definition
  *  you specify the lookUp word to get a list of synonym ids and the index selects which id to use from the list.
  *
  *  synIndex: unique 3-char ID for the definition, it's a var as compressedIndex will set this automatically before database insertion
@@ -38,8 +39,10 @@ data class DefinitionData (
 }
 
 /**
- * Adds DefintionData to the Nabu database
+ * Adds DefinitionData to the Nabu database
  * Also some helper functions (displayIds) to find which index to use for AssociatedWords
+ *
+ * @param dbFileName filename of the Nabu database
  */
 class DbAdditions(dbFileName : String) {
     private val db = Database(dbFileName)
@@ -49,6 +52,8 @@ class DbAdditions(dbFileName : String) {
      *
      * Note that for the lookUp table, new words will be added and
      * existing words will be appended the new id to the list of synonym ids
+     *
+     * @param definitionData contains data for the word, including its synonyms, definitions and unique ID for the synonymSet table
      */
     fun add(definitionData : DefinitionData){
         val synonymSet = toSynonymSet(definitionData)

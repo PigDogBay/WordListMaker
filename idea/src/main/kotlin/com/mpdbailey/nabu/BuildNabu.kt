@@ -22,6 +22,7 @@ import java.util.Objects
  * 10) Add extra definitions from resources/ExtraDefinitions.json, see DbAdditions.kt
  */
 class BuildNabu {
+
     /**
      * Build the Nabu database and store it at the specified filename
      */
@@ -40,12 +41,18 @@ class BuildNabu {
         database.insertSynonyms(compSets)
         database.insertExceptions(Morphology().loadAllExceptions())
 
-        //Add extra definitions
+        addExtraDefinitions(dbFileName,compressor.compressedIndex)
+    }
+
+    /**
+     * Extra definitions are defined in resources/ExtraDefinitions.json
+     */
+    private fun addExtraDefinitions(dbFileName: String, compressedIndex: CompressedIndex){
         val additional = DbAdditions(dbFileName)
         val data = ResourceLoader().loadDefinitionGson("/ExtraDefinitions.json")
         data.forEach {
             //Set unique id for the definition
-            it.synIndex = compressor.compressedIndex.next()
+            it.synIndex = compressedIndex.next()
             additional.add(it)
         }
     }
