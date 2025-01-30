@@ -63,6 +63,11 @@ class DbAdditions(dbFileName : String) {
         updateIndex(definitionData.word,synonymSet)
     }
 
+    /**
+     * Converts DefinitionData (JSON data objects) to SynonymSet (Nabu database objects
+     * )
+     * @param definitionData to be converted for use by Nabu DB
+     */
     private fun toSynonymSet(definitionData: DefinitionData) :SynonymSet{
         return SynonymSet(definitionData.synIndex,
             definitionData.words,
@@ -73,6 +78,12 @@ class DbAdditions(dbFileName : String) {
         )
     }
 
+    /**
+     * Inserts the SynonymSet into the Nabu DB
+     *
+     * @param synonymSet will be inserted if no entry exists for synonymSet.index
+     *  if a synonymSet already exists then a warning will be displayed and the function will exit
+     */
     private fun insert(synonymSet: SynonymSet){
         //Don't add it if already in the database
         val result = db.querySynonymSet(synonymSet.index)
