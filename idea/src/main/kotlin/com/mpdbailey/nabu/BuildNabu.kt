@@ -2,6 +2,7 @@ package com.mpdbailey.nabu
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.mpdbailey.utils.ResourceLoader
 import java.util.Objects
 
 /**
@@ -41,7 +42,7 @@ class BuildNabu {
 
         //Add extra definitions
         val additional = DbAdditions(dbFileName)
-        val data = loadDefinitionGson("/ExtraDefinitions.json")
+        val data = ResourceLoader().loadDefinitionGson("/ExtraDefinitions.json")
         data.forEach {
             //Set unique id for the definition
             it.synIndex = compressor.compressedIndex.next()

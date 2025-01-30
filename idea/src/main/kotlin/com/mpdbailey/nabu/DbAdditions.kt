@@ -38,16 +38,6 @@ data class DefinitionData (
 }
 
 /**
- * Loads DefinitionData from a JSON file, see resources/ExtraDefinitions.json
- */
-fun loadDefinitionGson(path : String) : List<DefinitionData>{
-    val gsonText = ResourceLoader().loadText(path)
-    val dataDefinitionDataType = object : TypeToken<List<DefinitionData>>(){}.type
-    val data :List<DefinitionData> = Gson().fromJson(gsonText, dataDefinitionDataType )
-    return data
-}
-
-/**
  * Adds DefintionData to the Nabu database
  * Also some helper functions (displayIds) to find which index to use for AssociatedWords
  */
