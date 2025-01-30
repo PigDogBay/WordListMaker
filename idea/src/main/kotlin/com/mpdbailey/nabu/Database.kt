@@ -7,11 +7,11 @@ import java.sql.DriverManager
  *
  * Database overview
  *
- * Look Up table
+ * Lookup Table
  *     Word - The word to look up its synonyms and definition
  *     Ids - List of Ids, each Id is 3 characters and is used to query the Synonym Set table
  *
- * Synonym Set table
+ * Synonym Set Table
  *     Id - Unique (Primary Key) 3 char code
  *     Synonym - list of related words (synonyms) separated by ','
  *     Part of speech - Noun, Verb, Adjective or Adverb
@@ -24,6 +24,17 @@ import java.sql.DriverManager
  * A synonym set may also reference related synonym sets as associated ids, these associated ids
  * can be queried in the synonym set table to find more related words which are useful for finding
  * thesaurus results.
+ *
+ *
+ * Exceptions Table
+ *     Inflected - Inflected word, e.g. axes
+ *     Bases - list of possible base words, e.g. ax,axis
+
+ * Inflected words, e.g. boxful, boxing, boxes, boxed need to converted to a base form (box),
+ * the lookup table only contains base forms of words which keeps the size of the DB down.
+ *
+ * Some words may have more base forms, for example axes could be ax or axis.
+ * The exception table is used to find base forms for words that could not be handled by the Morphology algorithm.
  *
  */
 class Database(private val filename : String) {
