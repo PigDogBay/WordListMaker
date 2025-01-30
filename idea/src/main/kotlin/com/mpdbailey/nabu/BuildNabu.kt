@@ -18,7 +18,7 @@ import java.util.Objects
  * 7) Tidy up the index and synonymSet lists and remove any offensive entries
  * 8) Create the Nabu database table and store as a file
  * 9) Insert all the indices and synonym set data into the DB
- * 10) Add extra definitions from resources/ExtraDefinitions.json
+ * 10) Add extra definitions from resources/ExtraDefinitions.json, see DbAdditions.kt
  */
 class BuildNabu {
     /**

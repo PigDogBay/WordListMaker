@@ -8,13 +8,25 @@ import com.mpdbailey.utils.ResourceLoader
 /**
  * Synonym set can have associated words
  * These words will be looked up in the lookUp table
- * index is to select the relevant synonym index from the list of ids
+ * index is to select the relevant 'synonym index' from the list of ids
+ * The synonym index points to another synonym in the synonymSet table
  */
 data class AssociatedWord (
     val word : String,
     val index : Int
 )
 
+/**
+ * Class to represent the data needed to add a new definition to the Nabu database
+ * word: The word that is being defined and is used to query the lookUp table
+ * partOfSpeech: What type is the word
+ * definition: Separate multiple definition strings using '; '
+ * words: List of closely related words that are also found in the lookUp table, these will appear in the synonym list for the word
+ * associatedWords: The word may also be related to other definitions, instead of specifying the synonym id for the definition
+ *  you specify the lookUp word to get a list of synonym ids and the index selects which id to use from the list.
+ *
+ *  synIndex: unique 3-char ID for the definition, it's a var as compressedIndex will set this automatically before database insertion
+ */
 data class DefinitionData (
     val word : String,
     val partOfSpeech: PartOfSpeech,
@@ -25,6 +37,9 @@ data class DefinitionData (
     var synIndex = "000"
 }
 
+/**
+ * Loads DefinitionData from a JSON file, see resources/ExtraDefinitions.json
+ */
 fun loadDefinitionGson(path : String) : List<DefinitionData>{
     val gsonText = ResourceLoader().loadText(path)
     val dataDefinitionDataType = object : TypeToken<List<DefinitionData>>(){}.type
@@ -32,9 +47,17 @@ fun loadDefinitionGson(path : String) : List<DefinitionData>{
     return data
 }
 
+/**
+ * Adds DefintionData to the Nabu database
+ * Also some helper functions (displayIds) to find which index to use for AssociatedWords
+ */
 class DbAdditions(dbFileName : String) {
     val db = Database(dbFileName)
 
+    /**
+     * data: - list of definitions to add
+     * compressedIndex: - Used to generate unique ids for each new definition
+     */
     fun addAll(data : List<DefinitionData>, compressedIndex: CompressedIndex) {
         data.forEach {
             it.synIndex = compressedIndex.next()
@@ -70,6 +93,12 @@ class DbAdditions(dbFileName : String) {
         db.insertSynonyms(listOf(synonymSet))
     }
 
+    /**
+     * If a word is already defined in the lookUp table, then the
+     * synonymSet index is added to the words id list
+     *
+     * If the word does not exist in the lookUp table, a new entry is created.
+     */
     private fun updateIndex(word : String, synonymSet: SynonymSet){
         val result = db.query(word)
         if (result.isEmpty()){
@@ -88,9 +117,8 @@ class DbAdditions(dbFileName : String) {
     }
 
     /**
-     * Debugging
+     * Debugging, useful for finding associated words+index
      */
-
     fun displayIds(word : String){
         val list = db.query(word)
         println("Index for $word")
@@ -118,18 +146,4 @@ class DbAdditions(dbFileName : String) {
         val json = gson.toJson(data)
         println("----JSON------\n$json\n-----JSON END------")
     }
-
 }
-
-val bailSynonymSetData = DefinitionData(
-    "bail",
-    PartOfSpeech.NOUN,
-    "One of the two wooden crosspieces that rest on top of the stumps to form a wicket",
-    listOf("bail","wicket","stump","cricket equipment","cricket"),
-    listOf(
-        AssociatedWord("stump",2),
-        AssociatedWord("wicket",0),
-        AssociatedWord("cricket equipment",0),
-        AssociatedWord("cricket",1),
-    )
-)
