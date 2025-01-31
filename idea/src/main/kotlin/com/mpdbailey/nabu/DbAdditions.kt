@@ -58,7 +58,7 @@ class DbAdditions(dbFileName : String) {
     fun add(definitionData : DefinitionData){
         val synonymSet = toSynonymSet(definitionData)
         //Add the definition
-        insert(synonymSet)
+        db.insertSynonyms(listOf(synonymSet))
         //Update the lookup table to point to the new definition
         updateIndex(definitionData.word,synonymSet)
     }
@@ -76,22 +76,6 @@ class DbAdditions(dbFileName : String) {
             definitionData.partOfSpeech,
             definitionData.definition
         )
-    }
-
-    /**
-     * Inserts the SynonymSet into the Nabu DB
-     *
-     * @param synonymSet will be inserted if no entry exists for synonymSet.index
-     *  if a synonymSet already exists then a warning will be displayed and the function will exit
-     */
-    private fun insert(synonymSet: SynonymSet){
-        //Don't add it if already in the database
-        val result = db.querySynonymSet(synonymSet.index)
-        if (result!=null) {
-            println("Warning! Synonym Set already exists in the database: ${synonymSet.index}")
-            return
-        }
-        db.insertSynonyms(listOf(synonymSet))
     }
 
     /**
