@@ -3,6 +3,7 @@ package com.mpdbailey.nabu
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
+import org.sqlite.SQLiteException
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -106,5 +107,12 @@ class DatabaseTest {
         nabu.update(synIndex)
         val actualIds = nabu.query("bail").reduce{a,s->"$a $s"}
         assertEquals("AAA BBB",actualIds)
+    }
+
+    @Test(expected = SQLiteException::class)
+    fun uniqueId1(){
+        val nabu = createDb()
+        val synSet = SynonymSet("001",listOf("not","unique", "id"), emptyList(),PartOfSpeech.NOUN,"expect an exception")
+        nabu.insertSynonyms(listOf((synSet)))
     }
 }
