@@ -103,17 +103,10 @@ fun nabuStatus(){
 
 
 fun main(args: Array<String>) {
-    //additionBail()
-//    wordNetLookup("bail")
-
-
 //    createScholar()
     BuildNabu().build(NABU_FILENAME)
     nabuStatus()
-    dbLookup("bail")
-
-//    dbLookup("cricket equipment")
-//    createScowl()
-//    createSmall()
-//    createPhrases()
+    createScowl()
+    createSmall()
+    createPhrases()
 }
