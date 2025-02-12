@@ -136,4 +136,45 @@ class DbFileHelperTest {
         kotlin.test.assertNotNull(peoplesFrontOfJudea)
         kotlin.test.assertTrue(peoplesFrontOfJudea.definitionText.contains("Marxist-Leninist"))
     }
+
+    /**
+     * The Zion bug was found to be in Compressor, it was stripping off Index.words > 28 chars
+     * That is 1008 entries
+     */
+    @Test
+    fun zionBugLargestIndex1(){
+        val target = DbFileHelper()
+        val indices = target.loadIndices(DbPartOfSpeech.Noun)
+        val large = indices.filter{it.word.length>28}
+        kotlin.test.assertEquals(1008,large.size)
+        val max = large.maxOf { it.word.length }
+        //Largest entry is 71 chars:
+        //blood-oxygenation_level_dependent_functional_magnetic_resonance_imaging
+        kotlin.test.assertEquals(71,max)
+        //large.forEach { println(it.word) }
+    }
+    @Test
+    fun zionBugLargestIndex2(){
+        val target = DbFileHelper()
+        val indices = target.loadIndices(DbPartOfSpeech.Adj)
+        val large = indices.filter{it.word.length>28}
+        kotlin.test.assertEquals(2,large.size)
+        large.forEach { println(it.word) }
+    }
+    @Test
+    fun zionBugLargestIndex3(){
+        val target = DbFileHelper()
+        val indices = target.loadIndices(DbPartOfSpeech.Adv)
+        val large = indices.filter{it.word.length>28}
+        kotlin.test.assertEquals(1,large.size)
+        large.forEach { println(it.word) }
+    }
+    @Test
+    fun zionBugLargestIndex4(){
+        val target = DbFileHelper()
+        val indices = target.loadIndices(DbPartOfSpeech.Verb)
+        val large = indices.filter{it.word.length>28}
+        kotlin.test.assertEquals(3,large.size)
+        large.forEach { println(it.word) }
+    }
 }
