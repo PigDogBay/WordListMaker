@@ -133,5 +133,18 @@ class CompressorTest {
         assertNotNull(sets)
     }
 
+    /**
+     * Compressor range check was excluding words > 28 chars
+     * This test checks that small words are still included after the new range fix
+     */
+    @Test
+    fun zionBugSmallIndex1(){
+        val combine = Combine()
+        val compressor = Compressor(combine.indices(),combine.synonyms())
+        val indices = compressor.compressedIndices
+        val smallIndices = indices.filter { it.word.length == 2 }
+        //smallIndices.forEach { println(it.word) }
+        assertEquals(292,smallIndices.count())
+    }
 
 }

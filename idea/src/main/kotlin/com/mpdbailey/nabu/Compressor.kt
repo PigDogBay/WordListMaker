@@ -51,7 +51,7 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
 
     private fun processSynSetWords(words : List<String>) = words
         .map { it.replace(replaceBrackets,"") }
-        .map{it.toLowerCase()}
+        .map{it.lowercase()}
         .filter { !it.contains(regexSynonymIllegal) }
         .filter { !it.contains("wordnet") }
         .map { it.replace(regexSynonymRemoveChars,"") }
@@ -62,7 +62,7 @@ class Compressor(indices : List<SynonymIndex>, synonymSets : List<SynonymSet>) {
     val compressedIndices =
         indices
             .asSequence()
-            .filter { it.word.length in 2..28 }
+            .filter { it.word.length > 1 }
             .filter {!it.word.contains(regexIllegal)}
             .filter {!(it.word.contains('\'') && it.word.length<7)}
             .map { SynonymIndex(
