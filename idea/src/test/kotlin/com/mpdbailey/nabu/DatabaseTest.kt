@@ -115,4 +115,23 @@ class DatabaseTest {
         val synSet = SynonymSet("001",listOf("not","unique", "id"), emptyList(),PartOfSpeech.NOUN,"expect an exception")
         nabu.insertSynonyms(listOf((synSet)))
     }
+
+    /**
+     * IN CSK type in ZION
+     * Thesaurus list, shows results for
+     *     popular_front_for_the_liberation_of_palestine-general_command
+     *     iz_al-din_al-qassam_battalions
+     *
+     * Clicking on these does a browser search
+     *
+     * These tests are to check if the data has been entered correctly into the database
+     */
+    @Test
+    fun zionBugIndex1(){
+        val nabu = createDb()
+        val indices = nabu.query("popular front for the liberation of palestine general command")
+        assertEquals(1,indices.count())
+        val synSet = nabu.querySynonymSet(indices[0])!!
+        assertTrue(synSet.definitions.contains("Marxist-Leninist"))
+    }
 }

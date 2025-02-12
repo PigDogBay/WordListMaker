@@ -2,6 +2,7 @@ package com.mpdbailey.nabu
 
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class CompressorTest {
@@ -107,5 +108,30 @@ class CompressorTest {
             println(it.words + " : " + it.definitions)
         }
     }
+
+    /**
+     * IN CSK type in ZION
+     * Thesaurus list, shows results for
+     *     popular_front_for_the_liberation_of_palestine-general_command
+     *     iz_al-din_al-qassam_battalions
+     *
+     * Clicking on these does a browser search
+     *
+     * These tests are to check if the data has been processed correctly
+     */
+    @Test
+    fun zionBug1(){
+        val combine = Combine()
+        val compressor = Compressor(combine.indices(),combine.synonyms())
+        val indices = compressor.compressedIndices
+
+        val popFrontJudea = indices.first { it.word == "popular front for the liberation of palestine general command"}
+        assertNotNull(popFrontJudea)
+
+        val synIndex = popFrontJudea.indices[0]
+        val sets = compressor.compressedSynonymSets.first { it.index == synIndex }
+        assertNotNull(sets)
+    }
+
 
 }
