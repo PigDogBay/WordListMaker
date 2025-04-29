@@ -11,5 +11,78 @@
       {"word": "cricket","index": 1}
     ],
     "synIndex": "000"
+  },
+  {
+    "word": "skarn",
+    "partOfSpeech": "NOUN",
+    "definition": "A skarn is a type of metamorphic rock that forms when hot magma interacts with surrounding limestone or dolomite rock. This contact creates new minerals, often rich in metals like copper, gold, and tungsten. In Canada, skarn deposits have been significant in mining areas like British Columbia and Quebec, where valuable ores are extracted. Skarns highlight how geological processes transform rocks into mineral-rich resources that play an important role in the mining industry",
+    "words": ["skarn","metamorphic rock","limestone","magma","dolomite"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "mage",
+    "partOfSpeech": "NOUN",
+    "definition": "A magician, wizard, sorcerer, witch, warlock or mystic.",
+    "words": ["mage","magician","wizard"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "durag",
+    "partOfSpeech": "NOUN",
+    "definition": "A close-fitting cloth tied around the top of the head to protect the hair.",
+    "words": ["durag","cap"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "conchiglie",
+    "partOfSpeech": "NOUN",
+    "definition": "Seashell shaped pasta",
+    "words": ["conchiglie","pasta","seashell"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "cavatelli",
+    "partOfSpeech": "NOUN",
+    "definition": "Small pasta shells similar to conchiglie",
+    "words": ["cavatelli","conchiglie","pasta"],
+    "associatedWords": [
+      {"word": "conchiglie","index": 0}
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "cholet",
+    "partOfSpeech": "NOUN",
+    "definition": "A commune of western France, in the Maine-et-Loire department. The town lies along the La Moine River, southeast of Nantes.",
+    "words": ["cholet","nantes","france"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "renate",
+    "partOfSpeech": "NOUN",
+    "definition": "Reborn or reincarnated",
+    "words": ["renate","reborn","reincarnate"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "clapback",
+    "partOfSpeech": "NOUN",
+    "definition": "A witty or sarcastic retort (derived from clap back)",
+    "words": ["clapback","retort"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
   }
 ]
