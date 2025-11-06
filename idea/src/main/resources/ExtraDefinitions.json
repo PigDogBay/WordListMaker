@@ -84,5 +84,123 @@
     "associatedWords": [
     ],
     "synIndex": "000"
+  },
+  {
+    "word": "barcode",
+    "partOfSpeech": "NOUN",
+    "definition": "A set of machine-readable parallel bars, varying in width, spacing or height, encoding information",
+    "words": ["barcode","bar code"],
+    "associatedWords": [
+      {"word": "bar code","index": 0}
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "bromance",
+    "partOfSpeech": "NOUN",
+    "definition": "Slang. A close but nonsexual relationship between two or more men.",
+    "words": ["bromance","friendship"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "edgelord",
+    "partOfSpeech": "NOUN",
+    "definition": "Slang, derogatory term. Someone who tries to appear edgy by doing or saying provocative, controversial, taboo, or offensive things",
+    "words": ["edgelord","controversialist"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "gastropub",
+    "partOfSpeech": "NOUN",
+    "definition": "British. A public house that serves high-quality food.",
+    "words": ["gastropub","public house","pub","restaurant"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "panko",
+    "partOfSpeech": "NOUN",
+    "definition": "Coarse, dry breadcrumbs used in Japanese cuisine.",
+    "words": ["panko","breadcrumb"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "battily",
+    "partOfSpeech": "ADVERB",
+    "definition": "In a very eccentric, foolish, or irrational way.",
+    "words": ["battily","batty"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "tentpole",
+    "partOfSpeech": "NOUN",
+    "definition": "A large-scale entertainment production that is a major source of revenue for its studio or television network",
+    "words": ["tentpole","blockbuster"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "agogo",
+    "partOfSpeech": "NOUN",
+    "definition": "A bell used in Yoruba and Brazilian music and typically played in pairs",
+    "words": ["agogo","bell","yoruba"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "turbinado",
+    "partOfSpeech": "NOUN",
+    "definition": "A type of sugar made from the extract of sugar cane ",
+    "words": ["turbinado","sugar cane","sugar"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "ungroup",
+    "partOfSpeech": "VERB",
+    "definition": "To separate a grouped set of items in a graphics package.",
+    "words": ["ungroup","separate"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "keychain",
+    "partOfSpeech": "NOUN",
+    "definition": "A chain or ring to which a key may be attached. A digital repository for the storage of cryptographic keys.",
+    "words": ["keychain","key ring"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "upcycle",
+    "partOfSpeech": "VERB",
+    "definition": "Reuse waster materials to create a higher quality product.",
+    "words": ["upcycle","recycle"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "demonym",
+    "partOfSpeech": "NOUN",
+    "definition": "The name for the inhabitants of a particular city, state or country. Eg Welsh, Scottish, Parisian.",
+    "words": ["demonym","inhabitant","resident","dweller","native"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
   }
 ]
