@@ -425,8 +425,6 @@ ungroups
 ungrouped
 keychain
 keychains
-foxglove
-foxgloves
 upcycle
 upcycles
 upcycled
