@@ -98,7 +98,7 @@
   {
     "word": "bromance",
     "partOfSpeech": "NOUN",
-    "definition": "Slang. A close but nonsexual relationship between two or more men.",
+    "definition": "Slang. A close but nonsexual relationship between two or more men",
     "words": ["bromance","friendship"],
     "associatedWords": [
     ],
@@ -116,7 +116,7 @@
   {
     "word": "gastropub",
     "partOfSpeech": "NOUN",
-    "definition": "British. A public house that serves high-quality food.",
+    "definition": "(British) A public house that serves high-quality food",
     "words": ["gastropub","public house","pub","restaurant"],
     "associatedWords": [
     ],
@@ -125,7 +125,7 @@
   {
     "word": "panko",
     "partOfSpeech": "NOUN",
-    "definition": "Coarse, dry breadcrumbs used in Japanese cuisine.",
+    "definition": "Coarse, dry breadcrumbs used in Japanese cuisine",
     "words": ["panko","breadcrumb"],
     "associatedWords": [
     ],
@@ -134,7 +134,7 @@
   {
     "word": "battily",
     "partOfSpeech": "ADVERB",
-    "definition": "In a very eccentric, foolish, or irrational way.",
+    "definition": "In a very eccentric, foolish, or irrational way",
     "words": ["battily","batty"],
     "associatedWords": [
     ],
@@ -161,7 +161,7 @@
   {
     "word": "turbinado",
     "partOfSpeech": "NOUN",
-    "definition": "A type of sugar made from the extract of sugar cane ",
+    "definition": "A type of sugar made from the extract of sugar cane",
     "words": ["turbinado","sugar cane","sugar"],
     "associatedWords": [
     ],
@@ -170,7 +170,7 @@
   {
     "word": "ungroup",
     "partOfSpeech": "VERB",
-    "definition": "To separate a grouped set of items in a graphics package.",
+    "definition": "To separate a grouped set of items in a graphics package",
     "words": ["ungroup","separate"],
     "associatedWords": [
     ],
@@ -179,7 +179,7 @@
   {
     "word": "keychain",
     "partOfSpeech": "NOUN",
-    "definition": "A chain or ring to which a key may be attached. A digital repository for the storage of cryptographic keys.",
+    "definition": "A chain or ring to which a key may be attached.\n\nA digital repository for the storage of cryptographic keys",
     "words": ["keychain","key ring"],
     "associatedWords": [
     ],
@@ -188,7 +188,7 @@
   {
     "word": "upcycle",
     "partOfSpeech": "VERB",
-    "definition": "Reuse waster materials to create a higher quality product.",
+    "definition": "Reuse waste materials to create a higher quality product",
     "words": ["upcycle","recycle"],
     "associatedWords": [
     ],
@@ -197,8 +197,17 @@
   {
     "word": "demonym",
     "partOfSpeech": "NOUN",
-    "definition": "The name for the inhabitants of a particular city, state or country. Eg Welsh, Scottish, Parisian.",
+    "definition": "The name for the inhabitants of a particular city, state or country. Eg Welsh, Scottish, Parisian",
     "words": ["demonym","inhabitant","resident","dweller","native"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "wheelbarrow race",
+    "partOfSpeech": "NOUN",
+    "definition": "A two-member team race in which one team member holds the legs of the other, as if the handles of a wheelbarrow. The team member playing the barrow runs on his/her hands",
+    "words": ["wheelbarrow race","wheelbarrow","race"],
     "associatedWords": [
     ],
     "synIndex": "000"
