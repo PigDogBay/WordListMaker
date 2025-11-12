@@ -211,5 +211,23 @@
     "associatedWords": [
     ],
     "synIndex": "000"
+  },
+  {
+    "word": "grift",
+    "partOfSpeech": "VERB",
+    "definition": "To engage in a petty swindle",
+    "words": ["grift","swindle","scam","cheat"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "grift",
+    "partOfSpeech": "NOUN",
+    "definition": "An act of obtaining money from someone by fraud",
+    "words": ["grift","swindle","scam","fraud"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
   }
 ]

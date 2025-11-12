@@ -99,6 +99,8 @@ fun nabuStatus(){
     println("Nabu Status")
     println("File size: ${file.length()} bytes, ${file.length()/(1024*1024)}Mb")
     println("Table Counts: ${dbl.indicesCount} indices, ${dbl.definitionsCount} definitions, ${dbl.exceptionsCount} exceptions")
+
+ //   dbl.getDefinitions("grift")
 }
 
 
