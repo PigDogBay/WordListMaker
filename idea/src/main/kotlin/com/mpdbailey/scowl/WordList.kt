@@ -3,8 +3,10 @@ package com.mpdbailey.scowl
 import com.mpdbailey.utils.ResourceLoader
 import com.mpdbailey.utils.removeAccents
 import java.io.File
+import java.util.Locale
 
 const val SCOWL_DIR = "../../scowl/wordlist/scowl/final/"
+const val SCOWL_V2_LARGE = "../../SCOWLv2/wordlist/large.txt"
 const val SOWPODS = "../../wordlists/sowpods.txt"
 const val BANNED_WORDS = "/bannedwords.txt"
 const val EXTRA_WORDS = "/extrawords.txt"
@@ -26,7 +28,7 @@ fun createScowlWordList() : List<String> {
         .filter{it.length>2}
         .filter{ it[1].isLowerCase()}                           //Remove abbreviations
         .filter { it.last().isLowerCase() }                     //Remove abbreviations
-        .map{it.toLowerCase()}
+        .map{ it.lowercase(Locale.US) }
         .map{it.removeAccents()}
         .minus(bannedWords)
         .toList()
@@ -50,7 +52,7 @@ fun createSmallWordList() : List<String> {
         .filter{it.length>2}
         .filter{ it[1].isLowerCase()}                           //Remove abbreviations
         .filter { it.last().isLowerCase() }                     //Remove abbreviations
-        .map{it.toLowerCase()}
+        .map{ it.lowercase(Locale.US) }
         .map{it.removeAccents()}
         .minus(bannedWords)
         .toList()
@@ -59,6 +61,25 @@ fun createSmallWordList() : List<String> {
         .distinct()
         .toList()
 }
+
+fun createScowlV2WordList() : List<String> {
+    return loadWordList(SCOWL_V2_LARGE)
+        .union(loadWordList(SOWPODS))                           //Add words only found in SOWPODS
+        .asSequence()
+        .filter { !it.contains('\'' )}
+        .filter{it.length>2}
+        .filter{ it[1].isLowerCase()}                           //Remove abbreviations
+        .filter { it.last().isLowerCase() }                     //Remove abbreviations
+        .map{ it.lowercase(Locale.US) }
+        .map{it.removeAccents()}
+        .minus(bannedWords)
+        .toList()
+        .union(extraWords.map { it.toLowerCase() })
+        .sortedWith(comparator.thenBy { it })
+        .distinct()
+        .toList()
+}
+
 
 fun loadWordList(filename : String) : List<String> = File(filename).readLines(Charsets.ISO_8859_1)
 

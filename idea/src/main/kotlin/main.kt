@@ -9,6 +9,7 @@ import wordnet.common.*
 import java.io.File
 
 const val OUT_FILENAME = "../../out/words.txt"
+const val OUT_FILENAME_V2 = "../../out/words2.txt"
 const val SMALL_FILENAME = "../../out/small.txt"
 const val PHRASES_FILENAME = "../../out/phrases.txt"
 const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
@@ -19,11 +20,38 @@ const val ACTORS = "/actors.txt"
 const val POLITICIANS = "/politicians.txt"
 
 fun createScowl(){
+    println("Creating SCOWL Original large word list")
     val words = createScowlWordList()
     println("Count: ${words.count()}")
     words.saveWordList(OUT_FILENAME)
     println("Validating - find any illegal words:")
     val badWordCount = validate(OUT_FILENAME)
+    println("Found $badWordCount illegal words")
+}
+
+/*
+Create word list using
+./scowl --db scowl.db word-list 85 A,B,C,D 1 --deaccent --wo-poses abbr --wo-pos-categories special,nonword,wordpart > large.txt
+
+
+To subtract the word lists, (words2 - words)
+NR = number of records read, resets to 1 when starts a new file
+FNR = total number of records read
+So NR equals FNR when reading words.txt
+{exclude[$0]; next} loads all the words into hashtable called exclude
+When it starts reading words2.txt
+NR!=FNR, so !{$0 in exclude} will exclude any word found in the hashtable
+
+awk 'NR==FNR {exclude[$0]; next} !($0 in exclude)' words.txt words2.txt >sub.txt
+
+ */
+fun createScowlV2(){
+    println("Creating SCOWL v2 large word list")
+    val words = createScowlV2WordList()
+    println("Count: ${words.count()}")
+    words.saveWordList(OUT_FILENAME_V2)
+    println("Validating - find any illegal words:")
+    val badWordCount = validate(OUT_FILENAME_V2)
     println("Found $badWordCount illegal words")
 }
 
@@ -106,9 +134,12 @@ fun nabuStatus(){
 
 fun main(args: Array<String>) {
 //    createScholar()
-    BuildNabu().build(NABU_FILENAME)
-    nabuStatus()
+//    BuildNabu().build(NABU_FILENAME)
+//    nabuStatus()
     createScowl()
-    createSmall()
-    createPhrases()
+//    createSmall()
+//    createPhrases()
+
+    createScowlV2()
+
 }
