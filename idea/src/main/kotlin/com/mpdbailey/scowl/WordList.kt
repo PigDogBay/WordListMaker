@@ -6,10 +6,10 @@ import java.io.File
 import java.util.Locale
 
 const val SCOWL_DIR = "../../scowl/wordlist/scowl/final/"
-const val SCOWL_V2_LARGE = "../../SCOWLv2/wordlist/large.txt"
 const val SOWPODS = "../../wordlists/sowpods.txt"
 const val BANNED_WORDS = "/bannedwords.txt"
 const val EXTRA_WORDS = "/extrawords.txt"
+const val SCOWL_V2 = "/source/scowlV2.txt"
 
 val comparator = compareByDescending<String> {it.length }
 val bannedWords = ResourceLoader().load(BANNED_WORDS)
@@ -63,7 +63,7 @@ fun createSmallWordList() : List<String> {
 }
 
 fun createScowlV2WordList() : List<String> {
-    return loadWordList(SCOWL_V2_LARGE)
+    return ResourceLoader().load(SCOWL_V2)
         .union(loadWordList(SOWPODS))                           //Add words only found in SOWPODS
         .asSequence()
         .filter { !it.contains('\'' )}
