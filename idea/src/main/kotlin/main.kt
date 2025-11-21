@@ -31,7 +31,7 @@ fun createScowl(){
 
 /*
 Create word list using
-./scowl --db scowl.db word-list 85 A,B,C,D 1 --deaccent --wo-poses abbr --wo-pos-categories special,nonword,wordpart > large.txt
+./scowl --db scowl.db word-list 85 A,B,C,D 1 --deaccent --wo-poses abbr --wo-pos-categories special,nonword,wordpart > scowlV2.txt
 
 
 To subtract the word lists, (words2 - words)
@@ -136,7 +136,7 @@ fun main(args: Array<String>) {
 //    createScholar()
 //    BuildNabu().build(NABU_FILENAME)
 //    nabuStatus()
-    createScowl()
+//    createScowl()
 //    createSmall()
 //    createPhrases()
 
