@@ -22,7 +22,8 @@ fun createScowlWordList() : List<String> {
         .filter { !it.name.contains("special") }
         .filter { !it.name.contains("contractions") }
         .flatMap { it.readLines(Charsets.ISO_8859_1) }          //SCOWL lists stored as ISO_8859_1
-        .union(ResourceLoader().load(SOWPODS))                           //Add words only found in SOWPODS
+        .union(ResourceLoader().load(SOWPODS))
+        .union(createScowlV2WordList()) //Add the new words found in SCOWL v2
         .asSequence()
         .filter { !it.contains('\'' )}
         .filter{it.length>2}
@@ -62,12 +63,19 @@ fun createSmallWordList() : List<String> {
         .toList()
 }
 
+/**
+ * SCOWL v2 needs to become the main word list generator
+ * For now its extra words are added to createScowlWordList()
+ * (This needs to be flipped, add SCOWL v1 extra words to this list)
+ *
+ * Note words below 6 letters are excluded, any suitable ones have been added manually
+ * These smaller words are mostly computing terms and abbreviations
+ */
 fun createScowlV2WordList() : List<String> {
     return ResourceLoader().load(SCOWL_V2)
-        .union(ResourceLoader().load(SOWPODS))                           //Add words only found in SOWPODS
         .asSequence()
         .filter { !it.contains('\'' )}
-        .filter{it.length>2}
+        .filter{it.length>5}                                    //Words below 6 contain a mostly abbreviations, computing terms, I've added correct ones manually
         .filter{ it[1].isLowerCase()}                           //Remove abbreviations
         .filter { it.last().isLowerCase() }                     //Remove abbreviations
         .map{ it.lowercase(Locale.US) }
