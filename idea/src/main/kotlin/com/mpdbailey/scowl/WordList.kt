@@ -6,7 +6,7 @@ import java.io.File
 import java.util.Locale
 
 const val SCOWL_DIR = "../../scowl/wordlist/scowl/final/"
-const val SOWPODS = "../../wordlists/sowpods.txt"
+const val SOWPODS = "/source/sowpods.txt"
 const val BANNED_WORDS = "/bannedwords.txt"
 const val EXTRA_WORDS = "/extrawords.txt"
 const val SCOWL_V2 = "/source/scowlV2.txt"
@@ -22,7 +22,7 @@ fun createScowlWordList() : List<String> {
         .filter { !it.name.contains("special") }
         .filter { !it.name.contains("contractions") }
         .flatMap { it.readLines(Charsets.ISO_8859_1) }          //SCOWL lists stored as ISO_8859_1
-        .union(loadWordList(SOWPODS))                           //Add words only found in SOWPODS
+        .union(ResourceLoader().load(SOWPODS))                           //Add words only found in SOWPODS
         .asSequence()
         .filter { !it.contains('\'' )}
         .filter{it.length>2}
@@ -64,7 +64,7 @@ fun createSmallWordList() : List<String> {
 
 fun createScowlV2WordList() : List<String> {
     return ResourceLoader().load(SCOWL_V2)
-        .union(loadWordList(SOWPODS))                           //Add words only found in SOWPODS
+        .union(ResourceLoader().load(SOWPODS))                           //Add words only found in SOWPODS
         .asSequence()
         .filter { !it.contains('\'' )}
         .filter{it.length>2}

@@ -136,10 +136,10 @@ fun main(args: Array<String>) {
 //    createScholar()
 //    BuildNabu().build(NABU_FILENAME)
 //    nabuStatus()
-//    createScowl()
+    createScowl()
 //    createSmall()
 //    createPhrases()
 
-    createScowlV2()
+//    createScowlV2()
 
 }
