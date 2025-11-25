@@ -4,6 +4,7 @@ import com.mpdbailey.utils.ResourceLoader
 import com.mpdbailey.utils.removeAccents
 import java.io.File
 import java.util.Locale
+import kotlin.collections.asSequence
 
 const val SCOWL_DIR = "../../scowl/wordlist/scowl/final/"
 const val SCOWL_V1_60 = "/source/scowlV1-60.txt"
@@ -18,41 +19,37 @@ val bannedWords = ResourceLoader().load(BANNED_WORDS)
 val extraWords = ResourceLoader().load(EXTRA_WORDS)
 
 
+
 fun createScowlWordList() : List<String> {
-        return ResourceLoader().load(SCOWL_V1_90)
-        .union(ResourceLoader().load(SOWPODS))
-        .union(createScowlV2WordList()) //Add the new words found in SCOWL v2
-        .asSequence()
-        .filter { !it.contains('\'' )}
-        .filter{it.length>2}
-        .filter{ it[1].isLowerCase()}                           //Remove abbreviations
-        .filter { it.last().isLowerCase() }                     //Remove abbreviations
-        .map{ it.lowercase(Locale.US) }
-        .map{it.removeAccents()}
-        .minus(bannedWords)
-        .toList()
-        .union(extraWords.map { it.toLowerCase() })
-        .sortedWith(comparator.thenBy { it })
-        .distinct()
-        .toList()
+        return ResourceLoader()
+            .load(SCOWL_V1_90)
+            .union(ResourceLoader().load(SOWPODS))
+            .union(createScowlV2WordList()) //Add the new words found in SCOWL v2
+            .toList()
+            .cleanList()
 }
 
 fun createSmallWordList() : List<String> {
-    return ResourceLoader().load(SCOWL_V1_60)
-        .asSequence()
+    return ResourceLoader()
+            .load(SCOWL_V1_60)
+            .cleanList()
+}
+
+fun List<String>.cleanList() : List<String>{
+    return this
         .filter { !it.contains('\'' )}
         .filter{it.length>2}
         .filter{ it[1].isLowerCase()}                           //Remove abbreviations
         .filter { it.last().isLowerCase() }                     //Remove abbreviations
         .map{ it.lowercase(Locale.US) }
         .map{it.removeAccents()}
-        .minus(bannedWords)
-        .toList()
-        .union(extraWords.map { it.toLowerCase() })
+        .minus(bannedWords.toSet())
+        .union(extraWords.map { it.lowercase(Locale.US) })
         .sortedWith(comparator.thenBy { it })
         .distinct()
-        .toList()
 }
+
+
 
 /**
  * SCOWL v2 needs to become the main word list generator
