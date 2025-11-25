@@ -9,11 +9,13 @@ const val SCOWL_V1_60 = "/source/scowlV1-60.txt"
 const val SCOWL_V1_90 = "/source/scowlV1-90.txt"
 const val SOWPODS = "/source/sowpods.txt"
 const val BANNED_WORDS = "/bannedwords.txt"
+const val BAD_WORDS = "/bad.txt"
 const val EXTRA_WORDS = "/extrawords.txt"
 const val SCOWL_V2 = "/source/scowlV2.txt"
 
 val comparator = compareByDescending<String> {it.length }
 val bannedWords = ResourceLoader().load(BANNED_WORDS)
+val badWords = ResourceLoader().load(BAD_WORDS)
 val extraWords = ResourceLoader().load(EXTRA_WORDS)
 
 
@@ -22,7 +24,7 @@ fun createScowlWordList() : List<String> {
         return ResourceLoader()
             .load(SCOWL_V1_90)
             .union(ResourceLoader().load(SOWPODS))
-            .union(createScowlV2WordList()) //Add the new words found in SCOWL v2
+            .union(ResourceLoader().load(SCOWL_V2)) //Add the new words found in SCOWL v2
             .toList()
             .cleanList()
 }
@@ -42,19 +44,10 @@ fun List<String>.cleanList() : List<String>{
         .map{ it.lowercase(Locale.US) }
         .map{it.removeAccents()}
         .minus(bannedWords.toSet())
+        .minus(badWords.toSet())
         .union(extraWords.map { it.lowercase(Locale.US) })
         .sortedWith(comparator.thenBy { it })
         .distinct()
-}
-
-/**
- * Note words below 6 letters are excluded, any suitable ones have been added manually
- * These smaller words are mostly computing terms and abbreviations
- */
-fun createScowlV2WordList() : List<String> {
-    return ResourceLoader().load(SCOWL_V2)
-        .filter { !it.contains('\'' )}
-        .filter{it.length>5}                                    //Words below 6 contain a mostly abbreviations, computing terms, I've added correct ones manually
 }
 
 fun loadWordList(filename : String) : List<String> = File(filename).readLines(Charsets.ISO_8859_1)
