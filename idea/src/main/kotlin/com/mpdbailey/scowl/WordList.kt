@@ -3,10 +3,8 @@ package com.mpdbailey.scowl
 import com.mpdbailey.utils.ResourceLoader
 import com.mpdbailey.utils.removeAccents
 import java.io.File
-import java.util.Locale
-import kotlin.collections.asSequence
+import java.util.*
 
-const val SCOWL_DIR = "../../scowl/wordlist/scowl/final/"
 const val SCOWL_V1_60 = "/source/scowlV1-60.txt"
 const val SCOWL_V1_90 = "/source/scowlV1-90.txt"
 const val SOWPODS = "/source/sowpods.txt"
@@ -49,8 +47,6 @@ fun List<String>.cleanList() : List<String>{
         .distinct()
 }
 
-
-
 /**
  * SCOWL v2 needs to become the main word list generator
  * For now its extra words are added to createScowlWordList()
@@ -61,50 +57,17 @@ fun List<String>.cleanList() : List<String>{
  */
 fun createScowlV2WordList() : List<String> {
     return ResourceLoader().load(SCOWL_V2)
-        .asSequence()
         .filter { !it.contains('\'' )}
         .filter{it.length>5}                                    //Words below 6 contain a mostly abbreviations, computing terms, I've added correct ones manually
         .filter{ it[1].isLowerCase()}                           //Remove abbreviations
         .filter { it.last().isLowerCase() }                     //Remove abbreviations
         .map{ it.lowercase(Locale.US) }
         .map{it.removeAccents()}
-        .minus(bannedWords)
-        .toList()
-        .union(extraWords.map { it.toLowerCase() })
+        .minus(bannedWords.toSet())
+        .union(extraWords.map { it.lowercase(Locale.US) })
         .sortedWith(comparator.thenBy { it })
         .distinct()
-        .toList()
 }
-
-
-
-fun createOldScowlLarge() : List<String>{
-    return File(SCOWL_DIR).listFiles()                          //List all word files in the SCOWL output folder
-        .filter { it.extension!="95" }                          //Remove certain files
-        .filter { !it.name.contains("abbreviations") }
-        .filter { !it.name.contains("special") }
-        .filter { !it.name.contains("contractions") }
-        .flatMap { it.readLines(Charsets.ISO_8859_1) }          //SCOWL lists stored as ISO_8859_1
-        .sortedWith(comparator.thenBy { it })
-        .distinct()
-        .toList()
-}
-
-fun createOldScowlSmall() : List<String>{
-    return File(SCOWL_DIR).listFiles()                          //List all word files in the SCOWL output folder
-        .filter { it.extension!="95" }                          //Remove certain files
-        .filter { it.extension!="80" }
-        .filter { it.extension!="70" }
-        .filter { !it.name.contains("abbreviations") }
-        .filter { !it.name.contains("special") }
-        .filter { !it.name.contains("contractions") }
-        .flatMap { it.readLines(Charsets.ISO_8859_1) }          //SCOWL lists stored as ISO_8859_1
-        .sortedWith(comparator.thenBy { it })
-        .distinct()
-        .toList()
-}
-
-
 
 fun loadWordList(filename : String) : List<String> = File(filename).readLines(Charsets.ISO_8859_1)
 

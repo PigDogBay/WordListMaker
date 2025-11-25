@@ -10,8 +10,6 @@ import java.io.File
 
 const val OUT_FILENAME = "../../out/words.txt"
 const val OUT_FILENAME_V2 = "../../out/words2.txt"
-const val OUT_OLD_LARGE_FILENAME = "../../out/oldLarge.txt"
-const val OUT_OLD_SMALL_FILENAME = "../../out/oldSmall.txt"
 const val SMALL_FILENAME = "../../out/small.txt"
 const val PHRASES_FILENAME = "../../out/phrases.txt"
 const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
@@ -74,17 +72,6 @@ fun createSmall(){
     println("Validating - find any illegal words:")
     val badWordCount = validate(SMALL_FILENAME)
     println("Found $badWordCount illegal words")
-}
-
-fun createOldScowlLists(){
-    val large = createOldScowlLarge()
-    println("Large Count: ${large.count()}")
-    large.saveWordList(OUT_OLD_LARGE_FILENAME)
-
-    val small = createOldScowlSmall()
-    println("Small Count: ${small.count()}")
-    small.saveWordList(OUT_OLD_SMALL_FILENAME)
-
 }
 
 fun createPhrases(){
@@ -153,6 +140,5 @@ fun main(args: Array<String>) {
     createSmall()
 //    createPhrases()
 
-//    createScowlV2()
-//    createOldScowlLists()
+    createScowlV2()
 }
