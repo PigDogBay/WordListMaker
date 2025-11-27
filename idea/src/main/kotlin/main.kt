@@ -107,9 +107,9 @@ fun nabuStatus(){
 
 fun main(args: Array<String>) {
 //    createScholar()
-//    BuildNabu().build(NABU_FILENAME)
-//    nabuStatus()
-    createScowl()
-    createSmall()
-    createPhrases()
+    BuildNabu().build(NABU_FILENAME)
+    nabuStatus()
+//    createScowl()
+//    createSmall()
+//    createPhrases()
 }

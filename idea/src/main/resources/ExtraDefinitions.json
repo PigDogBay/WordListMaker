@@ -229,5 +229,32 @@
     "associatedWords": [
     ],
     "synIndex": "000"
+  },
+  {
+    "word": "grandpop",
+    "partOfSpeech": "NOUN",
+    "definition": "The father of your father or mother.",
+    "words": ["grandfather","gramps","granddad","grandpa","grandpop"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "fantod",
+    "partOfSpeech": "NOUN",
+    "definition": "State of extreme nervousness.",
+    "words": ["fantods","worry","jitters","heebie-jeebies"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
+  },
+  {
+    "word": "doctor doolittle",
+    "partOfSpeech": "NOUN",
+    "definition": "The central character in the Doctor Doolittle series of novels about a man who can speak to animals.",
+    "words": ["doctor doolittle","physician"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
   }
 ]
