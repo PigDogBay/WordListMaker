@@ -104,12 +104,27 @@ fun nabuStatus(){
  //   dbl.getDefinitions("grift")
 }
 
+//Extra filter for WordList.createSmall
+//             .filter { it.first().isLowerCase() }                     //Remove Proper nouns
+fun properNouns(){
+    val words = ResourceLoader()
+        .load(SCOWL_V1_60)
+        .filter { !it.contains('\'') }
+        .filter { it.length > 2 }
+        .filter { it[1].isLowerCase() }                           //Remove abbreviations
+        .filter { it.last().isLowerCase() }
+        .filter { it.first().isUpperCase() }
+
+    println("Proper nouns ${words.count()}")
+    words.saveWordList("../../out/proper.txt")
+}
 
 fun main(args: Array<String>) {
 //    createScholar()
-    BuildNabu().build(NABU_FILENAME)
-    nabuStatus()
+//    BuildNabu().build(NABU_FILENAME)
+//    nabuStatus()
 //    createScowl()
-//    createSmall()
+    createSmall()
 //    createPhrases()
+
 }
