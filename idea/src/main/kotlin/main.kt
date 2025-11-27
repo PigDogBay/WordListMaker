@@ -111,5 +111,5 @@ fun main(args: Array<String>) {
 //    nabuStatus()
     createScowl()
     createSmall()
-//    createPhrases()
+    createPhrases()
 }
