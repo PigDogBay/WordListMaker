@@ -121,10 +121,10 @@ fun properNouns(){
 
 fun main(args: Array<String>) {
 //    createScholar()
-//    BuildNabu().build(NABU_FILENAME)
+    BuildNabu().build(NABU_FILENAME)
 //    nabuStatus()
 //    createScowl()
     createSmall()
 //    createPhrases()
-
+    dbLookup("rage baiting")
 }

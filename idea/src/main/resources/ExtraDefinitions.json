@@ -256,5 +256,14 @@
     "associatedWords": [
     ],
     "synIndex": "000"
+  },
+  {
+    "word": "rage bait",
+    "partOfSpeech": "NOUN",
+    "definition": "Internet slang for the practice of eliciting outrage in order to drive online traffic and engagement.",
+    "words": ["rage bait","provocative","outrage"],
+    "associatedWords": [
+    ],
+    "synIndex": "000"
   }
 ]
