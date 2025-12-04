@@ -132,11 +132,11 @@ fun properNouns(){
 }
 
 fun main(args: Array<String>) {
-//    createScholar()
-//    BuildNabu().build(NABU_FILENAME)
-//    nabuStatus()
-//    createScowl()
+    createScholar()
+    BuildNabu().build(NABU_FILENAME)
+    nabuStatus()
+    createScowl()
     createSmall()
     createWordGame()
-//    createPhrases()
+    createPhrases()
 }
