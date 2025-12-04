@@ -33,9 +33,25 @@ fun createScowlWordList() : List<String> {
 fun createSmallWordList() : List<String> {
     return ResourceLoader()
             .load(SCOWL_V1_60)
-            .union(ResourceLoader().load(SCOWL_60_EXTRA_WORDS))
             .toList()
             .cleanList()
+}
+
+fun createGameWordList() : List<String> {
+    return ResourceLoader()
+        .load(SCOWL_V1_60)
+        .filter { !it.contains('\'' )}
+        .filter{it.length>2}
+        .filter{ it.first().isLowerCase()}                       //Remove Proper nouns
+        .filter{ it[1].isLowerCase()}                           //Remove abbreviations
+        .filter { it.last().isLowerCase() }                     //Remove abbreviations
+        .map{ it.lowercase(Locale.US) }
+        .map{it.removeAccents()}
+        .minus(bannedWords.toSet())
+        .minus(badWords.toSet())
+        .union(ResourceLoader().load(SCOWL_60_EXTRA_WORDS))
+        .sortedWith(comparator.thenBy { it })
+        .distinct()
 }
 
 fun List<String>.cleanList() : List<String>{

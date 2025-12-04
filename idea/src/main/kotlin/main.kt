@@ -10,6 +10,7 @@ import java.io.File
 
 const val OUT_FILENAME = "../../out/words.txt"
 const val SMALL_FILENAME = "../../out/small.txt"
+const val GAME_FILENAME = "../../out/game.txt"
 const val PHRASES_FILENAME = "../../out/phrases.txt"
 const val NABU_FILENAME = "/Users/markbailey/work/MPDBTech/wordlist/out/nabu.db"
 const val UKACD17 = "/source/ukacd17.txt"
@@ -25,7 +26,7 @@ fun createScowl(){
     words.saveWordList(OUT_FILENAME)
     println("Validating - find any illegal words:")
     val badWordCount = validate(OUT_FILENAME)
-    println("Found $badWordCount illegal words")
+    println("Found $badWordCount illegal words\n")
 }
 
 fun createScholar(){
@@ -35,17 +36,27 @@ fun createScholar(){
     words.saveWordList(SCHOLAR_FILENAME)
     println("Validating - find any illegal words:")
     val badWordCount = validate(SCHOLAR_FILENAME)
-    println("Found $badWordCount illegal words")
+    println("Found $badWordCount illegal words\n")
 }
 
 fun createSmall(){
-    println("Creating Small word list...")
+    println("Creating small.txt")
     val words = createSmallWordList()
     println("Small Count: ${words.count()}")
     words.saveWordList(SMALL_FILENAME)
     println("Validating - find any illegal words:")
     val badWordCount = validate(SMALL_FILENAME)
-    println("Found $badWordCount illegal words")
+    println("Found $badWordCount illegal words\n")
+}
+
+fun createWordGame(){
+    println("Creating game.txt")
+    val words = createGameWordList()
+    println("Word Game Count: ${words.count()}")
+    words.saveWordList(GAME_FILENAME)
+    println("Validating - find any illegal words:")
+    val badWordCount = validate(GAME_FILENAME)
+    println("Found $badWordCount illegal words\n")
 }
 
 fun createPhrases(){
@@ -68,7 +79,7 @@ fun createPhrases(){
     println("WordNet Count: ${wordNet.count()}")
     println("Actors Count: ${actors.count()}")
     println("UKACD Count: ${ukacd.count()}")
-    println("Phrases Count: ${phrases.count()}")
+    println("Phrases Count: ${phrases.count()}\n")
 }
 
 fun dbLookup(query : String){
@@ -126,5 +137,6 @@ fun main(args: Array<String>) {
 //    nabuStatus()
 //    createScowl()
     createSmall()
+    createWordGame()
 //    createPhrases()
 }
