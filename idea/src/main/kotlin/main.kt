@@ -39,8 +39,9 @@ fun createScholar(){
 }
 
 fun createSmall(){
+    println("Creating Small word list...")
     val words = createSmallWordList()
-    println("Count: ${words.count()}")
+    println("Small Count: ${words.count()}")
     words.saveWordList(SMALL_FILENAME)
     println("Validating - find any illegal words:")
     val badWordCount = validate(SMALL_FILENAME)
@@ -121,10 +122,9 @@ fun properNouns(){
 
 fun main(args: Array<String>) {
 //    createScholar()
-    BuildNabu().build(NABU_FILENAME)
+//    BuildNabu().build(NABU_FILENAME)
 //    nabuStatus()
 //    createScowl()
     createSmall()
 //    createPhrases()
-    dbLookup("rage baiting")
 }

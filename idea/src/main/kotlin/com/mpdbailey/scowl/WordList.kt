@@ -12,6 +12,7 @@ const val BANNED_WORDS = "/bannedwords.txt"
 const val BAD_WORDS = "/bad.txt"
 const val EXTRA_WORDS = "/extrawords.txt"
 const val SCOWL_V2 = "/source/scowlV2.txt"
+const val SCOWL_60_EXTRA_WORDS = "/scowl60Extras.txt"
 
 val comparator = compareByDescending<String> {it.length }
 val bannedWords = ResourceLoader().load(BANNED_WORDS)
@@ -32,6 +33,8 @@ fun createScowlWordList() : List<String> {
 fun createSmallWordList() : List<String> {
     return ResourceLoader()
             .load(SCOWL_V1_60)
+            .union(ResourceLoader().load(SCOWL_60_EXTRA_WORDS))
+            .toList()
             .cleanList()
 }
 
