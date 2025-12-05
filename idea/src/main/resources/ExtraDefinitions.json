@@ -24,7 +24,7 @@
   {
     "word": "mage",
     "partOfSpeech": "NOUN",
-    "definition": "A magician, wizard, sorcerer, witch, warlock or mystic.",
+    "definition": "A magician, wizard, sorcerer, witch, warlock or mystic",
     "words": ["mage","magician","wizard"],
     "associatedWords": [
     ],
@@ -33,7 +33,7 @@
   {
     "word": "durag",
     "partOfSpeech": "NOUN",
-    "definition": "A close-fitting cloth tied around the top of the head to protect the hair.",
+    "definition": "A close-fitting cloth tied around the top of the head to protect the hair",
     "words": ["durag","cap"],
     "associatedWords": [
     ],
@@ -61,7 +61,7 @@
   {
     "word": "cholet",
     "partOfSpeech": "NOUN",
-    "definition": "A commune of western France, in the Maine-et-Loire department. The town lies along the La Moine River, southeast of Nantes.",
+    "definition": "A commune of western France, in the Maine-et-Loire department. The town lies along the La Moine River, southeast of Nantes",
     "words": ["cholet","nantes","france"],
     "associatedWords": [
     ],
@@ -233,7 +233,7 @@
   {
     "word": "grandpop",
     "partOfSpeech": "NOUN",
-    "definition": "The father of your father or mother.",
+    "definition": "The father of your father or mother",
     "words": ["grandfather","gramps","granddad","grandpa","grandpop"],
     "associatedWords": [
     ],
@@ -242,7 +242,7 @@
   {
     "word": "fantod",
     "partOfSpeech": "NOUN",
-    "definition": "State of extreme nervousness.",
+    "definition": "State of extreme nervousness",
     "words": ["fantods","worry","jitters","heebie-jeebies"],
     "associatedWords": [
     ],
@@ -251,7 +251,7 @@
   {
     "word": "doctor doolittle",
     "partOfSpeech": "NOUN",
-    "definition": "The central character in the Doctor Doolittle series of novels about a man who can speak to animals.",
+    "definition": "The central character in the Doctor Doolittle series of novels about a man who can speak to animals",
     "words": ["doctor doolittle","physician"],
     "associatedWords": [
     ],
@@ -260,7 +260,7 @@
   {
     "word": "rage bait",
     "partOfSpeech": "NOUN",
-    "definition": "Internet slang for the practice of eliciting outrage in order to drive online traffic and engagement.",
+    "definition": "Internet slang for the practice of eliciting outrage in order to drive online traffic and engagement",
     "words": ["rage bait","provocative","outrage"],
     "associatedWords": [
     ],
