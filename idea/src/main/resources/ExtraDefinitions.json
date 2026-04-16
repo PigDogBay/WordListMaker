@@ -265,5 +265,85 @@
     "associatedWords": [
     ],
     "synIndex": "000"
+  },
+  {
+    "word": "untag",
+    "partOfSpeech": "VERB",
+    "definition": "To remove a digital tag or metadata label from a piece of content, such as a photo or social media post",
+    "words": ["untag", "tag", "unlabelled"],
+    "associatedWords": [],
+    "synIndex": "000"
+  },
+  {
+    "word": "dogpile",
+    "partOfSpeech": "NOUN",
+    "definition": "A situation where a group of people jump on top of one another in a heap; also used metaphorically for a coordinated verbal attack online",
+    "words": ["dogpile", "heap", "mound"],
+    "associatedWords": [],
+    "synIndex": "000"
+  },
+  {
+    "word": "earthball",
+    "partOfSpeech": "NOUN",
+    "definition": "Scleroderma citrinum, commonly known as the common earthball, pigskin poison puffball, or common earth ball, is a species of earthball fungus.",
+    "words": ["earthball", "fungus", "mushroom"],
+    "associatedWords": [],
+    "synIndex": "000"
+  },
+  {
+    "word": "malbec",
+    "partOfSpeech": "NOUN",
+    "definition": "A variety of black grape used in winemaking, or the full-bodied red wine produced from it, originally from France but widely popular in Argentina",
+    "words": ["malbec", "red wine", "wine", "grape"],
+    "associatedWords": [],
+    "synIndex": "000"
+  },
+  {
+    "word": "donburi",
+    "partOfSpeech": "NOUN",
+    "definition": "A Japanese 'rice-bowl dish' consisting of fish, meat, vegetables, or other ingredients simmered together and served over rice",
+    "words": ["donburi", "rice", "japanese", "cuisine"],
+    "associatedWords": [],
+    "synIndex": "000"
+  },
+  {
+    "word": "dogstail",
+    "partOfSpeech": "NOUN",
+    "definition": "A common type of meadow grass (Cynosurus cristatus) with a narrow, stiff, spiked flower head, native to the Mediterranean basin, grown for fodder",
+    "words": ["dogstail", "meadow grass", "grass"],
+    "associatedWords": [],
+    "synIndex": "000"
+  },
+  {
+    "word": "milliamp",
+    "partOfSpeech": "NOUN",
+    "definition": "A unit of electric current equal to one thousandth of an ampere",
+    "words": ["milliamp", "milliampere", "electricity", "current"],
+    "associatedWords": [],
+    "synIndex": "000"
+  },
+  {
+    "word": "larp",
+    "partOfSpeech": "NOUN",
+    "definition": "Acronym for Live Action Role-Playing; a form of role-playing game where participants physically act out their characters' actions",
+    "words": ["larp", "pretend"],
+    "associatedWords": [],
+    "synIndex": "000"
+  },
+  {
+    "word": "gladhanding",
+    "partOfSpeech": "VERB",
+    "definition": "The act of greeting people in an overly friendly or effusive way, typically for political or business advantage",
+    "words": ["gladhanding", "network", "schmooze"],
+    "associatedWords": [],
+    "synIndex": "000"
+  },
+  {
+    "word": "on loan",
+    "partOfSpeech": "ADJECTIVE",
+    "definition": "Borrowed or lent out for a period of time, often referring to library books, museum artifacts, or professional athletes",
+    "words": ["on loan", "borrow", "lend"],
+    "associatedWords": [],
+    "synIndex": "000"
   }
 ]
